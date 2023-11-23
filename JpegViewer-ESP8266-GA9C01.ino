@@ -7,7 +7,7 @@
 #include <Arduino_GFX_Library.h>
 #define GFX_BL 5 // default backlight pin
 #include <LittleFS.h>
-#define DEBUG false
+//#define DEBUG
 
 #ifdef DEBUG
   // List everything in LittleFS Storage
@@ -17,9 +17,9 @@
 Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
 Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
 
-
-
 int imageSelect = 1;
+int _width = 240;
+int _height = 240;
 
 void setup()
 {
@@ -47,7 +47,7 @@ void loop()
     listLittleFS();
   #endif
   while (!Serial.available()); 
-  x = Serial.readString().toInt();
+  imageSelect = Serial.readString().toInt();
 
   runCommand();
 
@@ -103,8 +103,6 @@ void drawImage(char fileName[]) {
   #endif
 //  int _width = gfx->width();
 //  int _height = gfx->height();
-  int _width = 240;
-  int _height = 240;
 
   jpegDraw(fileName, jpegDrawCallback, true /* useBigEndian */, 0, 0, _width /* widthLimit */, _height /* heightLimit */);
 }

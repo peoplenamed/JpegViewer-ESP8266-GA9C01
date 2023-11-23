@@ -6,8 +6,9 @@
  ******************************************************************************/
 #ifndef _JPEGFUNC_H_
 #define _JPEGFUNC_H_
-
+//#define DEBUG
 #include <JPEGDEC.h>
+#include <LittleFS.h>
 
 static JPEGDEC _jpeg;
 static File _f;
@@ -15,7 +16,9 @@ static int _x, _y, _x_bound, _y_bound;
 
 static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
 {
-    // Serial.println("jpegOpenFile");
+    #ifdef DEBUG
+        Serial.println("jpegOpenFile");
+    #endif
     _f = LittleFS.open(szFilename, "r");
     *pFileSize = _f.size();
     return &_f;
@@ -23,14 +26,18 @@ static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
 
 static void jpegCloseFile(void *pHandle)
 {
-    // Serial.println("jpegCloseFile");
+    #ifdef DEBUG
+        Serial.println("jpegCloseFile");
+    #endif
     File *f = static_cast<File *>(pHandle);
     f->close();
 }
 
 static int32_t jpegReadFile(JPEGFILE *pFile, uint8_t *pBuf, int32_t iLen)
 {
-    // Serial.printf("jpegReadFile, iLen: %d\n", iLen);
+    #ifdef DEBUG
+        Serial.printf("jpegReadFile, iLen: %d\n", iLen);
+    #endif
     File *f = static_cast<File *>(pFile->fHandle);
     size_t r = f->read(pBuf, iLen);
     return r;
@@ -38,7 +45,10 @@ static int32_t jpegReadFile(JPEGFILE *pFile, uint8_t *pBuf, int32_t iLen)
 
 static int32_t jpegSeekFile(JPEGFILE *pFile, int32_t iPosition)
 {
-//    Serial.printf("jpegSeekFile, pFile->iPos: %d, iPosition: %d\n", pFile->iPos, iPosition);
+    #ifdef DEBUG
+        Serial.printf("jpegSeekFile, pFile->iPos: %d, iPosition: %d\n", pFile->iPos, iPosition);
+    #endif
+
     File *f = static_cast<File *>(pFile->fHandle);
     f->seek(iPosition);
     return iPosition;
@@ -59,20 +69,7 @@ static void jpegDraw(
     int _scale;
     int iMaxMCUs;
     float ratio = (float)_jpeg.getHeight() / heightLimit;
-    
-    //    Serial.printf("== filename: %d\n", filename);
-    //    Serial.printf("== *filename: %d\n", *filename);
-    //    Serial.printf("== useBigEndian: %d\n", useBigEndian);
-    //    Serial.printf("== x: %d\n", x);
-    //    Serial.printf("== y: %d\n", y);
-    //    Serial.printf("== _x: %d\n", _x);
-    //    Serial.printf("== _y: %d\n", _y);
-    //    Serial.printf("== _x_bound: %d\n", _x_bound);
-    //    Serial.printf("== _y_bound: %d\n", _y_bound);
-    //    Serial.printf("== widthLimit: %d\n", widthLimit);
-    //    Serial.printf("== heightLimit: %d\n", heightLimit);
-    //    Serial.printf("== _scale: %d\n", _scale);
-    //    Serial.printf("== ratio: %d\n", ratio);
+      
     if (ratio <= 1)
     {
         _scale = 0;
@@ -93,8 +90,24 @@ static void jpegDraw(
         _scale = JPEG_SCALE_EIGHTH;
         iMaxMCUs = widthLimit / 2;
     }
-    //    Serial.printf("== _scale: %d\n", _scale);
-    //    Serial.printf("== iMaxMCUs: %d\n", iMaxMCUs);
+
+    #ifdef DEBUG
+        Serial.printf("== filename: %d\n", filename);
+        Serial.printf("== *filename: %d\n", *filename);
+        Serial.printf("== useBigEndian: %d\n", useBigEndian);
+        Serial.printf("== x: %d\n", x);
+        Serial.printf("== y: %d\n", y);
+        Serial.printf("== _x: %d\n", _x);
+        Serial.printf("== _y: %d\n", _y);
+        Serial.printf("== _x_bound: %d\n", _x_bound);
+        Serial.printf("== _y_bound: %d\n", _y_bound);
+        Serial.printf("== widthLimit: %d\n", widthLimit);
+        Serial.printf("== heightLimit: %d\n", heightLimit);
+        Serial.printf("== _scale: %d\n", _scale);
+        Serial.printf("== ratio: %d\n", ratio);
+        Serial.printf("== _scale: %d\n", _scale);
+        Serial.printf("== iMaxMCUs: %d\n", iMaxMCUs);
+    #endif
 
     _jpeg.setMaxOutputSize(iMaxMCUs);
 

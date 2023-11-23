@@ -66,16 +66,18 @@ void runCommand() {
       calvinAndHobbes();
       break;
     case 3:
-      drawJpgAnimation("1Ys_", ".jpg", 19, 3);
+      grumpyFace();
       break;
     default:
-      drawJpgAnimation("grumpy_face_0", ".jpg", 4, 5);
+      calvinDuplicator();
       break;
   }
 }
 
 void calvinAndHobbes(){ drawImage("/download.jpeg"); }
 void octocat(){ drawImage("/octocat.jpg"); }
+void grumpyFace() { drawJpgAnimation("grumpy_face_0", ".jpg", 4, 50); }
+void calvinDuplicator() { drawJpgAnimation("1Ys_", ".jpg", 19, 3); }
 
 
 void drawJpgAnimation(String name, String fileType, int frames, int times) {

@@ -9,7 +9,7 @@
 #include "colorStruct.h"
 #include <Arduino_GFX_Library.h>
 #define GFX_BL 5 // default backlight pin
-//#define DEBUG
+#define DEBUG
 
 #ifdef DEBUG
   #ifdef ESP8266
@@ -29,7 +29,7 @@
   // ESP32 definitions
 //  #include "FS.h"
   #include "SPIFFS.h"
-  Arduino_DataBus *bus = new Arduino_ESP32SPI(15 /* DC */, 2 /* CS */);
+  Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 18 /* CS */);
   Arduino_GFX *gfx = new Arduino_GC9A01(bus, 4 /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 

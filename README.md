@@ -21,3 +21,5 @@ Install LittleFS uploader
 ESP32
 Install SPIFFS uploader
 https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/
+
+Install zips to ~/Arduino/tools

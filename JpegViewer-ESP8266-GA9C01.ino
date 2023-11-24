@@ -3,38 +3,7 @@
  *     ESP32: https://github.com/lorol/arduino-esp32fs-plugin
  *     Ada was here
  *     MOM AND FAMILY ARE THE BEST!**************!!!!!!!!!!!!!!!!!
- *     
-    [code]
-      TFT_eSPI ver = 2.5.34
-      Processor    = ESP8266
-      Frequency    = 80MHz
-      Voltage      = 3.32V
-      Transactions = No
-      Interface    = SPI
-      SPI overlap  = No
-      
-      Display driver = 9341
-      Display width  = 240
-      Display height = 320 (Peter has no idea why it reports 320. Should be 240)
-      
-      MOSI    = GPIO 7
-      MISO    = GPIO 6
-      SCK     = GPIO 5
-      TFT_CS   = PIN_D8
-      TFT_DC   = PIN_D3
-      TFT_RST  = PIN_D4
-      
-      Font GLCD   loaded
-      Font 2      loaded
-      Font 4      loaded
-      Font 6      loaded
-      Font 7      loaded
-      Font 8      loaded
-      Smooth font enabled
-      
-      Display SPI frequency = 27.00
-    [/code]
-
+ *     https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circular-display-with-gc9a01-controller-powered-by-an-esp8266/
  ******************************************************************************/
 #include "JpegFunc.h"
 #include "colorStruct.h"
@@ -48,8 +17,18 @@
   #include "List_LittleFS.h"
 #endif
 
-Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
-Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
+#ifdef ESP8266
+  // ESP8266 definitions
+  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
+#endif
+
+#ifdef ESP32
+  // ESP32 definitions
+  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
+#endif
+
 
 String userInput;
 const byte numChars = 32;
@@ -77,6 +56,8 @@ void setup() {
     Serial.println(F("ERROR: File System Mount Failed!"));
     gfx->println(F("ERROR: File System Mount Failed!"));
     // void setRotation(uint8_t rotation);
+  } else {
+    splashScreen();
   }
 }
 
@@ -261,6 +242,12 @@ void satisfiedFace() {
   drawImage("satisfied_face.jpg");
   delay(400);
   normalFace();
+}
+
+void splashScreen() {
+  grumpyFace();
+  delay(500);
+  satisfiedFace();
 }
 
 void drawJpgAnimation(String name, String fileType, int frames, int times)

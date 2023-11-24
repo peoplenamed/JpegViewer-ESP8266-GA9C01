@@ -20,13 +20,13 @@
 #ifdef ESP8266
   // ESP8266 definitions
   Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, D4 /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 #ifdef ESP32
   // ESP32 definitions
-  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 0 /* RST */, 0 /* rotation */, true /* IPS */);
+  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D19 /* DC */, D2 /* CS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, D4 /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 

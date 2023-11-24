@@ -109,11 +109,11 @@ void calvinDuplicator() { drawJpgAnimation("1Ys_", ".jpg", 19, 3); }
 void grumpyFace() { drawJpgAnimation("grumpy_face_0", ".jpg", 4, 20); }
 void winkFace() { drawJpgAnimation("wink_face_", ".jpg", 5, 1); }
 void disappointedFace() { drawJpgAnimation("disappointed_face_", ".jpg", 5, 1); }
-void normalFace() { drawImage("normal_face"); }
+void normalFace() { drawImage("normal_face.jpg"); }
 void satisfiedFace() {
   normalFace();
   delay(400);
-  drawImage("satisfied_face");
+  drawImage("satisfied_face.jpg");
   delay(400);
   normalFace();
 }

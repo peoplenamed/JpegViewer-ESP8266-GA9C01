@@ -5,5 +5,5 @@ https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circu
 The display is driven by the GC9A01 controller. (I swapped them in the original title)
 
 These are the pins I used for the ESP8266
-![alt text](/PINOUT.png)
+![alt text](/PINOUTS.png)
 

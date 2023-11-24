@@ -14,3 +14,10 @@ Preferences -> Additional Board Managers
 `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
 ![alt text](/ADDITIONAL.png)
 
+
+ESP8266
+Install LittleFS uploader
+
+ESP32
+Install SPIFFS uploader
+https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/

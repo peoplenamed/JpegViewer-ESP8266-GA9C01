@@ -9,24 +9,28 @@
 #include "colorStruct.h"
 #include <Arduino_GFX_Library.h>
 #define GFX_BL 5 // default backlight pin
-#include <LittleFS.h>
 //#define DEBUG
 
 #ifdef DEBUG
-  // List everything in LittleFS Storage
-  #include "List_LittleFS.h"
+  #ifdef ESP8266
+    // List everything in LittleFS Storage
+    #include "List_LittleFS.h"
+  #endif
 #endif
 
 #ifdef ESP8266
   // ESP8266 definitions
+  #include <LittleFS.h>
   Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
   Arduino_GFX *gfx = new Arduino_GC9A01(bus, D4 /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 #ifdef ESP32
   // ESP32 definitions
-  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D19 /* DC */, D2 /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, D4 /* RST */, 0 /* rotation */, true /* IPS */);
+//  #include "FS.h"
+  #include "SPIFFS.h"
+  Arduino_DataBus *bus = new Arduino_ESP32SPI(15 /* DC */, 2 /* CS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 4 /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 
@@ -51,20 +55,32 @@ void setup() {
     #endif
     wipeScreen(true);
   }
-  if (!LittleFS.begin())
-  {
-    Serial.println(F("ERROR: File System Mount Failed!"));
-    gfx->println(F("ERROR: File System Mount Failed!"));
-    // void setRotation(uint8_t rotation);
-  } else {
-    splashScreen();
-  }
+
+  #ifdef ESP32
+    if(!SPIFFS.begin(true)){
+      Serial.println("An Error has occurred while mounting SPIFFS");
+      return;
+    }
+  #endif
+  
+  #ifdef ESP8826
+    if (!LittleFS.begin())
+    {
+      Serial.println(F("ERROR: File System Mount Failed!"));
+      gfx->println(F("ERROR: File System Mount Failed!"));
+      // void setRotation(uint8_t rotation);
+    }
+  #endif
+
+  splashScreen();
 }
 
 void loop()
 {
   #ifdef DEBUG
-    listLittleFS();
+    #ifdef ESP8826
+      listLittleFS();
+    #endif
   #endif
   while (!Serial.available()); 
 
@@ -352,7 +368,7 @@ void circleWipe(int radius, boolean wipe)
   wipeScreen(wipe);
   int32_t w = _width;
   int32_t h = _height;
-  uint32_t start;
+  //uint32_t start;
   int32_t x, y;
   int32_t r2 = radius * 2;
   int32_t w1 = w + radius;

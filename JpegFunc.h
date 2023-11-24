@@ -8,7 +8,16 @@
 #define _JPEGFUNC_H_
 //#define DEBUG
 #include <JPEGDEC.h>
-#include <LittleFS.h>
+
+
+#ifdef ESP8826
+  #include <LittleFS.h>
+#endif
+
+#ifdef ESP32
+  #include "FS.h"
+  #include "SPIFFS.h"
+#endif
 
 static JPEGDEC _jpeg;
 static File _f;
@@ -19,7 +28,12 @@ static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
     #ifdef DEBUG
         Serial.println("jpegOpenFile");
     #endif
-    _f = LittleFS.open(szFilename, "r");
+    #ifdef ESP8826
+      _f = LittleFS.open(szFilename, "r");
+    #endif
+    #ifdef ESP32
+      _f = SPIFFS.open(szFilename, "r");
+    #endif
     *pFileSize = _f.size();
     return &_f;
 }

@@ -48,7 +48,7 @@ static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
     
     #ifdef DEBUG
         Serial.print("JPEG file size: ");
-        Serial.println(*pFileSize);
+        Serial.println(_f.size());
     #endif
     return &_f;
 }

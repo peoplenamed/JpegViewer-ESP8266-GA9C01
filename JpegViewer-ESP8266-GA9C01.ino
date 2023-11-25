@@ -38,11 +38,11 @@
     #include <SPIFFS.h>
   #endif 
 
-  #define TFT_CS 5
-  #define TFT_DC 23
+  #define TFT_CS 22
+  #define TFT_DC 16
   #define TFT_RST 4
-  #define TFT_SCK 14
-  #define TFT_MOSI 12
+//  #define TFT_SCK 18
+//  #define TFT_MOSI 12
   #define TFT_MISO -1  // no data coming back
   //#define TFT_LED 9
 //  #include "SPIFFS.h"
@@ -290,7 +290,10 @@ void drawJpgAnimation(String name, String fileType, int frames, int times)
   {
     for (int i=0; i <= frames-1; i++)
     {
-      String filename = "";
+      String filename;
+      #ifdef ESP32
+        filename = "/";
+      #endif
       filename.concat(name);
   
       if (i < 10)

@@ -90,7 +90,7 @@ void setup() {
     {
       Serial.println(F("ERROR: File System Mount Failed!"));
       gfx->println(F("ERROR: File System Mount Failed!"));
-      // void setRotation(uint8_t rotation);
+      // gfx->setRotation(uint8_t rotation);
     }
   #endif
 
@@ -215,8 +215,10 @@ void chooseImage(int imageSelect)
 {
   switch (imageSelect) {
     case 0:
+      popEye();
       break;
     case 1:
+      fangs();
       break;
     case 2:
       grumpyFace();
@@ -273,15 +275,51 @@ void octocat(){ drawImage("/octocat.jpg"); }
 void calvinDuplicator() { drawJpgAnimation("1Ys_", ".jpg", 19, 3); }
 
 /** FACES **/
-void grumpyFace() { drawJpgAnimation("/grumpy_face_0", ".jpg", 4, 5); }
+void grumpyFace() {
+  normalFace();
+  drawJpgAnimation("/grumpy_face_0", ".jpg", 4, 5);
+  normalFace();
+}
 void winkFace() { drawJpgAnimation("/wink_face_", ".jpg", 5, 1); }
-void disappointedFace() { drawJpgAnimation("/disappointed_face_", ".jpg", 5, 1); }
+void disappointedFace() {
+  normalFace();
+  delay(600);
+  drawJpgAnimation("/disappointed_face_", ".jpg", 5, 1);
+  delay(600);
+  normalFace();
+}
 void normalFace() { drawImage("/normal_face.jpg"); }
 void satisfiedFace() {
   normalFace();
   delay(400);
   drawImage("/satisfied_face.jpg");
   delay(400);
+  normalFace();
+}
+
+void popEye() {
+  normalFace();
+  delay(400);
+  drawImage("/PopEye_0001.jpg");
+  delay(400);
+  drawImage("/PopEye_0002.jpg");
+  delay(400);
+  drawImage("/PopEye_0001.jpg");
+  delay(400);
+  normalFace();
+}
+
+void fangs() {
+  normalFace();
+  delay(400);
+  drawImage("/fangs_0001.jpg");
+  delay(600);
+  drawImage("/fangs_0002.jpg");
+  delay(1500);
+  drawImage("/fangs_0001.jpg");
+  delay(600);
+  drawImage("/fangs_0001.jpg");
+  delay(600);
   normalFace();
 }
 

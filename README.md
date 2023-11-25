@@ -6,17 +6,27 @@ https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circu
 The display is driven by the GC9A01 controller. (I swapped them in the original title)
 
 These are the pins I used for the ESP8266
-![working pinouts for esp8266/esp32](/PINOUTS.png)
+![working pinouts for esp8266/esp32](./PINOUTS.png)
 
 ADD these to Arduino.
 Preferences -> Additional Board Managers
 `https://dl.espressif.com/dl/package_esp32_index.json`
 `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
 `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
-![alt text](/ADDITIONAL.png)
-![esp32 wiring reference](/ref1.webp)
-![esp32 pinouts](/ref2.webp)
+![alt text](./ADDITIONAL.png)
+![esp32 wiring reference](./ref1.webp)
+![esp32 pinouts](./ref2.webp)
 
+
+## Screen Specs
+- https://www.amazon.com/Teyleten-Robot-Display-Interface-240x240/dp/B0B7TFRNN1
+- 1.VCC:Power 
+- 2.GND:Power Ground 
+- 3.SCL:This pin is used to be serial interface clock 
+- 4.SDA:SPl interface input/output pin.the data is latched on the rising edge of the SCL signal. 
+- 5.DC:Display data/command selection pin in 4-line serial interface 
+- 6.CS:Chip selection pin;Low enable, high disable 
+- 7.RST:This signal will reset the device and it must be applied to properly initialize the chip.Signal is active low.
 
 ESP8266
 Install LittleFS uploader

@@ -109,7 +109,7 @@ void loop()
   recvWithStartEndMarkers();
   showNewData();
 
-  loop(); // I have no idea why I have to call this...
+  //loop(); // I have no idea why I have to call this...
 }
 
 void recvWithStartEndMarkers() {

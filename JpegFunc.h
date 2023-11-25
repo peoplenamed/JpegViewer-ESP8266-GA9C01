@@ -6,8 +6,9 @@
  ******************************************************************************/
 #ifndef _JPEGFUNC_H_
 #define _JPEGFUNC_H_
-//#define DEBUG
+#define DEBUG
 #include <JPEGDEC.h>
+#define USE_LittleFS
 
 
 #ifdef ESP8826
@@ -15,8 +16,16 @@
 #endif
 
 #ifdef ESP32
-  #include "FS.h"
-  #include "SPIFFS.h"
+//  #include "FS.h"
+//  #include "SPIFFS.h"
+  
+  #include <FS.h>
+  #ifdef USE_LittleFS
+    #define SPIFFS LITTLEFS
+    #include <LITTLEFS.h> 
+  #else
+    #include <SPIFFS.h>
+  #endif 
 #endif
 
 static JPEGDEC _jpeg;
@@ -32,9 +41,15 @@ static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
       _f = LittleFS.open(szFilename, "r");
     #endif
     #ifdef ESP32
-      _f = SPIFFS.open(szFilename, "r");
+//      _f = SPIFFS.open(szFilename, "r");
+      _f = LITTLEFS.open(szFilename, "r");
     #endif
     *pFileSize = _f.size();
+    
+    #ifdef DEBUG
+        Serial.print("JPEG file size: ");
+        Serial.println(*pFileSize);
+    #endif
     return &_f;
 }
 
@@ -106,21 +121,21 @@ static void jpegDraw(
     }
 
     #ifdef DEBUG
-        Serial.printf("== filename: %d\n", filename);
-        Serial.printf("== *filename: %d\n", *filename);
-        Serial.printf("== useBigEndian: %d\n", useBigEndian);
-        Serial.printf("== x: %d\n", x);
-        Serial.printf("== y: %d\n", y);
-        Serial.printf("== _x: %d\n", _x);
-        Serial.printf("== _y: %d\n", _y);
-        Serial.printf("== _x_bound: %d\n", _x_bound);
-        Serial.printf("== _y_bound: %d\n", _y_bound);
-        Serial.printf("== widthLimit: %d\n", widthLimit);
-        Serial.printf("== heightLimit: %d\n", heightLimit);
-        Serial.printf("== _scale: %d\n", _scale);
-        Serial.printf("== ratio: %d\n", ratio);
-        Serial.printf("== _scale: %d\n", _scale);
-        Serial.printf("== iMaxMCUs: %d\n", iMaxMCUs);
+//        Serial.printf("== filename: %d\n", filename);
+//        Serial.printf("== *filename: %d\n", *filename);
+//        Serial.printf("== useBigEndian: %d\n", useBigEndian);
+//        Serial.printf("== x: %d\n", x);
+//        Serial.printf("== y: %d\n", y);
+//        Serial.printf("== _x: %d\n", _x);
+//        Serial.printf("== _y: %d\n", _y);
+//        Serial.printf("== _x_bound: %d\n", _x_bound);
+//        Serial.printf("== _y_bound: %d\n", _y_bound);
+//        Serial.printf("== widthLimit: %d\n", widthLimit);
+//        Serial.printf("== heightLimit: %d\n", heightLimit);
+//        Serial.printf("== _scale: %d\n", _scale);
+//        Serial.printf("== ratio: %d\n", ratio);
+//        Serial.printf("== _scale: %d\n", _scale);
+//        Serial.printf("== iMaxMCUs: %d\n", iMaxMCUs);
     #endif
 
     _jpeg.setMaxOutputSize(iMaxMCUs);

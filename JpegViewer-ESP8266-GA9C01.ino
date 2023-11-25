@@ -10,12 +10,13 @@
 #include <Arduino_GFX_Library.h>
 #define GFX_BL 5 // default backlight pin
 #define DEBUG
+#define USE_LittleFS
 
 #ifdef DEBUG
-  #ifdef ESP8266
+//  #ifdef ESP8266
     // List everything in LittleFS Storage
     #include "List_LittleFS.h"
-  #endif
+//  #endif
 #endif
 
 #ifdef ESP8266
@@ -26,11 +27,27 @@
 #endif
 
 #ifdef ESP32
-  // ESP32 definitions
 //  #include "FS.h"
-  #include "SPIFFS.h"
-  Arduino_DataBus *bus = new Arduino_ESP32SPI(21 /* DC */, 18 /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, 4 /* RST */, 0 /* rotation */, true /* IPS */);
+//  #include "SPIFFS.h"
+  
+  #include <FS.h>
+  #ifdef USE_LittleFS
+    #define SPIFFS LITTLEFS
+    #include <LITTLEFS.h> 
+  #else
+    #include <SPIFFS.h>
+  #endif 
+
+  #define TFT_CS 5
+  #define TFT_DC 23
+  #define TFT_RST 4
+  #define TFT_SCK 14
+  #define TFT_MOSI 12
+  #define TFT_MISO -1  // no data coming back
+  //#define TFT_LED 9
+//  #include "SPIFFS.h"
+  Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
 #endif
 
 
@@ -57,7 +74,8 @@ void setup() {
   }
 
   #ifdef ESP32
-    if(!SPIFFS.begin(true)){
+//    if(!SPIFFS.begin(true)){
+    if(!LITTLEFS.begin(true)){
       Serial.println("An Error has occurred while mounting SPIFFS");
       return;
     }
@@ -78,9 +96,9 @@ void setup() {
 void loop()
 {
   #ifdef DEBUG
-    #ifdef ESP8826
+//    #ifdef ESP8826
       listLittleFS();
-    #endif
+//    #endif
   #endif
   while (!Serial.available()); 
 
@@ -420,6 +438,7 @@ void drawImage(char* fileName) {
 }
 
 static int jpegDrawCallback(JPEGDRAW *pDraw) {
+  Serial.println("jpegDrawCallback");
   #ifdef DEBUG
     Serial.printf("Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
   #endif

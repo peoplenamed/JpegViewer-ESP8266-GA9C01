@@ -10,7 +10,15 @@ void listLittleFS(void) {
   Serial.println(F("  File name                              Size"));
   Serial.println(FPSTR(line));
 
-  fs::File root = LITTLEFS.open("/", "r");
+  fs::File root;
+
+  #ifdef ESP32
+    root = LITTLEFS.open("/", "r");
+  #endif
+  #ifdef ESP8826
+    root = LittleFS.open("/", "r");
+  #endif
+
   if (!root) {
     Serial.println(F("Failed to open directory"));
     return;

@@ -9,27 +9,20 @@
 #include "colorStruct.h"
 #include <Arduino_GFX_Library.h>
 #define GFX_BL 5 // default backlight pin
-#define DEBUG
+//#define DEBUG
 #define USE_LittleFS
 
-#ifdef DEBUG
-//  #ifdef ESP8266
-    // List everything in LittleFS Storage
-    #include "List_LittleFS.h"
-//  #endif
-#endif
-
 #ifdef ESP8266
-  // ESP8266 definitions
   #include <LittleFS.h>
-  Arduino_DataBus *bus = new Arduino_ESP8266SPI(D2 /* DC */, D8 /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, D4 /* RST */, 0 /* rotation */, true /* IPS */);
+  #define TFT_CS D8
+  #define TFT_DC D2
+  #define TFT_RST D4
+  #define TFT_MISO -1  // no data coming back
+  Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
+  Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 #ifdef ESP32
-//  #include "FS.h"
-//  #include "SPIFFS.h"
-  
   #include <FS.h>
   #ifdef USE_LittleFS
     #define SPIFFS LITTLEFS
@@ -41,15 +34,18 @@
   #define TFT_CS 22
   #define TFT_DC 16
   #define TFT_RST 4
-//  #define TFT_SCK 18
-//  #define TFT_MOSI 12
   #define TFT_MISO -1  // no data coming back
-  //#define TFT_LED 9
-//  #include "SPIFFS.h"
+
   Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
   Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
 #endif
 
+#ifdef DEBUG
+  #ifdef USE_LittleFS
+    // List everything in LittleFS Storage
+    #include "List_LittleFS.h"
+  #endif
+#endif
 
 String userInput;
 const byte numChars = 32;
@@ -74,11 +70,19 @@ void setup() {
   }
 
   #ifdef ESP32
-//    if(!SPIFFS.begin(true)){
-    if(!LITTLEFS.begin(true)){
-      Serial.println("An Error has occurred while mounting SPIFFS");
-      return;
-    }
+    #ifdef USE_LittleFS
+      if(!LITTLEFS.begin(true))
+      {
+        Serial.println("An Error has occurred while mounting LITTLEFS");
+        return;
+      }
+    #else
+      if(!SPIFFS.begin(true))
+      {
+        Serial.println("An Error has occurred while mounting SPIFFS");
+        return;
+      }
+    #endif
   #endif
   
   #ifdef ESP8826
@@ -266,7 +270,7 @@ void octocat(){ drawImage("/octocat.jpg"); }
 void calvinDuplicator() { drawJpgAnimation("1Ys_", ".jpg", 19, 3); }
 
 /** FACES **/
-void grumpyFace() { drawJpgAnimation("grumpy_face_0", ".jpg", 4, 20); }
+void grumpyFace() { drawJpgAnimation("grumpy_face_0", ".jpg", 4, 5); }
 void winkFace() { drawJpgAnimation("wink_face_", ".jpg", 5, 1); }
 void disappointedFace() { drawJpgAnimation("disappointed_face_", ".jpg", 5, 1); }
 void normalFace() { drawImage("normal_face.jpg"); }
@@ -441,7 +445,6 @@ void drawImage(char* fileName) {
 }
 
 static int jpegDrawCallback(JPEGDRAW *pDraw) {
-  Serial.println("jpegDrawCallback");
   #ifdef DEBUG
     Serial.printf("Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
   #endif

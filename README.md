@@ -34,8 +34,8 @@ EXAMPLES:
 `<Howdy friend|0|110|3|3|1>` Print 'Howdy friend' on screen at x:0,y:110,size:3,color:3:wipe screen:1(true)
 `<75%|20|140|3|3|0>`  Print '75%' on screen at x:20,y:140,size:3,color:3:wipe screen:0(false)
 *Static routines*
-`<0>` octocat
-`<1>` calvinAndHobbes
+`<0>`
+`<1>`
 `<2>` grumpyFace
 `<3>` winkFace
 `<4>` disappointedFace
@@ -84,8 +84,8 @@ EXAMPLES:
 `<47>`
 `<48>`
 `<49>`
-`<50>`
-`<51>`
+`<50>` octocat
+`<51>` calvinAndHobbes
 `<52>`
 `<53>`
 `<54>`

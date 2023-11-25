@@ -214,10 +214,8 @@ void chooseImage(int imageSelect)
 {
   switch (imageSelect) {
     case 0:
-      octocat();
       break;
     case 1:
-      calvinAndHobbes();
       break;
     case 2:
       grumpyFace();
@@ -241,10 +239,10 @@ void chooseImage(int imageSelect)
       circleWipe(10, true);
       break;
     case 22:
-      triangleWipe(true);
+      triangleWipe(false);
       break;
     case 23:
-      triangleWipe(false);
+      triangleWipe(true);
       break;
     case 30:
       drawRimCircle(120, false, 10);
@@ -256,6 +254,10 @@ void chooseImage(int imageSelect)
       westText("West");
       centerText("100%");
       break;
+    case 50:
+      octocat();
+    case 51:
+      calvinAndHobbes();
     default:
       calvinDuplicator();
       break;
@@ -270,14 +272,14 @@ void octocat(){ drawImage("/octocat.jpg"); }
 void calvinDuplicator() { drawJpgAnimation("1Ys_", ".jpg", 19, 3); }
 
 /** FACES **/
-void grumpyFace() { drawJpgAnimation("grumpy_face_0", ".jpg", 4, 5); }
-void winkFace() { drawJpgAnimation("wink_face_", ".jpg", 5, 1); }
-void disappointedFace() { drawJpgAnimation("disappointed_face_", ".jpg", 5, 1); }
-void normalFace() { drawImage("normal_face.jpg"); }
+void grumpyFace() { drawJpgAnimation("/grumpy_face_0", ".jpg", 4, 5); }
+void winkFace() { drawJpgAnimation("/wink_face_", ".jpg", 5, 1); }
+void disappointedFace() { drawJpgAnimation("/disappointed_face_", ".jpg", 5, 1); }
+void normalFace() { drawImage("/normal_face.jpg"); }
 void satisfiedFace() {
   normalFace();
   delay(400);
-  drawImage("satisfied_face.jpg");
+  drawImage("/satisfied_face.jpg");
   delay(400);
   normalFace();
 }
@@ -295,9 +297,6 @@ void drawJpgAnimation(String name, String fileType, int frames, int times)
     for (int i=0; i <= frames-1; i++)
     {
       String filename;
-      #ifdef ESP32
-        filename = "/";
-      #endif
       filename.concat(name);
   
       if (i < 10)

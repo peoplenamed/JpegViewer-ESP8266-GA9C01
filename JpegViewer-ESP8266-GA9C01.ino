@@ -317,9 +317,9 @@ void fangs() {
   drawImage("/fangs_0002.jpg");
   delay(1500);
   drawImage("/fangs_0001.jpg");
-  delay(600);
+  delay(300);
   drawImage("/fangs_0001.jpg");
-  delay(600);
+  delay(200);
   normalFace();
 }
 

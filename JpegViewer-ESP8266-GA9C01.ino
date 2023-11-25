@@ -5,40 +5,13 @@
  *     MOM AND FAMILY ARE THE BEST!**************!!!!!!!!!!!!!!!!!
  *     https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circular-display-with-gc9a01-controller-powered-by-an-esp8266/
  ******************************************************************************/
-#include "JpegFunc.h"
-#include "colorStruct.h"
+
 #include <Arduino_GFX_Library.h>
-#define GFX_BL 5 // default backlight pin
+
+#include <config.h>
+
 // #define DEBUG
 #define USE_LittleFS
-
-#ifdef ESP8266
-#include <LittleFS.h>
-#define TFT_CS D8
-#define TFT_DC D2
-#define TFT_RST D4
-#define TFT_MISO -1 // no data coming back
-Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
-Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
-#endif
-
-#ifdef ESP32
-#include <FS.h>
-#ifdef USE_LittleFS
-#define SPIFFS LITTLEFS
-#include <LITTLEFS.h>
-#else
-#include <SPIFFS.h>
-#endif
-
-#define TFT_CS 22
-#define TFT_DC 16
-#define TFT_RST 4
-#define TFT_MISO -1 // no data coming back
-
-Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
-Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
-#endif
 
 #ifdef DEBUG
 #ifdef USE_LittleFS
@@ -560,7 +533,7 @@ void drawImage(char *fileName)
     //  int _width = gfx->width();
     //  int _height = gfx->height();
 
-    jpegDraw(fileName, jpegDrawCallback, true /* useBigEndian */, 0, 0, _width /* widthLimit */, _height /* heightLimit */);
+    jpegDraw(fileName, jpegDrawCallback, true /* useBigEndian */, 0, 0, _WIDTH /* widthLimit */, _HEIGHT /* heightLimit */);
 }
 
 static int jpegDrawCallback(JPEGDRAW *pDraw)

@@ -5,14 +5,25 @@ https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circu
 
 The display is driven by the GC9A01 controller. (I swapped them in the original title)
 
-These are the pins I used for the ESP8266
-![working pinouts for esp8266/esp32](./PINOUTS.png)
+These are the pins I used for the ESP8266 / ESP 32
 
-ADD these to Arduino.
-Preferences -> Additional Board Managers
-`https://dl.espressif.com/dl/package_esp32_index.json`
+| SCREEN | ESP8266 | ESP32 |  |
+|--------|---------|------|--------|
+| RST    | D4      | 4    | RST    |
+| CS     | D8      | 22   | CS     |
+| DC     | D2      | 16   | DC     |
+| SDA    | D7      | 23   | DIN    |
+| SCL    | D5      | 18   | CLK    |
+| GND    | GND     | GND  | GND    |
+| VCC    | 3V      | 3V   | 3V     |
+
+### ADD these to Arduino.
+ - Preferences -> Additional Board Managers
+ - `https://dl.espressif.com/dl/package_esp32_index.json`
 `http://arduino.esp8266.com/stable/package_esp8266com_index.json`
 `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
+
+### Useful Diagrams
 ![alt text](./ADDITIONAL.png)
 ![esp32 wiring reference](./ref1.webp)
 ![esp32 pinouts](./ref2.webp)

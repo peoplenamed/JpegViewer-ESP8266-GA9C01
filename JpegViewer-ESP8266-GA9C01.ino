@@ -299,13 +299,13 @@ void satisfiedFace() {
 
 void popEye() {
   normalFace();
-  delay(400);
+  delay(100);
   drawImage("/PopEye_0001.jpg");
-  delay(400);
+  delay(100);
   drawImage("/PopEye_0002.jpg");
-  delay(400);
+  delay(100);
   drawImage("/PopEye_0001.jpg");
-  delay(400);
+  delay(100);
   normalFace();
 }
 

@@ -235,6 +235,9 @@ void chooseImage(int imageSelect)
     case 6:
       normalFace();
       break;
+    case 7:
+      diamondEyes();
+      break;
     case 20:
       circleWipe(10, false);
       break;
@@ -319,6 +322,30 @@ void fangs() {
   drawImage("/fangs_0001.jpg");
   delay(300);
   drawImage("/fangs_0001.jpg");
+  delay(200);
+  normalFace();
+}
+
+void diamondEyes() {
+  normalFace();
+  delay(400);
+  drawImage("/diamondEyes_0001.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0002.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0003.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0002.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0001.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0003.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0002.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0003.jpg");
+  delay(200);
+  drawImage("/diamondEyes_0001.jpg");
   delay(200);
   normalFace();
 }

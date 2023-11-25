@@ -31,8 +31,9 @@ Install zips to ~/Arduino/tools
 Commands must be wrapped in <brackets>
 EXAMPLES:
 *Dynamic text*
-`<Howdy friend|0|110|3|3|1>` Print 'Howdy friend' on screen at x:0,y:110,size:3,color:3:wipe screen:1(true)
-`<75%|20|140|3|3|0>`  Print '75%' on screen at x:20,y:140,size:3,color:3:wipe screen:0(false)
+Dynamic text MUST begin with asterisk*
+`<*Howdy friend|0|110|3|3|1>` Print 'Howdy friend' on screen at x:0,y:110,size:3,color:3:wipe screen:1(true)
+`<*%75|20|140|3|3|0>`  Print '75%' on screen at x:20,y:140,size:3,color:3:wipe screen:0(false)
 *Static routines*
 `<0>`
 `<1>`

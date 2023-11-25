@@ -153,18 +153,19 @@ void showNewData() {
 
 void runCommand() {
   char firstChar = receivedChars[0];
-  if (isDigit(firstChar)) {
-    chooseImage(atoi(receivedChars));
-  } else {
+  if (firstChar == '*') {
     processCustomMessage();
+  } else {
+    chooseImage(atoi(receivedChars));
   }
 }
 
 void processCustomMessage() {
   // Example Messages
-  //   <Howdy friend|0|110|3|3|1>
-  //   <75%|20|140|3|3|0>
+  //   <*Howdy friend|0|110|3|3|1>
+  //   <*75%|20|140|3|3|0>
   String charsAsString = receivedChars;
+  charsAsString.remove(0,1); // remove asterisk
   String _text = getValueFromDelimitedString(charsAsString, '|', 0);
   String _x = getValueFromDelimitedString(charsAsString, '|', 1);
   String _y = getValueFromDelimitedString(charsAsString, '|', 2);

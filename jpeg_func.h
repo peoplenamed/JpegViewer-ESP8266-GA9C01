@@ -4,8 +4,8 @@
  * Dependent libraries:
  * JPEGDEC: https://github.com/bitbank2/JPEGDEC.git
  ******************************************************************************/
-#ifndef JPEGFUNC_H
-#define JPEGFUNC_H
+#ifndef _JPEGFUNC_H_
+#define _JPEGFUNC_H_
 #include <JPEGDEC.h>
 #define USE_LittleFS
 // #define DEBUG
@@ -170,4 +170,4 @@ void debugJpeg(
     Serial.println(iMaxMCUs);
 }
 
-#endif
+#endif // _JPEGFUNC_H_

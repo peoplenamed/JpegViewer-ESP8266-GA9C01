@@ -5,21 +5,15 @@
  *     MOM AND FAMILY ARE THE BEST!**************!!!!!!!!!!!!!!!!!
  *     https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circular-display-with-gc9a01-controller-powered-by-an-esp8266/
  ******************************************************************************/
-#include "JpegFunc.h"
 #include "colorStruct.h"
-#include <Arduino_GFX_Library.h>
+//#include "display.h"
+#include "JpegFunc.h"
 #define GFX_BL 5 // default backlight pin
 //#define DEBUG
 #define USE_LittleFS
 
 #ifdef ESP8266
   #include <LittleFS.h>
-  #define TFT_CS D8
-  #define TFT_DC D2
-  #define TFT_RST D4
-  #define TFT_MISO -1  // no data coming back
-  Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
 #endif
 
 #ifdef ESP32
@@ -29,15 +23,7 @@
     #include <LITTLEFS.h> 
   #else
     #include <SPIFFS.h>
-  #endif 
-
-  #define TFT_CS 22
-  #define TFT_DC 16
-  #define TFT_RST 4
-  #define TFT_MISO -1  // no data coming back
-
-  Arduino_DataBus *bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
-  Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
+  #endif
 #endif
 
 #ifdef DEBUG
@@ -51,8 +37,6 @@ String userInput;
 const byte numChars = 32;
 char receivedChars[numChars];
 boolean newData = false;
-int _height = 240;
-int _width = 240;
 
 void setup() {
   Serial.begin(115200);
@@ -496,23 +480,4 @@ void triangleWipe(boolean wipe) {
         cx1 + i, cy1 + i, // bottom right
         gfx->color565(0, 0, i));
   }
-}
-
-void drawImage(char* fileName) {
-  #ifdef DEBUG
-    Serial.print("Drawing ");
-    Serial.println(fileName);
-  #endif
-//  int _width = gfx->width();
-//  int _height = gfx->height();
-
-  jpegDraw(fileName, jpegDrawCallback, true /* useBigEndian */, 0, 0, _width /* widthLimit */, _height /* heightLimit */);
-}
-
-static int jpegDrawCallback(JPEGDRAW *pDraw) {
-  #ifdef DEBUG
-    Serial.printf("Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
-  #endif
-  gfx->draw16bitBeRGBBitmap(pDraw->x, pDraw->y, pDraw->pPixels, pDraw->iWidth, pDraw->iHeight);
-  return 1;
 }

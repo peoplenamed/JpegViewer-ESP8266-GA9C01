@@ -7,6 +7,15 @@
 #define _HEIGHT 240
 #define _WIDTH 240
 
+#define _EYE_LEFT_X 56
+#define _EYE_LEFT_Y 66
+
+#define _EYE_RIGHT_X 120
+#define _EYE_RIGHT_Y 66
+
+#define _MOUTH_X 56
+#define _MOUTH_Y 120
+
 #ifdef ESP8266
 // Include little FS on ESP8266
 #include <LittleFS.h>

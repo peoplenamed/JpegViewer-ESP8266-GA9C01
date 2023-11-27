@@ -8,10 +8,13 @@
 
 #include <Arduino_GFX_Library.h>
 
-#include <config.h>
+#include "config.h"
+#include "jpeg_func.h"
+#include "color_struct.h"
+#include "assets/face/eyes/eye.h"
 
 // #define DEBUG
-#define USE_LittleFS
+// #define USE_LittleFS
 
 #ifdef DEBUG
 #ifdef USE_LittleFS
@@ -159,7 +162,14 @@ void runCommand()
 
     if (firstChar == '-')
     {
-        debugCircle();
+
+        Eye eye(56, 66);
+        eye.render(0);
+        delay(420);
+        eye.render(5);
+        delay(420);
+        eye.render(6);
+        // debugCircle();
     }
     else
     {

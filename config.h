@@ -37,9 +37,7 @@
 #include <SPIFFS.h>
 #endif
 
-// Setup Graphics Interace
-Arduino_DataBus *graphic_bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
-Arduino_GFX *gfx = new Arduino_GC9A01(graphic_bus, TFT_RST, 0 /* rotation */, true /* IPS */);
-// #endif
+extern Arduino_DataBus *graphic_bus;
+extern Arduino_GFX *gfx;
 
 #endif

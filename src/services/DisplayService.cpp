@@ -15,8 +15,6 @@
  * GLOBAL PROTOTYPES
  **********************/
 
-Arduino_DataBus *Display::bus;
-Arduino_GFX *Display::gfx;
 JpegFunk Display::jpegFunk;
 
 /**********************
@@ -31,33 +29,33 @@ Display::Display() {}
 
 void Display::setupDisplay()
 {
-#ifdef ESP8826
-#include <LittleFS.h>
-#define TFT_CS D8
-#define TFT_DC D2
-#define TFT_RST D4
-#define TFT_MISO -1 // no data coming back
-    Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
-    Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
-#endif
+    // #ifdef ESP8826
+    // #include <LittleFS.h>
+    // #define TFT_CS D8
+    // #define TFT_DC D2
+    // #define TFT_RST D4
+    // #define TFT_MISO -1 // no data coming back
+    //     Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
+    //     Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
+    // #endif
 
-#ifdef ESP32
-#include <FS.h>
-#ifdef USE_LittleFS
-#define SPIFFS LITTLEFS
-#include <LITTLEFS.h>
-#else
-#include <SPIFFS.h>
-#endif
+    // #ifdef ESP32
+    // #include <FS.h>
+    // #ifdef USE_LittleFS
+    // #define SPIFFS LITTLEFS
+    // #include <LITTLEFS.h>
+    // #else
+    // #include <SPIFFS.h>
+    // #endif
 
-#define TFT_CS 22
-#define TFT_DC 16
-#define TFT_RST 4
-#define TFT_MISO -1 // no data coming back
+    // #define TFT_CS 22
+    // #define TFT_DC 16
+    // #define TFT_RST 4
+    // #define TFT_MISO -1 // no data coming back
 
-    bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
-    gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
-#endif
+    //     bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
+    //     gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
+    // #endif
     Serial.print("Display initializer");
     // Init Display
     if (!gfx->begin())

@@ -3,7 +3,7 @@
  *      INCLUDES
  *********************/
 #include "SerialManagerController.h"
-#include "../views/EyeView.h"
+#include "../animations/AngryFaceAnimation.h"
 
 /*********************
  *      CLASS
@@ -88,13 +88,8 @@ void SerialManager::runCommand()
     }
     else if (firstChar == '-')
     {
-
-        EyeView eye(56, 66);
-        eye.render(0);
-        delay(420);
-        eye.render(5);
-        delay(420);
-        eye.render(6);
+        AngryFaceAnimation angryFaceAnimation;
+        angryFaceAnimation.render();
     }
     else
     {

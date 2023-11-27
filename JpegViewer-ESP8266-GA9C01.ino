@@ -8,9 +8,6 @@
 /*********************
  *  GLOBAL INCLUDES
  *********************/
-#include <Arduino.h>
-#include <Arduino_GFX_Library.h>
-
 #include "config.h"
 #include "src/controllers/SerialManagerController.h"
 

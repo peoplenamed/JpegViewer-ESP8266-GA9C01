@@ -1,10 +1,11 @@
-#ifndef _EYE_VIEW_H_
-#define _EYE_VIEW_H_
+#ifndef _EYE_FRAME_H_
+#define _EYE_FRAME_H_
 /*********************
  *      INCLUDES
  *********************/
+#include "../../config.h"
 
-class EyeView
+class EyeFrame
 {
 public:
     int x;
@@ -18,7 +19,7 @@ public:
     static const unsigned char eye_closed_lr[] PROGMEM;
     static const unsigned char eye_open_lr[] PROGMEM;
 
-    EyeView(int x, int y);
+    EyeFrame(int x, int y);
 
     void render(int type);
 };

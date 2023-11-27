@@ -3,7 +3,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include <Arduino_GFX_Library.h>
+#include "../../config.h"
 #include "JpegFunkService.h"
 
 /*********************
@@ -42,8 +42,6 @@ public:
     void DrawCircle(int32_t x, int32_t y, int32_t radius, int32_t color);
     void drawJpgAnimation(String name, String fileType, int frames, int times);
 
-    static Arduino_DataBus *bus;
-    static Arduino_GFX *gfx;
     static JpegFunk jpegFunk;
 };
 

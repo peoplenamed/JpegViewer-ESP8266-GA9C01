@@ -1,28 +1,31 @@
 /*********************
  *      INCLUDES
  *********************/
-#include <Arduino.h>;
-#include <Arduino_GFX.h>;
+#include "../../config.h";
 #include "AngryFaceAnimation.h";
-#include "../frames/EyeFrame.h";
+#include "elements/EyeElement.h";
+#include "elements/MouthElement.h";
 
 /*********************
  *      DEFINES
  *********************/
 void AngryFaceAnimation::render()
 {
-    EyeFrame eyeLeftFrame(_EYE_LEFT_X, _EYE_LEFT_Y);
-    EyeFrame eyeRightFrame(_EYE_RIGHT_X, _EYE_RIGHT_Y);
+    EyeElement eyeLeftElement(_EYE_LEFT_X, _EYE_LEFT_Y);
+    EyeElement eyeRightElement(_EYE_RIGHT_X, _EYE_RIGHT_Y);
+    MouthElement mouthElement(_MOUTH_X, _MOUTH_Y);
 
-    eyeLeftFrame.render(0);
-    eyeRightFrame.render(0);
-    delay(250);
+    mouthElement.render(MOUTH_CLOSED);
 
-    eyeLeftFrame.render(5);
-    eyeRightFrame.render(5);
-    delay(250);
+    eyeLeftElement.render(EYE_OPEN_LR);
+    eyeRightElement.render(EYE_OPEN_LR);
+    delay(200);
 
-    eyeLeftFrame.render(6);
-    eyeRightFrame.render(6);
-    delay(250);
+    eyeLeftElement.render(EYE_CLOSING_LR);
+    eyeRightElement.render(EYE_CLOSING_LR);
+    delay(200);
+
+    eyeLeftElement.render(EYE_CLOSED_LR);
+    eyeRightElement.render(EYE_CLOSED_LR);
+    delay(200);
 }

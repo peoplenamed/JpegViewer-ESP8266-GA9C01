@@ -1,11 +1,28 @@
-#ifndef _EYE_FRAME_H_
-#define _EYE_FRAME_H_
+#ifndef _EYE_ELEMENT_H_
+#define _EYE_ELEMENT_H_
 /*********************
  *      INCLUDES
  *********************/
-#include "../../config.h"
+#include "../../../config.h"
 
-class EyeFrame
+/**********************
+ *      TYPEDEFS
+ **********************/
+enum EyeType
+{
+    EYE_OPEN_LR,
+    EYE_ANGRY_R,
+    EYE_ANGRY_L,
+    EYE_DISAPPOINTED_LR,
+    EYE_DIAMOND_LR,
+    EYE_CLOSING_LR,
+    EYE_CLOSED_LR
+};
+
+/**********************
+ *      CLASS
+ **********************/
+class EyeElement
 {
 public:
     int x;
@@ -19,8 +36,8 @@ public:
     static const unsigned char eye_closed_lr[] PROGMEM;
     static const unsigned char eye_open_lr[] PROGMEM;
 
-    EyeFrame(int x, int y);
+    EyeElement(int x, int y);
 
-    void render(int type);
+    void render(EyeType type);
 };
 #endif

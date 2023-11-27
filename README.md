@@ -35,9 +35,9 @@ These are the pins I used for the ESP8266 / ESP 32
 
 ### Useful Diagrams
 
-![alt text](./ADDITIONAL.png)
-![esp32 wiring reference](./ref1.webp)
-![esp32 pinouts](./ref2.webp)
+![alt text](./README/ADDITIONAL.png)
+![esp32 wiring reference](./README/ref1.webp)
+![esp32 pinouts](./README/ref2.webp)
 
 ## Screen Specs
 

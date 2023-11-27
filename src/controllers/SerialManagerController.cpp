@@ -4,6 +4,7 @@
  *********************/
 #include "SerialManagerController.h"
 #include "../animations/AngryFaceAnimation.h"
+#include "../animations/SleepFaceAnimation.h"
 
 /*********************
  *      CLASS
@@ -89,7 +90,12 @@ void SerialManager::runCommand()
     else if (firstChar == '-')
     {
         AngryFaceAnimation angryFaceAnimation;
-        angryFaceAnimation.render();
+        angryFaceAnimation.renderIn();
+        delay(2);
+        angryFaceAnimation.renderOut();
+        delay(2);
+        SleepFaceAnimation sleepFaceAnimation;
+        sleepFaceAnimation.renderIn();
     }
     else
     {

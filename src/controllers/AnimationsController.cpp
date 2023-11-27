@@ -1,4 +1,4 @@
-#include "Animations.h"
+#include "AnimationsController.h"
 
 Animations::Animations() {
   Serial.println("Animations initializer");
@@ -205,7 +205,7 @@ void Animations::userDefinedText(String _text, int _x, int _y, int _size, int _c
 void Animations::wipeScreen(boolean wipe) {
   display.wipeScreen(wipe);
 }
-      
+
 void Animations::drawRimCircle(int32_t radius, boolean wipe, int maxWipe)
 {
   display.wipeScreen(wipe);

@@ -6,36 +6,39 @@
  *     https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circular-display-with-gc9a01-controller-powered-by-an-esp8266/
  ******************************************************************************/
 #include "Arduino.h"
-#include "SerialManager.h"
+#include "config.h"
+#include "src/controllers/SerialManagerController.h"
 #define USE_LittleFS
 #define DEBUG
 
 #ifdef DEBUG
-  #ifdef USE_LittleFS
-    // List everything in LittleFS Storage
+#ifdef USE_LittleFS
+// List everything in LittleFS Storage
 //    #include "List_LittleFS.h"
-  #endif
+#endif
 #endif
 
 SerialManager serialManager;
 
-void setup() {
-  Serial.begin(115200);
-  Serial.setTimeout(1);
+void setup()
+{
+    Serial.begin(115200);
+    Serial.setTimeout(1);
 
-  #ifdef DEBUG
-    #ifdef USE_LittleFS
-//      listLittleFS(); // Not working atm...
-    #endif
-  #endif
-  
-  serialManager.setupDisplay();
-  serialManager.splashScreen();
+#ifdef DEBUG
+#ifdef USE_LittleFS
+    //      listLittleFS(); // Not working atm...
+#endif
+#endif
+
+    serialManager.setupDisplay();
+    serialManager.splashScreen();
 }
 
 void loop()
 {
-  while (!Serial.available()); 
+    while (!Serial.available())
+        ;
 
-  serialManager.processSerialCommands();
+    serialManager.processSerialCommands();
 }

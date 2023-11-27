@@ -1,6 +1,13 @@
-#include "SerialManager.h"
-#include "assets/face/eyes/eye.h"
 
+/*********************
+ *      INCLUDES
+ *********************/
+#include "SerialManagerController.h"
+#include "../views/EyeView.h"
+
+/*********************
+ *      CLASS
+ *********************/
 SerialManager::SerialManager()
 {
     Serial.print("SerialManager initializer");
@@ -82,7 +89,7 @@ void SerialManager::runCommand()
     else if (firstChar == '-')
     {
 
-        Eye eye(56, 66);
+        EyeView eye(56, 66);
         eye.render(0);
         delay(420);
         eye.render(5);

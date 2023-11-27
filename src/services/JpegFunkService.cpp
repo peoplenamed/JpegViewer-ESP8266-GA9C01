@@ -1,34 +1,54 @@
-/*******************************************************************************
- * JPEGDEC related function
- *
- * Dependent libraries:
- * JPEGDEC: https://github.com/bitbank2/JPEGDEC.git
- ******************************************************************************/
-#ifndef _JPEGFUNC_H_
-#define _JPEGFUNC_H_
-#include <JPEGDEC.h>
-#define USE_LittleFS
-// #define DEBUG
+/*********************
+ *      INCLUDES
+ *********************/
+#include "JpegFunkService.h"
+
+/*********************
+ *      DEFINES
+ *********************/
+int JpegFunk::_height = 240;
+int JpegFunk::_width = 240;
+JPEGDEC JpegFunk::_jpeg;
+File JpegFunk::_f;
+int JpegFunk::_x;
+int JpegFunk::_y;
+int JpegFunk::_x_bound;
+int JpegFunk::_y_bound;
+
+/**********************
+ *      CLASS
+ **********************/
+JpegFunk::JpegFunk()
+{
+    Serial.print("JpegFunk initializer");
+    Serial.println("JpegFunk initializer");
+#ifdef ESP32
+#ifdef USE_LittleFS
+    if (!LITTLEFS.begin(true))
+    {
+        Serial.println("An Error has occurred while mounting LITTLEFS");
+        return;
+    }
+#else
+    if (!SPIFFS.begin(true))
+    {
+        Serial.println("An Error has occurred while mounting SPIFFS");
+        return;
+    }
+#endif
+#endif
 
 #ifdef ESP8826
-#include <LittleFS.h>
+    if (!LittleFS.begin())
+    {
+        Serial.println(F("ERROR: File System Mount Failed!"));
+        gfx->println(F("ERROR: File System Mount Failed!"));
+        // gfx->setRotation(uint8_t rotation);
+    }
 #endif
+}
 
-#ifdef ESP32
-#include <FS.h>
-#ifdef USE_LittleFS
-#define SPIFFS LITTLEFS
-#include <LITTLEFS.h>
-#else
-#include <SPIFFS.h>
-#endif
-#endif
-
-static JPEGDEC _jpeg;
-static File _f;
-static int _x, _y, _x_bound, _y_bound;
-
-static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
+void *JpegFunk::jpegOpenFile(const char *szFilename, int32_t *pFileSize)
 {
 #ifdef DEBUG
     Serial.print("jpegOpenFile: ");
@@ -53,7 +73,7 @@ static void *jpegOpenFile(const char *szFilename, int32_t *pFileSize)
     return &_f;
 }
 
-static void jpegCloseFile(void *pHandle)
+void JpegFunk::jpegCloseFile(void *pHandle)
 {
 #ifdef DEBUG
     Serial.println("jpegCloseFile");
@@ -62,7 +82,7 @@ static void jpegCloseFile(void *pHandle)
     f->close();
 }
 
-static int32_t jpegReadFile(JPEGFILE *pFile, uint8_t *pBuf, int32_t iLen)
+int32_t JpegFunk::jpegReadFile(JPEGFILE *pFile, uint8_t *pBuf, int32_t iLen)
 {
 #ifdef DEBUG
     Serial.printf("jpegReadFile, iLen: %d\n", iLen);
@@ -72,7 +92,7 @@ static int32_t jpegReadFile(JPEGFILE *pFile, uint8_t *pBuf, int32_t iLen)
     return r;
 }
 
-static int32_t jpegSeekFile(JPEGFILE *pFile, int32_t iPosition)
+int32_t JpegFunk::jpegSeekFile(JPEGFILE *pFile, int32_t iPosition)
 {
 #ifdef DEBUG
     Serial.printf("jpegSeekFile, pFile->iPos: %d, iPosition: %d\n", pFile->iPos, iPosition);
@@ -83,7 +103,7 @@ static int32_t jpegSeekFile(JPEGFILE *pFile, int32_t iPosition)
     return iPosition;
 }
 
-static void jpegDraw(
+void JpegFunk::jpegDraw(
     const char *filename, JPEG_DRAW_CALLBACK *jpegDrawCallback, bool useBigEndian,
     int x, int y, int widthLimit, int heightLimit)
 {
@@ -120,11 +140,11 @@ static void jpegDraw(
         iMaxMCUs = widthLimit / 2;
     }
 #ifdef DEBUG
-    debugJpeg(*filename, useBigEndian, x, y, _x, _y, widthLimit,
-              heightLimit, _scale, iMaxMCUs, ratio)
+    debugJpeg(filename, useBigEndian, x, y, _x, _y, widthLimit,
+              heightLimit, _scale, iMaxMCUs, ratio);
 #endif
 
-        _jpeg.setMaxOutputSize(iMaxMCUs);
+    _jpeg.setMaxOutputSize(iMaxMCUs);
 
     if (useBigEndian)
     {
@@ -135,7 +155,7 @@ static void jpegDraw(
     _jpeg.close();
 }
 
-void debugJpeg(
+void JpegFunk::debugJpeg(
     const char *filename, bool useBigEndian,
     int x, int y, int _x, int _y, int widthLimit, int heightLimit,
     int _scale, int iMaxMCUs, float ratio)
@@ -169,5 +189,3 @@ void debugJpeg(
     Serial.print("== iMaxMCUs: ");
     Serial.println(iMaxMCUs);
 }
-
-#endif // _JPEGFUNC_H_

@@ -1,7 +1,8 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "EyeView.h"
+#include "EyeView.h";
+#include <Arduino_GFX.h>;
 
 /*********************
  *      DEFINES
@@ -11,7 +12,7 @@ EyeView::EyeView(int x, int y)
 {
     this->x = x;
     this->y = y;
-}
+};
 
 const unsigned char EyeView::eye_angry_r[] PROGMEM = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,

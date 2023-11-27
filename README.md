@@ -8,6 +8,8 @@ _Face Specs_
 
 - Eyes are 44 x 40 px
 
+LittleFS_esp32
+
 _Setup_
 This is the original tutorial I used to setup my ESP8266 NodeMCU Amica v1.0
 https://thesolaruniverse.wordpress.com/2022/11/01/an-internet-synced-clock-circular-display-with-gc9a01-controller-powered-by-an-esp8266/

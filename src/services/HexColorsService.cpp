@@ -1,6 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
+#include <Arduino.h>
 #include "HexColorsService.h"
 
 /*********************

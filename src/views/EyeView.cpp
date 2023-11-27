@@ -1,8 +1,9 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "EyeView.h";
+#include <Arduino.h>;
 #include <Arduino_GFX.h>;
+#include "EyeView.h";
 
 /*********************
  *      DEFINES

@@ -9,6 +9,7 @@ _Face Specs_
 - Eyes are 44 x 40 px
 
 LittleFS_esp32
+GFX Library for Arduino
 
 _Setup_
 This is the original tutorial I used to setup my ESP8266 NodeMCU Amica v1.0

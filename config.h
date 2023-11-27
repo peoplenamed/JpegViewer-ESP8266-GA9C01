@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include "pinout.h"
+#include <Arduino_GFX.h>
 
 // Define Globals
 #define _HEIGHT 240

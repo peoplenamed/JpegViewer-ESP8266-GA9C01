@@ -37,6 +37,7 @@ void setup()
 {
     Serial.begin(115200);
     Serial.setTimeout(1);
+    Log.begin(LOG_LEVEL, &Serial);
 
 #ifdef DEBUG
 #ifdef USE_LittleFS

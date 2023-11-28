@@ -2,6 +2,7 @@
 #define _CONFIG_H_
 
 #include "pinout.h"
+#include <ArduinoLog.h>
 #include <Arduino.h>
 #include <Arduino_GFX_Library.h>
 
@@ -17,6 +18,17 @@
 
 #define _MOUTH_X 56
 #define _MOUTH_Y 120
+
+// https://github.com/thijse/Arduino-Log
+//  * 0 - LOG_LEVEL_SILENT     no output
+//  * 1 - LOG_LEVEL_FATAL      fatal errors
+//  * 2 - LOG_LEVEL_ERROR      all errors
+//  * 3 - LOG_LEVEL_WARNING    errors, and warnings
+//  * 4 - LOG_LEVEL_NOTICE     errors, warnings and notices
+//  * 5 - LOG_LEVEL_TRACE      errors, warnings, notices & traces
+//  * 6 - LOG_LEVEL_VERBOSE    all
+
+#define LOG_LEVEL LOG_LEVEL_VERBOSE
 
 // #ifdef ESP8266
 // // Include little FS on ESP8266
@@ -39,5 +51,4 @@
 
 extern Arduino_DataBus *graphic_bus;
 extern Arduino_GFX *gfx;
-
 #endif

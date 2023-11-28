@@ -13,6 +13,7 @@
 /*********************
  *      INCLUDES
  *********************/
+#include "../../config.h"
 #include <JPEGDEC.h>
 
 #ifdef ESP8826

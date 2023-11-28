@@ -56,17 +56,15 @@ void Display::setupDisplay()
     //     bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
     //     gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
     // #endif
-    Serial.print("Display initializer");
+    Log.info("Display initializer" CR);
     // Init Display
     if (!gfx->begin())
     {
-        Serial.println("gfx->begin() failed!");
+        Log.fatal("gfx->begin() failed!" CR);
     }
     else
     {
-#ifdef DEBUG
-        Serial.println("gfx->begin() initialized.");
-#endif
+        Log.trace("gfx->begin() initialized." CR);
         wipeScreen(true);
     }
 }
@@ -100,19 +98,14 @@ void Display::drawText(String _text, int _x, int _y, int _size, int _color)
 
 int Display::jpegDrawCallback(JPEGDRAW *pDraw)
 {
-#ifdef DEBUG
-    Serial.printf("Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
-#endif
+    Log.trace("Draw pos = %d,%d. size = %d x %d" CR, pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
     gfx->draw16bitBeRGBBitmap(pDraw->x, pDraw->y, pDraw->pPixels, pDraw->iWidth, pDraw->iHeight);
     return 1;
 }
 
 void Display::drawImage(char *fileName)
 {
-#ifdef DEBUG
-    Serial.print("Drawing ");
-    Serial.println(fileName);
-#endif
+    Log.trace("Drawing: %d" CR, fileName);
     int _width = 240;
     int _height = 240;
 

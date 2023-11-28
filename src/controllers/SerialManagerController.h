@@ -4,7 +4,12 @@
 /*********************
  *      INCLUDES
  *********************/
+#include "../../config.h"
+#include <ArduinoLog.h>
 #include "AnimationsController.h"
+#include "../animations/AngryFaceAnimation.h"
+#include "../animations/SleepFaceAnimation.h"
+#include "../animations/GrumpyFaceAnimation.h"
 
 /*********************
  *      CLASS

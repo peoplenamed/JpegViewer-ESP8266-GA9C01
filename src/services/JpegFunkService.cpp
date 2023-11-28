@@ -20,8 +20,7 @@ int JpegFunk::_y_bound;
  **********************/
 JpegFunk::JpegFunk()
 {
-    Serial.print("JpegFunk initializer");
-    Serial.println("JpegFunk initializer");
+    Log.info("JpegFunk initializer" CR);
 #ifdef ESP32
 #ifdef USE_LittleFS
     if (!LITTLEFS.begin(true))

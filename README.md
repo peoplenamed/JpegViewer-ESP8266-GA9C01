@@ -4,12 +4,10 @@ _Inspiration_
 I was heavily inspired by the "K1 Devil Burner" after seeing a video on YouTube. The package was deemed too expensive so I grabbed a cheap LCD round display named, RoundyFi. $(21) After breaking the RoundyFi I bought a 3-pack of some cheaper $(24) LCD displays and started hooking them up to ESP8826 and ESP32.
 https://www.google.com/search?q=k1+devil+burner&oq=k1+devil+burner&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDQ5NDVqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:69d335a3,vid:E5RaALcMHHg,st:0
 
-_Face Specs_
-
-- Eyes are 44 x 40 px
-
+_Libraries to install_
 LittleFS_esp32
 GFX Library for Arduino
+ArduinoLog by Thijs Elenbaas
 
 _Setup_
 This is the original tutorial I used to setup my ESP8266 NodeMCU Amica v1.0

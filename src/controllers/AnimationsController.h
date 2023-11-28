@@ -1,6 +1,7 @@
 #ifndef _ANIMATIONS_CONTROLLER_H_
 #define _ANIMATIONS_CONTROLLER_H_
 
+#include "../../config.h"
 #include "../services/DisplayService.h"
 #include "../services/HexColorsService.h"
 //  #include "Arduino.h"

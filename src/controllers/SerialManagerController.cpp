@@ -3,16 +3,13 @@
  *      INCLUDES
  *********************/
 #include "SerialManagerController.h"
-#include "../animations/AngryFaceAnimation.h"
-#include "../animations/SleepFaceAnimation.h"
-#include "../animations/GrumpyFaceAnimation.h"
 
 /*********************
  *      CLASS
  *********************/
 SerialManager::SerialManager()
 {
-    Serial.print("SerialManager initializer");
+    Log.notice("SerialManager initializer");
 }
 
 void SerialManager::setupDisplay()
@@ -68,7 +65,7 @@ void SerialManager::recvWithStartEndMarkers()
 
 void SerialManager::splashScreen()
 {
-    Serial.println("SerialManager::splashScreen()");
+    Log.notice("SerialManager::splashScreen()" CR);
     animations.splashScreen();
 }
 
@@ -127,20 +124,8 @@ void SerialManager::processCustomMessage()
     String _size = getValueFromDelimitedString(charsAsString, '|', 3);
     String _color = getValueFromDelimitedString(charsAsString, '|', 4);
     String _wipe = getValueFromDelimitedString(charsAsString, '|', 5);
-#ifdef DEBUG
-    Serial.print("  _text = ");
-    Serial.println(_text);
-    Serial.print("  _x = ");
-    Serial.println(_x);
-    Serial.print("  _y = ");
-    Serial.println(_y);
-    Serial.print("  _size = ");
-    Serial.println(_size);
-    Serial.print("  _color = ");
-    Serial.println(_color);
-    Serial.print("  _wipe = ");
-    Serial.println(_wipe);
-#endif
+
+    Log.trace("_text: %s, _x: %s, _y: %s, _size: %s, _color: %s, _wipe: %s" CR, _text, _x, _y, _size, _color, _wipe);
 
     if (_wipe == "1")
     {

@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.js": "javascript",
+    "*.module": "php",
+    "*.php": "php",
+    "*.ts": "typescript",
+    "*.tsx": "typescriptreact",
+    ".php_cs": "php",
+    ".php_cs.dist": "php",
+    "cstdarg": "cpp"
+  }
+}

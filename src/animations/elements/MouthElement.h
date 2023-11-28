@@ -10,7 +10,9 @@
  **********************/
 enum MouthType
 {
-    MOUTH_CLOSED
+    MOUTH_CLOSED,
+    MOUTH_GRUMPY_ONE,
+    MOUTH_GRUMPY_TWO
 };
 
 class MouthElement
@@ -20,6 +22,8 @@ public:
     int y;
 
     static const unsigned char mouth_closed[] PROGMEM;
+    static const unsigned char mouth_grumpy_one[] PROGMEM;
+    static const unsigned char mouth_grumpy_two[] PROGMEM;
 
     MouthElement(int x, int y);
 

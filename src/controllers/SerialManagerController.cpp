@@ -5,6 +5,7 @@
 #include "SerialManagerController.h"
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"
+#include "../animations/GrumpyFaceAnimation.h"
 
 /*********************
  *      CLASS
@@ -91,11 +92,21 @@ void SerialManager::runCommand()
     {
         AngryFaceAnimation angryFaceAnimation;
         angryFaceAnimation.renderIn();
-        delay(2);
+        delay(2000);
         angryFaceAnimation.renderOut();
-        delay(2);
+        delay(2000);
         SleepFaceAnimation sleepFaceAnimation;
         sleepFaceAnimation.renderIn();
+        delay(2000);
+        sleepFaceAnimation.renderOut();
+        delay(2000);
+
+        GrumpyFaceAnimation grumpyFaceAnimation;
+        grumpyFaceAnimation.renderIn();
+        delay(2000);
+        grumpyFaceAnimation.renderLoop();
+        delay(2000);
+        sleepFaceAnimation.renderOut();
     }
     else
     {

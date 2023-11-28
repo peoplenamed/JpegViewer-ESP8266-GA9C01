@@ -1,5 +1,5 @@
-#ifndef _SLEEP_FACE_ANIMATION_H_
-#define _SLEEP_FACE_ANIMATION_H_
+#ifndef _GRUMPY_FACE_ANIMATION_H_
+#define _GRUMPY_FACE_ANIMATION_H_
 /*********************
  *      INCLUDES
  *********************/
@@ -10,10 +10,10 @@
 /*********************
  *      Class
  *********************/
-class SleepFaceAnimation
+class GrumpyFaceAnimation
 {
 public:
-    SleepFaceAnimation();
+    GrumpyFaceAnimation();
     void renderIn();
     void renderOut();
     void renderLoop();

@@ -1,21 +1,21 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../../config.h";
 #include "AngryFaceAnimation.h";
-#include "elements/EyeElement.h";
-#include "elements/MouthElement.h";
 
 /*********************
  *      DEFINES
  *********************/
+// Constructor implementation
+AngryFaceAnimation::AngryFaceAnimation()
+    : eyeLeftElement(_EYE_LEFT_X, _EYE_LEFT_Y),
+      eyeRightElement(_EYE_RIGHT_X, _EYE_RIGHT_Y),
+      mouthElement(_MOUTH_X, _MOUTH_Y)
+{
+}
+
 void AngryFaceAnimation::renderIn()
 {
-
-    EyeElement eyeLeftElement(_EYE_LEFT_X, _EYE_LEFT_Y);
-    EyeElement eyeRightElement(_EYE_RIGHT_X, _EYE_RIGHT_Y);
-    MouthElement mouthElement(_MOUTH_X, _MOUTH_Y);
-
     mouthElement.render(MOUTH_CLOSED);
 
     eyeLeftElement.render(EYE_OPEN_LR);
@@ -32,10 +32,6 @@ void AngryFaceAnimation::renderIn()
 
 void AngryFaceAnimation::renderOut()
 {
-    EyeElement eyeLeftElement(_EYE_LEFT_X, _EYE_LEFT_Y);
-    EyeElement eyeRightElement(_EYE_RIGHT_X, _EYE_RIGHT_Y);
-    MouthElement mouthElement(_MOUTH_X, _MOUTH_Y);
-
     mouthElement.render(MOUTH_CLOSED);
 
     eyeLeftElement.render(EYE_ANGRY_L);

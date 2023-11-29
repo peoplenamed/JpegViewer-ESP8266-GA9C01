@@ -81,6 +81,15 @@ void Animations::chooseAnimation(int imageSelect)
         winkFaceAnimation.renderOut();
         break;
     }
+    case 15:
+    {
+        Log.trace("SatisfiedFaceAnimation" CR);
+        SatisfiedFaceAnimation satisfiedFaceAnimation;
+        satisfiedFaceAnimation.renderIn();
+        delay(2000);
+        satisfiedFaceAnimation.renderOut();
+        break;
+    }
     case 20:
         circleWipe(10, false);
         break;

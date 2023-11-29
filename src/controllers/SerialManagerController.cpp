@@ -85,26 +85,6 @@ void SerialManager::runCommand()
     {
         processCustomMessage();
     }
-    else if (firstChar == '-')
-    {
-        AngryFaceAnimation angryFaceAnimation;
-        angryFaceAnimation.renderIn();
-        delay(2000);
-        angryFaceAnimation.renderOut();
-        delay(2000);
-        SleepFaceAnimation sleepFaceAnimation;
-        sleepFaceAnimation.renderIn();
-        delay(2000);
-        sleepFaceAnimation.renderOut();
-        delay(2000);
-
-        GrumpyFaceAnimation grumpyFaceAnimation;
-        grumpyFaceAnimation.renderIn();
-        delay(2000);
-        grumpyFaceAnimation.renderLoop();
-        delay(2000);
-        sleepFaceAnimation.renderOut();
-    }
     else
     {
         animations.chooseAnimation(atoi(receivedChars));

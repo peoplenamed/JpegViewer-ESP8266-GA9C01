@@ -51,4 +51,6 @@
 
 extern Arduino_DataBus *graphic_bus;
 extern Arduino_GFX *gfx;
+
+extern int current_animation;
 #endif

@@ -21,19 +21,19 @@ void GrumpyFaceAnimation::renderIn()
     eyeLeftElement.render(EYE_DISAPPOINTED_LR);
     eyeRightElement.render(EYE_DISAPPOINTED_LR);
     mouthElement.render(MOUTH_GRUMPY_ONE);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_TWO);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_ONE);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_TWO);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_ONE);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_TWO);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_ONE);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_TWO);
 }
 
@@ -54,9 +54,9 @@ void GrumpyFaceAnimation::renderLoop()
     eyeRightElement.render(EYE_ANGRY_R);
 
     mouthElement.render(MOUTH_GRUMPY_ONE);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_TWO);
-    delay(100);
+    delay(200);
     mouthElement.render(MOUTH_GRUMPY_ONE);
 
     eyeLeftElement.render(EYE_DISAPPOINTED_LR);

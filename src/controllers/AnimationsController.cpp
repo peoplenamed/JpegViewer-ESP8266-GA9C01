@@ -41,11 +41,44 @@ void Animations::chooseAnimation(int imageSelect)
         break;
     case 11:
     {
-        Log.trace("AngryFaceAnimation:" CR);
+        Log.trace("AngryFaceAnimation" CR);
         AngryFaceAnimation angryFaceAnimation;
         angryFaceAnimation.renderIn();
         delay(600);
         angryFaceAnimation.renderOut();
+        current_animation = 12;
+        break;
+    }
+    case 12:
+    {
+        Log.trace("SleepFaceAnimation" CR);
+        SleepFaceAnimation sleepFaceAnimation;
+        sleepFaceAnimation.renderIn();
+        delay(2000);
+        sleepFaceAnimation.renderLoop();
+        delay(2000);
+        sleepFaceAnimation.renderOut();
+        delay(2000);
+        break;
+    }
+    case 13:
+    {
+        Log.trace("GrumpyFaceAnimation" CR);
+        GrumpyFaceAnimation grumpyFaceAnimation;
+        grumpyFaceAnimation.renderIn();
+        delay(2000);
+        grumpyFaceAnimation.renderLoop();
+        delay(2000);
+        grumpyFaceAnimation.renderOut();
+        break;
+    }
+    case 14:
+    {
+        Log.trace("WinkFaceAnimation" CR);
+        WinkFaceAnimation winkFaceAnimation;
+        winkFaceAnimation.renderIn();
+        delay(2000);
+        winkFaceAnimation.renderOut();
         break;
     }
     case 20:

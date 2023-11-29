@@ -7,6 +7,7 @@
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"
 #include "../animations/GrumpyFaceAnimation.h"
+#include "../animations/WinkFaceAnimation.h"
 //  #include "Arduino.h"
 
 #define DEBUG

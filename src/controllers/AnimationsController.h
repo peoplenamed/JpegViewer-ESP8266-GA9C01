@@ -4,6 +4,9 @@
 #include "../../config.h"
 #include "../services/DisplayService.h"
 #include "../services/HexColorsService.h"
+#include "../animations/AngryFaceAnimation.h"
+#include "../animations/SleepFaceAnimation.h"
+#include "../animations/GrumpyFaceAnimation.h"
 //  #include "Arduino.h"
 
 #define DEBUG

@@ -105,7 +105,7 @@ int Display::jpegDrawCallback(JPEGDRAW *pDraw)
 
 void Display::drawImage(char *fileName)
 {
-    Log.trace("Drawing: %d" CR, fileName);
+    Log.trace("Drawing: %s" CR, fileName);
     int _width = 240;
     int _height = 240;
 

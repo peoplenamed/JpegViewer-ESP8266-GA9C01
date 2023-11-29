@@ -39,6 +39,15 @@ void Animations::chooseAnimation(int imageSelect)
     case 7:
         diamondEyes();
         break;
+    case 11:
+    {
+        Log.trace("AngryFaceAnimation:" CR);
+        AngryFaceAnimation angryFaceAnimation;
+        angryFaceAnimation.renderIn();
+        delay(600);
+        angryFaceAnimation.renderOut();
+        break;
+    }
     case 20:
         circleWipe(10, false);
         break;
@@ -163,7 +172,7 @@ void Animations::diamondEyes()
 
 void Animations::splashScreen()
 {
-    Log.info("Animations::splashScreen()r" CR);
+    Log.info("Animations::splashScreen()" CR);
     grumpyFace();
     delay(500);
     satisfiedFace();

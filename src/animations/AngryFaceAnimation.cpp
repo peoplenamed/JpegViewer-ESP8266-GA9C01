@@ -20,11 +20,11 @@ void AngryFaceAnimation::renderIn()
 
     eyeLeftElement.render(EYE_OPEN_LR);
     eyeRightElement.render(EYE_OPEN_LR);
-    delay(200);
+    delay(600);
 
     eyeLeftElement.render(EYE_CLOSING_LR);
     eyeRightElement.render(EYE_CLOSING_LR);
-    delay(200);
+    delay(600);
 
     eyeLeftElement.render(EYE_ANGRY_L);
     eyeRightElement.render(EYE_ANGRY_R);
@@ -36,11 +36,11 @@ void AngryFaceAnimation::renderOut()
 
     eyeLeftElement.render(EYE_ANGRY_L);
     eyeRightElement.render(EYE_ANGRY_R);
-    delay(200);
+    delay(600);
 
     eyeLeftElement.render(EYE_CLOSING_LR);
     eyeRightElement.render(EYE_CLOSING_LR);
-    delay(200);
+    delay(600);
 
     eyeLeftElement.render(EYE_OPEN_LR);
     eyeRightElement.render(EYE_OPEN_LR);

@@ -90,6 +90,28 @@ void Animations::chooseAnimation(int imageSelect)
         satisfiedFaceAnimation.renderOut();
         break;
     }
+    case 16:
+    {
+        Log.trace("PopEyeFaceAnimation" CR);
+        PopEyeFaceAnimation popEyeFaceAnimation;
+        popEyeFaceAnimation.renderIn();
+        delay(2000);
+        popEyeFaceAnimation.renderLoop();
+        delay(2000);
+        popEyeFaceAnimation.renderOut();
+        break;
+    }
+    case 17:
+    {
+        Log.trace("FangFaceAnimation" CR);
+        FangFaceAnimation fangFaceAnimation;
+        fangFaceAnimation.renderIn();
+        delay(2000);
+        fangFaceAnimation.renderLoop();
+        delay(2000);
+        fangFaceAnimation.renderOut();
+        break;
+    }
     case 20:
         circleWipe(10, false);
         break;

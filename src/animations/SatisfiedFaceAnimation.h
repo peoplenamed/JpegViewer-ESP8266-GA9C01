@@ -13,14 +13,14 @@
 class SatisfiedFaceAnimation
 {
 public:
-    SatisfiedFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	SatisfiedFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

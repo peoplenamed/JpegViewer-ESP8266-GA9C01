@@ -15,15 +15,15 @@
 class SleepFaceAnimation
 {
 public:
-    SleepFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	SleepFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
-    SleepElement sleepElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
+	SleepElement sleepElement;
 };
 #endif

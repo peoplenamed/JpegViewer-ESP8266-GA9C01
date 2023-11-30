@@ -12,6 +12,6 @@
 class SleepElement
 {
 public:
-    void render(int x, int y);
+	void render(int x, int y);
 };
 #endif

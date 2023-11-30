@@ -13,14 +13,14 @@
 class FangFaceAnimation
 {
 public:
-    FangFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	FangFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

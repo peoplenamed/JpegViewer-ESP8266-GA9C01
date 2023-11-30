@@ -13,14 +13,14 @@
 class GrumpyFaceAnimation
 {
 public:
-    GrumpyFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	GrumpyFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

@@ -13,14 +13,14 @@
 class WinkFaceAnimation
 {
 public:
-    WinkFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	WinkFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

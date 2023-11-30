@@ -637,13 +637,13 @@ void MouthElement::render(MouthType type)
         break;
     case MOUTH_GRUMPY_TWO:
         bitmapImage = mouth_grumpy_two;
-        c break;
+        break;
     case MOUTH_FANGS_ONE:
         bitmapImage = mouth_fangs_one;
         break;
     case MOUTH_FANGS_TWO:
         bitmapImage = mouth_fangs_two;
-        c break;
+        break;
     default:
         bitmapImage = mouth_closed; // Default case
         break;

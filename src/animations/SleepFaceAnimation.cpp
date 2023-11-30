@@ -17,7 +17,11 @@ SleepFaceAnimation::SleepFaceAnimation()
 
 void SleepFaceAnimation::renderIn()
 {
+
     gfx->fillScreen(BLACK);
+    gfx->drawEllipse(_MOUTH_X, _MOUTH_Y, 20, 10, WHITE);
+    delay(5000);
+
     mouthElement.render(MOUTH_CLOSED);
 
     eyeLeftElement.render(EYE_OPEN_LR);

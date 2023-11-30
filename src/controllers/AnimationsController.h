@@ -58,7 +58,7 @@ public:
 private:
     Display display;
     int compassTextColor = 7;
-    HexColors hexColors;
+    HexColorsService hexColors;
     int _width = 240;
     int _height = 240;
 };

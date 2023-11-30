@@ -630,25 +630,29 @@ void MouthElement::render(MouthType type)
     switch (type)
     {
     case MOUTH_CLOSED:
-        bitmapImage = mouth_closed;
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_closed, 128, 120, WHITE);
         break;
     case MOUTH_GRUMPY_ONE:
-        bitmapImage = mouth_grumpy_one;
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_grumpy_one, 128, 120, WHITE);
         break;
     case MOUTH_GRUMPY_TWO:
-        bitmapImage = mouth_grumpy_two;
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_grumpy_two, 128, 120, WHITE);
         break;
     case MOUTH_FANGS_ONE:
-        bitmapImage = mouth_fangs_one;
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_fangs_one, 128, 120, WHITE);
         break;
     case MOUTH_FANGS_TWO:
-        bitmapImage = mouth_fangs_two;
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_fangs_two, 128, 120, WHITE);
         break;
     default:
-        bitmapImage = mouth_closed; // Default case
+        // Default case
+        gfx->fillRect(x, y, 128, 120, BLACK);
+        gfx->drawBitmap(x, y, mouth_closed, 128, 120, WHITE);
         break;
     }
-
-    gfx->fillRect(x, y, 128, 120, BLACK);
-    gfx->drawBitmap(x, y, bitmapImage, 128, 120, WHITE);
 }

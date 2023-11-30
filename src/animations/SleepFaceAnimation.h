@@ -4,6 +4,7 @@
  *      INCLUDES
  *********************/
 #include "../../config.h";
+#include "../services/HexColorsService.h";
 #include "elements/EyeElement.h";
 #include "elements/MouthElement.h";
 #include "elements/SleepElement.h";

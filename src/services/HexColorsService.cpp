@@ -1,7 +1,6 @@
 /*********************
  *      INCLUDES
  *********************/
-#include <Arduino.h>
 #include "HexColorsService.h"
 
 /*********************
@@ -11,6 +10,15 @@
 /**********************
  *      TYPEDEFS
  **********************/
+ColorStruct COLORS[8] = {
+    {1, "black", 0x0000},
+    {2, "blue", 0x001F},
+    {3, "red", 0xF800},
+    {4, "green", 0x07E0},
+    {5, "cyan", 0x07FF},
+    {6, "magenta", 0xF81F},
+    {7, "yellow", 0xFFE0},
+    {8, "white", 0xFFFF}};
 
 /**********************
  *  STATIC PROTOTYPES
@@ -32,26 +40,16 @@
  *   CLASS
  **********************/
 
-ColorStruct COLORS[8] = {
-    {1, "black", 0x0000},
-    {2, "blue", 0x001F},
-    {3, "red", 0xF800},
-    {4, "green", 0x07E0},
-    {5, "cyan", 0x07FF},
-    {6, "magenta", 0xF81F},
-    {7, "yellow", 0xFFE0},
-    {8, "white", 0xFFFF}};
-
-HexColors::HexColors()
+HexColorsService::HexColorsService()
 {
-    Serial.println("HexColors initializer");
+    Log.trace("HexColorsService initializer");
 }
 
 // unsigned long HexColors::getHexColor(int chosenColor) {
 //   return COLORS[chosenColor - 1].hex;
 // }
 
-unsigned long HexColors::getHexColor(int chosenColor)
+unsigned long HexColorsService::getHexColor(int chosenColor)
 {
     switch (chosenColor)
     {
@@ -85,7 +83,7 @@ unsigned long HexColors::getHexColor(int chosenColor)
     }
 }
 
-unsigned long HexColors::getRandomColor()
+unsigned long HexColorsService::getRandomColor()
 {
     int randomColor = random(0, 7);
     return this->getHexColor(randomColor);

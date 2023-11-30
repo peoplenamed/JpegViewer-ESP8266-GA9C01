@@ -4,10 +4,21 @@
 /*********************
  *      INCLUDES
  *********************/
+#include <../../config.h>
+#include <Arduino.h>
+#include <ArduinoLog.h>
 
 /*********************
  *      DEFINES
  *********************/
+#define BLACK 0x0000
+#define BLUE 0x001F
+#define RED 0xF800
+#define GREEN 0x07E0
+#define CYAN 0x07FF
+#define MAGENTA 0xF81F
+#define YELLOW 0xFFE0
+#define WHITE 0xFFFF
 
 /**********************
  *      TYPEDEFS
@@ -32,10 +43,10 @@ typedef struct
  *      CLASS
  **********************/
 
-class HexColors
+class HexColorsService
 {
 public:
-    HexColors();
+    HexColorsService();
 
     unsigned long black = 0x0000;
     unsigned long blue = 0x001F;
@@ -53,21 +64,6 @@ private:
 };
 
 #endif // _HEX_COLORS_SERVICE_H_
-
-// typedef struct {
-//    int id;
-//    String name;
-//    unsigned long hex;
-// } colorStruct;
-
-// #define BLACK    0x0000
-// #define BLUE     0x001F
-// #define RED      0xF800
-// #define GREEN    0x07E0
-// #define CYAN     0x07FF
-// #define MAGENTA  0xF81F
-// #define YELLOW   0xFFE0
-// #define WHITE    0xFFFF
 
 // const colorStruct COLORS[8] = {
 //   {1, "BLACK", 0x0000},

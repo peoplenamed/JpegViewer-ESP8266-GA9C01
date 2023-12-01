@@ -13,14 +13,14 @@
 class PopEyeFaceAnimation
 {
 public:
-    PopEyeFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	PopEyeFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

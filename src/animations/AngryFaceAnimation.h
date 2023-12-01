@@ -13,14 +13,14 @@
 class AngryFaceAnimation
 {
 public:
-    AngryFaceAnimation();
-    void renderIn();
-    void renderOut();
-    void renderLoop();
+	AngryFaceAnimation();
+	void renderIn();
+	void renderOut();
+	void renderLoop();
 
 private:
-    EyeElement eyeLeftElement;
-    EyeElement eyeRightElement;
-    MouthElement mouthElement;
+	EyeElement eyeLeftElement;
+	EyeElement eyeRightElement;
+	MouthElement mouthElement;
 };
 #endif

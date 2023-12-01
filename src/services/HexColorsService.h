@@ -1,24 +1,24 @@
 #ifndef _HEX_COLORS_SERVICE_H_
-#define _HEX_COLORS_SERVICE_H_
+#	define _HEX_COLORS_SERVICE_H_
 
 /*********************
  *      INCLUDES
  *********************/
-#include <../../config.h>
-#include <Arduino.h>
-#include <ArduinoLog.h>
+#	include <../../config.h>
+#	include <Arduino.h>
+#	include <ArduinoLog.h>
 
 /*********************
  *      DEFINES
  *********************/
-#define BLACK 0x0000
-#define BLUE 0x001F
-#define RED 0xF800
-#define GREEN 0x07E0
-#define CYAN 0x07FF
-#define MAGENTA 0xF81F
-#define YELLOW 0xFFE0
-#define WHITE 0xFFFF
+#	define BLACK 0x0000
+#	define BLUE 0x001F
+#	define RED 0xF800
+#	define GREEN 0x07E0
+#	define CYAN 0x07FF
+#	define MAGENTA 0xF81F
+#	define YELLOW 0xFFE0
+#	define WHITE 0xFFFF
 
 /**********************
  *      TYPEDEFS
@@ -26,9 +26,9 @@
 
 typedef struct
 {
-    int id;
-    String name;
-    unsigned long hex;
+	int id;
+	String name;
+	unsigned long hex;
 } ColorStruct;
 
 /**********************
@@ -46,21 +46,21 @@ typedef struct
 class HexColorsService
 {
 public:
-    HexColorsService();
+	HexColorsService();
 
-    unsigned long black = 0x0000;
-    unsigned long blue = 0x001F;
-    unsigned long red = 0xF800;
-    unsigned long green = 0x07E0;
-    unsigned long cyan = 0x07FF;
-    unsigned long magenta = 0xF81F;
-    unsigned long yellow = 0xFFE0;
-    unsigned long white = 0xFFFF;
-    unsigned long getHexColor(int chosenColor);
-    unsigned long getRandomColor();
+	unsigned long black = 0x0000;
+	unsigned long blue = 0x001F;
+	unsigned long red = 0xF800;
+	unsigned long green = 0x07E0;
+	unsigned long cyan = 0x07FF;
+	unsigned long magenta = 0xF81F;
+	unsigned long yellow = 0xFFE0;
+	unsigned long white = 0xFFFF;
+	unsigned long getHexColor(int chosenColor);
+	unsigned long getRandomColor();
 
 private:
-    ColorStruct COLORS[8];
+	ColorStruct COLORS[8];
 };
 
 #endif // _HEX_COLORS_SERVICE_H_

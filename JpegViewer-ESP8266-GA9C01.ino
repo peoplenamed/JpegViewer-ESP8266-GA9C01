@@ -25,35 +25,35 @@ int frameDisplayTimer = 20;
 #define DEBUG
 
 #ifdef DEBUG
-#ifdef USE_LittleFS
+#	ifdef USE_LittleFS
 // List everything in LittleFS Storage
 //    #include "List_LittleFS.h"
-#endif
+#	endif
 #endif
 
 SerialManager serialManager;
 
 void setup()
 {
-    Serial.begin(115200);
-    Serial.setTimeout(1);
-    Log.begin(LOG_LEVEL, &Serial);
+	Serial.begin(115200);
+	Serial.setTimeout(1);
+	Log.begin(LOG_LEVEL, &Serial);
 
 #ifdef DEBUG
-#ifdef USE_LittleFS
-    //      listLittleFS(); // Not working atm...
-#endif
+#	ifdef USE_LittleFS
+	//      listLittleFS(); // Not working atm...
+#	endif
 #endif
 
-    serialManager.setupDisplay();
-    serialManager.splashScreen();
+	serialManager.setupDisplay();
+	serialManager.splashScreen();
 }
 
 void loop()
 {
-    while (!Serial.available())
-        ;
+	while(!Serial.available())
+		;
 
-    serialManager.processSerialCommands();
-    lastFrame = millis();
+	serialManager.processSerialCommands();
+	lastFrame = millis();
 }

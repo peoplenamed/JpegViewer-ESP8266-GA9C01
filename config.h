@@ -2,8 +2,8 @@
 #define _CONFIG_H_
 
 #include "pinout.h"
-#include <ArduinoLog.h>
 #include <Arduino.h>
+#include <ArduinoLog.h>
 #include <Arduino_GFX_Library.h>
 
 // Define Globals
@@ -43,14 +43,14 @@
 //  Include little FS or SPIFFS on ESP32
 #include <FS.h>
 #ifdef USE_LittleFS
-#define SPIFFS LITTLEFS
-#include <LITTLEFS.h>
+#	define SPIFFS LITTLEFS
+#	include <LITTLEFS.h>
 #else
-#include <SPIFFS.h>
+#	include <SPIFFS.h>
 #endif
 
-extern Arduino_DataBus *graphic_bus;
-extern Arduino_GFX *gfx;
+extern Arduino_DataBus* graphic_bus;
+extern Arduino_GFX* gfx;
 
 extern int current_animation;
 #endif

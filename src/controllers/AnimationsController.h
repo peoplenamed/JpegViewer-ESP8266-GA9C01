@@ -5,15 +5,14 @@
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/FangFaceAnimation.h"
 #include "../animations/GrumpyFaceAnimation.h"
+#include "../animations/LoadingFaceAnimation.h"
+#include "../animations/NormalAnimation.h"
 #include "../animations/PopEyeFaceAnimation.h"
 #include "../animations/SatisfiedFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"
 #include "../animations/WinkFaceAnimation.h"
 #include "../services/DisplayService.h"
 #include "../services/HexColorsService.h"
-//  #include "Arduino.h"
-
-#define DEBUG
 
 class Animations
 {
@@ -59,8 +58,8 @@ private:
 	Display display;
 	int compassTextColor = 7;
 	HexColorsService hexColors;
-	int _width = 240;
-	int _height = 240;
+	int _width = _WIDTH;
+	int _height = _HEIGHT;
 };
 
 #endif // _ANIMATIONS_H_

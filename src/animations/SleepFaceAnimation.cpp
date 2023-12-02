@@ -18,8 +18,6 @@ void SleepFaceAnimation::renderIn()
 {
 
 	gfx->fillScreen(BLACK);
-	gfx->drawEllipse(_MOUTH_X, _MOUTH_Y, 20, 10, WHITE);
-	delay(5000);
 
 	mouthElement.render(MOUTH_CLOSED);
 
@@ -39,6 +37,10 @@ void SleepFaceAnimation::renderIn()
 void SleepFaceAnimation::renderLoop()
 {
 	gfx->fillScreen(BLACK);
+
+	gfx->fillRect(_EYE_RIGHT_X, _EYE_RIGHT_Y + (54 / 2), 53, 6, WHITE);
+	gfx->fillRect(_MOUTH_X, _MOUTH_Y + 20, 116, 6, WHITE);
+
 	mouthElement.render(MOUTH_CLOSED);
 
 	eyeLeftElement.render(EYE_CLOSED_LR);
@@ -49,7 +51,6 @@ void SleepFaceAnimation::renderLoop()
 	sleepElement.render(_EYE_RIGHT_X + 55, _EYE_RIGHT_Y - 25);
 	delay(1000);
 	sleepElement.render(_EYE_RIGHT_X + 65, _EYE_RIGHT_Y - 40);
-	// sleepElement.render(_EYE_RIGHT_X + 10, _EYE_RIGHT_Y + 15);
 	delay(2000);
 }
 

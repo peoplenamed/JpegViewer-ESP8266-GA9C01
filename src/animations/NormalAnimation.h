@@ -1,5 +1,5 @@
-#ifndef _FANG_FACE_ANIMATION_H_
-#define _FANG_FACE_ANIMATION_H_
+#ifndef _NORMAL_FACE_ANIMATION_H_
+#define _NORMAL_FACE_ANIMATION_H_
 /*********************
  *      INCLUDES
  *********************/
@@ -11,10 +11,10 @@
 /*********************
  *      Class
  *********************/
-class FangFaceAnimation : public FaceAnimation
+class NormalAnimation : public FaceAnimation
 {
 public:
-	FangFaceAnimation();
+	NormalAnimation();
 	void renderIn() override;
 	void renderOut() override;
 	void renderLoop() override;

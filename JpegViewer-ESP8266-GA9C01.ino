@@ -14,8 +14,6 @@
 /*********************
  *  GLOBAL VARIBLES
  *********************/
-unsigned long lastFrame = millis();
-int frameDisplayTimer = 20;
 
 /*********************
  *  GLOBAL DEFINE
@@ -55,5 +53,4 @@ void loop()
 		;
 
 	serialManager.processSerialCommands();
-	lastFrame = millis();
 }

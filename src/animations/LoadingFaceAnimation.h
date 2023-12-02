@@ -1,5 +1,5 @@
-#ifndef _FANG_FACE_ANIMATION_H_
-#define _FANG_FACE_ANIMATION_H_
+#ifndef _LOADING_FACE_ANIMATION_H_
+#define _LOADING_FACE_ANIMATION_H_
 /*********************
  *      INCLUDES
  *********************/
@@ -11,13 +11,14 @@
 /*********************
  *      Class
  *********************/
-class FangFaceAnimation : public FaceAnimation
+class LoadingFaceAnimation : public FaceAnimation
 {
 public:
-	FangFaceAnimation();
+	LoadingFaceAnimation();
 	void renderIn() override;
 	void renderOut() override;
 	void renderLoop() override;
+	EyeType getRandomEyeType();
 
 private:
 	EyeElement eyeLeftElement;

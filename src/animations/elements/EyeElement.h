@@ -19,7 +19,11 @@ enum EyeType
 	EYE_CLOSING_LR,
 	EYE_CLOSED_LR,
 	EYE_POP_ONE_LR,
-	EYE_POP_TWO_LR
+	EYE_POP_TWO_LR,
+	EYE_SPIRAL_ONE_LR,
+	EYE_SPIRAL_TWO_LR,
+	EYE_SPIRAL_THREE_LR,
+	EYE_SPIRAL_FOUR_LR
 };
 
 /**********************
@@ -41,9 +45,14 @@ public:
 	static const unsigned char eye_open_lr[] PROGMEM;
 	static const unsigned char eye_pop_one_lr[] PROGMEM;
 	static const unsigned char eye_pop_two_lr[] PROGMEM;
+	static const unsigned char eye_spiral_one_lr[] PROGMEM;
+	static const unsigned char eye_spiral_two_lr[] PROGMEM;
+	static const unsigned char eye_spiral_three_lr[] PROGMEM;
+	static const unsigned char eye_spiral_four_lr[] PROGMEM;
 
 	EyeElement(int x, int y);
 
 	void render(EyeType type);
+	void drawRotatingSpiral(int centerX, int centerY, float maxRadius, float rotationStep);
 };
 #endif

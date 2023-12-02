@@ -39,6 +39,9 @@ void Animations::chooseAnimation(int imageSelect)
 	case 7:
 		diamondEyes();
 		break;
+	case 8:
+		splashScreen();
+		break;
 	case 11: {
 		Log.trace("AngryFaceAnimation" CR);
 		AngryFaceAnimation angryFaceAnimation;
@@ -54,9 +57,6 @@ void Animations::chooseAnimation(int imageSelect)
 		sleepFaceAnimation.renderIn();
 		delay(2000);
 		sleepFaceAnimation.renderLoop();
-		delay(2000);
-		sleepFaceAnimation.renderOut();
-		delay(2000);
 		break;
 	}
 	case 13: {
@@ -159,62 +159,58 @@ void Animations::calvinDuplicator()
 void Animations::grumpyFace()
 {
 	Log.info("Animations::grumpyFace()" CR);
-
-	normalFace();
-	display.drawJpgAnimation("/grumpy_face_0", ".jpg", 4, 5);
-	normalFace();
+	GrumpyFaceAnimation grumpyFaceAnimation;
+	grumpyFaceAnimation.renderIn();
+	delay(1000);
+	grumpyFaceAnimation.renderOut();
 }
 void Animations::winkFace()
 {
-	display.drawJpgAnimation("/wink_face_", ".jpg", 5, 1);
+	Log.info("Animations::winkFace()" CR);
+	WinkFaceAnimation winkFaceAnimation;
+	winkFaceAnimation.renderIn();
+	delay(1000);
+	winkFaceAnimation.renderOut();
 }
 void Animations::disappointedFace()
 {
-	normalFace();
-	delay(600);
-	display.drawJpgAnimation("/disappointed_face_", ".jpg", 5, 1);
-	delay(600);
-	normalFace();
+	Log.info("Animations::disappointedFace()" CR);
+	AngryFaceAnimation angryFaceAnimation;
+	angryFaceAnimation.renderIn();
+	delay(1000);
+	angryFaceAnimation.renderOut();
 }
 void Animations::normalFace()
 {
-	display.drawImage("/normal_face.jpg");
+	Log.info("Animations::normalFace()" CR);
+	NormalAnimation normalAnimation;
+	normalAnimation.renderIn();
 }
 void Animations::satisfiedFace()
 {
-	normalFace();
-	delay(400);
-	display.drawImage("/satisfied_face.jpg");
-	delay(400);
-	normalFace();
+	Log.info("Animations::satisfiedFace()" CR);
+	SatisfiedFaceAnimation satisfiedFaceAnimation;
+	satisfiedFaceAnimation.renderIn();
+	delay(1000);
+	satisfiedFaceAnimation.renderOut();
 }
 
 void Animations::popEye()
 {
-	normalFace();
-	delay(100);
-	display.drawImage("/PopEye_0001.jpg");
-	delay(100);
-	display.drawImage("/PopEye_0002.jpg");
-	delay(100);
-	display.drawImage("/PopEye_0001.jpg");
-	delay(100);
-	normalFace();
+	Log.info("Animations::popEye()" CR);
+	PopEyeFaceAnimation popEyeFaceAnimation;
+	popEyeFaceAnimation.renderIn();
+	delay(1000);
+	popEyeFaceAnimation.renderOut();
 }
 
 void Animations::fangs()
 {
-	normalFace();
-	delay(400);
-	display.drawImage("/fangs_0001.jpg");
-	delay(600);
-	display.drawImage("/fangs_0002.jpg");
-	delay(1500);
-	display.drawImage("/fangs_0001.jpg");
-	delay(300);
-	display.drawImage("/fangs_0001.jpg");
-	delay(200);
-	normalFace();
+	Log.info("Animations::fangs()" CR);
+	FangFaceAnimation fangFaceAnimation;
+	fangFaceAnimation.renderIn();
+	delay(1000);
+	fangFaceAnimation.renderOut();
 }
 
 void Animations::diamondEyes()
@@ -245,9 +241,8 @@ void Animations::diamondEyes()
 void Animations::splashScreen()
 {
 	Log.info("Animations::splashScreen()" CR);
-	grumpyFace();
-	delay(500);
-	satisfiedFace();
+	LoadingFaceAnimation loadingFaceAnimation;
+	loadingFaceAnimation.renderIn();
 }
 
 void Animations::northText(String _text)

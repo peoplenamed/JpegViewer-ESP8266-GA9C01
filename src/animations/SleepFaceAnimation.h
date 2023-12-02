@@ -5,6 +5,7 @@
  *********************/
 #include "../../config.h";
 #include "../services/HexColorsService.h";
+#include "FaceAnimation.h";
 #include "elements/EyeElement.h";
 #include "elements/MouthElement.h";
 #include "elements/SleepElement.h";
@@ -12,7 +13,7 @@
 /*********************
  *      Class
  *********************/
-class SleepFaceAnimation
+class SleepFaceAnimation : public FaceAnimation
 {
 public:
 	SleepFaceAnimation();

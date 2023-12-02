@@ -1,12 +1,18 @@
 #ifndef _CONFIG_H_
 #define _CONFIG_H_
 
+/*********************
+ *      INCLUDES
+ *********************/
 #include "pinout.h"
 #include <Arduino.h>
 #include <ArduinoLog.h>
 #include <Arduino_GFX_Library.h>
+#include <functional>
 
-// Define Globals
+/*********************
+ *      DEFINES
+ *********************/
 #define _HEIGHT 240
 #define _WIDTH 240
 
@@ -49,8 +55,17 @@
 #	include <SPIFFS.h>
 #endif
 
+/**********************
+ *      TYPEDEFS
+ **********************/
+
+/**********************
+ * GLOBAL PROTOTYPES
+ **********************/
+
 extern Arduino_DataBus* graphic_bus;
 extern Arduino_GFX* gfx;
 
 extern int current_animation;
+
 #endif

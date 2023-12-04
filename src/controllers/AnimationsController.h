@@ -4,6 +4,7 @@
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/FangFaceAnimation.h"
 #include "../animations/GrumpyFaceAnimation.h"
+#include "../animations/HappyFaceAnimation.h"
 #include "../animations/LoadingFaceAnimation.h"
 #include "../animations/NormalAnimation.h"
 #include "../animations/PopEyeFaceAnimation.h"
@@ -35,6 +36,7 @@ public:
 	void popEye();
 	void fangs();
 	void diamondEyes();
+	void happyFace();
 	void splashScreen();
 
 	// TEXT

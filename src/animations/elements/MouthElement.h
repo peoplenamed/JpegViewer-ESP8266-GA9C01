@@ -15,6 +15,9 @@ enum MouthType
 	MOUTH_GRUMPY_TWO,
 	MOUTH_FANGS_ONE,
 	MOUTH_FANGS_TWO,
+	MOUTH_SMILE_ONE,
+	MOUTH_SMILE_TWO,
+	MOUTH_SMILE_FILLED,
 };
 
 class MouthElement
@@ -28,6 +31,9 @@ public:
 	static const unsigned char mouth_grumpy_two[] PROGMEM;
 	static const unsigned char mouth_fangs_one[] PROGMEM;
 	static const unsigned char mouth_fangs_two[] PROGMEM;
+	static const unsigned char mouth_smile_filled[] PROGMEM;
+	static const unsigned char mouth_smile_two[] PROGMEM;
+	static const unsigned char mouth_smile_one[] PROGMEM;
 
 	MouthElement(int x, int y);
 

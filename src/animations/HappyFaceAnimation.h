@@ -1,5 +1,5 @@
-#ifndef _FANG_FACE_ANIMATION_H_
-#define _FANG_FACE_ANIMATION_H_
+#ifndef _HAPPY_FACE_ANIMATION_H_
+#define _HAPPY_FACE_ANIMATION_H_
 /*********************
  *      INCLUDES
  *********************/
@@ -11,10 +11,10 @@
 /*********************
  *      Class
  *********************/
-class FangFaceAnimation : public FaceAnimation
+class HappyFaceAnimation : public FaceAnimation
 {
 public:
-	FangFaceAnimation();
+	HappyFaceAnimation();
 	void renderIn() override;
 	void renderOut() override;
 	void renderLoop() override;

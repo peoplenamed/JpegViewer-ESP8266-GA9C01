@@ -42,6 +42,9 @@ void Animations::chooseAnimation(int imageSelect)
 	case 8:
 		splashScreen();
 		break;
+	case 9:
+		happyFace();
+		break;
 	case 11: {
 		Log.trace("AngryFaceAnimation" CR);
 		AngryFaceAnimation angryFaceAnimation;
@@ -155,6 +158,14 @@ void Animations::calvinDuplicator()
 }
 
 /** FACES **/
+void Animations::happyFace()
+{
+	Log.info("Animations::happyFace()" CR);
+	HappyFaceAnimation happyFaceAnimation;
+	happyFaceAnimation.renderIn();
+	delay(1000);
+	happyFaceAnimation.renderOut();
+}
 void Animations::grumpyFace()
 {
 	Log.info("Animations::grumpyFace()" CR);

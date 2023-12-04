@@ -9,7 +9,7 @@
  *  GLOBAL INCLUDES
  *********************/
 #include "config.h"
-#include "src/controllers/SerialManagerController.h"
+#include "controllers/SerialManagerController.h"
 
 /*********************
  *  GLOBAL VARIBLES
@@ -19,38 +19,22 @@
  *  GLOBAL DEFINE
  *********************/
 
-#define USE_LittleFS
-#define DEBUG
-
-#ifdef DEBUG
-#	ifdef USE_LittleFS
-// List everything in LittleFS Storage
-//    #include "List_LittleFS.h"
-#	endif
-#endif
-
 SerialManager serialManager;
 
 void setup()
 {
 	Serial.begin(115200);
-	Serial.setTimeout(1);
+	while(!Serial)
+		delay(10);
+
 	Log.begin(LOG_LEVEL, &Serial);
 
-#ifdef DEBUG
-#	ifdef USE_LittleFS
-	//      listLittleFS(); // Not working atm...
-#	endif
-#endif
-
+	//Serial.println("Setup done");
 	serialManager.setupDisplay();
 	serialManager.splashScreen();
 }
 
 void loop()
 {
-	while(!Serial.available())
-		;
-
 	serialManager.processSerialCommands();
 }

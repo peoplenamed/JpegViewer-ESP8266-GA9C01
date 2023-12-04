@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "PopEyeFaceAnimation.h";
+#include "PopEyeFaceAnimation.h"
 
 /*********************
  *      DEFINES

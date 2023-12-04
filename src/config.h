@@ -4,17 +4,17 @@
 /*********************
  *      INCLUDES
  *********************/
+#include "SPIFFS.h"
 #include "pinout.h"
 #include <Arduino.h>
 #include <ArduinoLog.h>
 #include <Arduino_GFX_Library.h>
+#include <SPI.h>
 #include <functional>
 
 /*********************
  *      DEFINES
  *********************/
-#define _HEIGHT 240
-#define _WIDTH 240
 
 #define _EYE_LEFT_X 56
 #define _EYE_LEFT_Y 66
@@ -47,13 +47,13 @@
 
 // #ifdef ESP32
 //  Include little FS or SPIFFS on ESP32
-#include <FS.h>
-#ifdef USE_LittleFS
-#	define SPIFFS LITTLEFS
-#	include <LITTLEFS.h>
-#else
-#	include <SPIFFS.h>
-#endif
+// #include <FS.h>
+// #ifdef USE_LittleFS
+// #	define SPIFFS LITTLEFS
+// #	include <LITTLEFS.h>
+// #else
+// #	include <SPIFFS.h>
+// #endif
 
 /**********************
  *      TYPEDEFS
@@ -62,10 +62,7 @@
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-
 extern Arduino_DataBus* graphic_bus;
 extern Arduino_GFX* gfx;
-
-extern int current_animation;
 
 #endif

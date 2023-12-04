@@ -4,7 +4,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../../config.h"
+#include "../config.h"
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/GrumpyFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"

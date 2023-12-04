@@ -4,7 +4,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#	include <../../config.h>
+#	include "../config.h"
 #	include <Arduino.h>
 #	include <ArduinoLog.h>
 

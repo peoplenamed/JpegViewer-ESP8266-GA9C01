@@ -48,7 +48,6 @@ void Animations::chooseAnimation(int imageSelect)
 		angryFaceAnimation.renderIn();
 		delay(600);
 		angryFaceAnimation.renderOut();
-		current_animation = 12;
 		break;
 	}
 	case 12: {

@@ -5,30 +5,14 @@
  * JPEGDEC: https://github.com/bitbank2/JPEGDEC.git
  ******************************************************************************/
 
-#define USE_LittleFS
-
 #ifndef _JPEGFUNK_SERVICE_H_
-#	define _JPEGFUNK_SERVICE_H_
+#define _JPEGFUNK_SERVICE_H_
 
 /*********************
  *      INCLUDES
  *********************/
-#	include "../../config.h"
-#	include <JPEGDEC.h>
-
-#	ifdef ESP8826
-#		include <LittleFS.h>
-#	endif
-
-#	ifdef ESP32
-#		include <FS.h>
-#		ifdef USE_LittleFS
-#			define SPIFFS LITTLEFS
-#			include <LITTLEFS.h>
-#		else
-#			include <SPIFFS.h>
-#		endif
-#	endif
+#include "../config.h"
+#include <JPEGDEC.h>
 
 /*********************
  *      DEFINES

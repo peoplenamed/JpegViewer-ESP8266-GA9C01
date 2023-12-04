@@ -1,7 +1,6 @@
 #ifndef _ANIMATIONS_CONTROLLER_H_
 #define _ANIMATIONS_CONTROLLER_H_
 
-#include "../../config.h"
 #include "../animations/AngryFaceAnimation.h"
 #include "../animations/FangFaceAnimation.h"
 #include "../animations/GrumpyFaceAnimation.h"
@@ -11,6 +10,7 @@
 #include "../animations/SatisfiedFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"
 #include "../animations/WinkFaceAnimation.h"
+#include "../config.h"
 #include "../services/DisplayService.h"
 #include "../services/HexColorsService.h"
 
@@ -58,8 +58,8 @@ private:
 	Display display;
 	int compassTextColor = 7;
 	HexColorsService hexColors;
-	int _width = _WIDTH;
-	int _height = _HEIGHT;
+	int _width = _SCREEN_WIDTH;
+	int _height = _SCREEN_HEIGHT;
 };
 
 #endif // _ANIMATIONS_H_

@@ -4,7 +4,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../../config.h"
+#include "../config.h"
 #include "elements/EyeElement.h"
 #include "elements/MouthElement.h"
 

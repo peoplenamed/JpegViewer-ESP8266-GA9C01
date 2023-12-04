@@ -21,30 +21,6 @@ int JpegFunk::_y_bound;
 JpegFunk::JpegFunk()
 {
 	Log.info("JpegFunk initializer" CR);
-#ifdef ESP32
-#	ifdef USE_LittleFS
-	if(!LITTLEFS.begin(true))
-	{
-		Serial.println("An Error has occurred while mounting LITTLEFS");
-		return;
-	}
-#	else
-	if(!SPIFFS.begin(true))
-	{
-		Serial.println("An Error has occurred while mounting SPIFFS");
-		return;
-	}
-#	endif
-#endif
-
-#ifdef ESP8826
-	if(!LittleFS.begin())
-	{
-		Serial.println(F("ERROR: File System Mount Failed!"));
-		gfx->println(F("ERROR: File System Mount Failed!"));
-		// gfx->setRotation(uint8_t rotation);
-	}
-#endif
 }
 
 void* JpegFunk::jpegOpenFile(const char* szFilename, int32_t* pFileSize)
@@ -53,16 +29,7 @@ void* JpegFunk::jpegOpenFile(const char* szFilename, int32_t* pFileSize)
 	Serial.print("jpegOpenFile: ");
 	Serial.println(szFilename);
 #endif
-#ifdef ESP8826
-	_f = LittleFS.open(szFilename, "r");
-#endif
-#ifdef ESP32
-#	ifdef USE_LittleFS
-	_f = LITTLEFS.open(szFilename, "r");
-#	else
 	_f = SPIFFS.open(szFilename, "r");
-#	endif
-#endif
 	*pFileSize = _f.size();
 
 #ifdef DEBUG

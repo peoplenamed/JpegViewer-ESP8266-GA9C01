@@ -1,22 +1,24 @@
-#ifndef _WINK_FACE_ANIMATION_H_
-#define _WINK_FACE_ANIMATION_H_
+#ifndef _LOADING_FACE_ANIMATION_H_
+#define _LOADING_FACE_ANIMATION_H_
 /*********************
  *      INCLUDES
  *********************/
 #include "../config.h";
+#include "FaceAnimation.h";
 #include "elements/EyeElement.h";
 #include "elements/MouthElement.h";
 
 /*********************
  *      Class
  *********************/
-class WinkFaceAnimation
+class DizzyFaceAnimation : public FaceAnimation
 {
 public:
-	WinkFaceAnimation();
-	void renderIn();
-	void renderOut();
-	void renderLoop();
+	DizzyFaceAnimation();
+	void renderIn() override;
+	void renderOut() override;
+	void renderLoop() override;
+	EyeType getRandomEyeType();
 
 private:
 	EyeElement eyeLeftElement;

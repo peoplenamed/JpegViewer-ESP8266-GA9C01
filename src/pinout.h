@@ -17,4 +17,7 @@
 #	define TFT_MISO -1 // no data coming back
 #endif
 
+#define _SCREEN_HEIGHT 240
+#define _SCREEN_WIDTH 240
+
 #endif

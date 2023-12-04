@@ -3,7 +3,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../../config.h";
+#include "../config.h";
 #include "../services/HexColorsService.h";
 #include "FaceAnimation.h";
 #include "elements/EyeElement.h";

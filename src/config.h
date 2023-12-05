@@ -11,6 +11,8 @@
 #include <Arduino_GFX_Library.h>
 #include <SPI.h>
 #include <functional>
+#include <iostream>
+#include <string>
 
 /*********************
  *      DEFINES
@@ -58,11 +60,31 @@
 /**********************
  *      TYPEDEFS
  **********************/
+enum AnimationState
+{
+	RENDER_IN,
+	RENDER_OUT,
+	RENDER_LOOP,
+};
+
+enum AvailableAnimations
+{
+	ANGRY_FACE_ANIMATION,
+	PUKE_FACE_ANIMATION,
+};
+
+typedef struct
+{
+	AvailableAnimations animationName;
+	AnimationState animationState;
+	String animationMarkers;
+} GlobalAniumationState;
 
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
 extern Arduino_DataBus* graphic_bus;
 extern Arduino_GFX* gfx;
+extern GlobalAniumationState globalAniumationState;
 
 #endif

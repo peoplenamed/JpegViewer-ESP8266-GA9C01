@@ -8,6 +8,7 @@
 #include "../animations/LoadingFaceAnimation.h"
 #include "../animations/NormalAnimation.h"
 #include "../animations/PopEyeFaceAnimation.h"
+#include "../animations/PukeRainbowFaceAnimation.h"
 #include "../animations/SatisfiedFaceAnimation.h"
 #include "../animations/SleepFaceAnimation.h"
 #include "../animations/WinkFaceAnimation.h"
@@ -38,6 +39,7 @@ public:
 	void diamondEyes();
 	void happyFace();
 	void splashScreen();
+	void pukeRainbowFace();
 
 	// TEXT
 	void northText(String _text);

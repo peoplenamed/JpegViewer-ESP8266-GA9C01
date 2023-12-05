@@ -45,6 +45,9 @@ void Animations::chooseAnimation(int imageSelect)
 	case 9:
 		happyFace();
 		break;
+	case 10:
+		pukeRainbowFace();
+		break;
 	case 11: {
 		Log.trace("AngryFaceAnimation" CR);
 		AngryFaceAnimation angryFaceAnimation;
@@ -158,6 +161,13 @@ void Animations::calvinDuplicator()
 }
 
 /** FACES **/
+void Animations::pukeRainbowFace()
+{
+	Log.info("Animations::pukeRainbowFace()" CR);
+	PukeRainbowFaceAnimation pukeRainbowFaceAnimation;
+	pukeRainbowFaceAnimation.renderIn();
+	globalAniumationState.animationState = RENDER_LOOP;
+}
 void Animations::happyFace()
 {
 	Log.info("Animations::happyFace()" CR);

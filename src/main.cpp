@@ -37,4 +37,13 @@ void setup()
 void loop()
 {
 	serialManager.processSerialCommands();
+	switch(globalAniumationState.animationName)
+	{
+	case ANGRY_FACE_ANIMATION:
+		break;
+	case PUKE_FACE_ANIMATION:
+		PukeRainbowFaceAnimation pukeRainbowFaceAnimation;
+		pukeRainbowFaceAnimation.renderLoop();
+		break;
+	}
 }

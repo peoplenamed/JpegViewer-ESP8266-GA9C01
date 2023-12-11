@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "AngryFaceAnimation.h";
+#include "AngryFaceAnimation.h"
 
 /*********************
  *      DEFINES
@@ -13,34 +13,37 @@ AngryFaceAnimation::AngryFaceAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void AngryFaceAnimation::renderIn()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	delay(600);
-
-	eyeLeftElement.render(EYE_CLOSING_LR);
-	eyeRightElement.render(EYE_CLOSING_LR);
-	delay(600);
-
-	eyeLeftElement.render(EYE_ANGRY_L);
-	eyeRightElement.render(EYE_ANGRY_R);
-}
-
-void AngryFaceAnimation::renderOut()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	eyeLeftElement.render(EYE_ANGRY_L);
-	eyeRightElement.render(EYE_ANGRY_R);
-	delay(600);
-
-	eyeLeftElement.render(EYE_CLOSING_LR);
-	eyeRightElement.render(EYE_CLOSING_LR);
-	delay(600);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
+boolean AngryFaceAnimation::renderFrame(int frame) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			eyeRightElement.render(EYE_CLOSING_LR);
+			break;
+		case 3:
+			eyeLeftElement.render(EYE_ANGRY_L);
+			eyeRightElement.render(EYE_ANGRY_R);
+			break;
+		case 4:
+			eyeLeftElement.render(EYE_ANGRY_L);
+			eyeRightElement.render(EYE_ANGRY_R);
+			break;
+		case 5:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			eyeRightElement.render(EYE_CLOSING_LR);
+			break;
+		case 6:
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		default:
+			return true;
+			break;
+	}
+	return false;
 }

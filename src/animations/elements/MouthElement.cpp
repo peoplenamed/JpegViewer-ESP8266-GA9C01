@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "MouthElement.h";
+#include "MouthElement.h"
 
 /*********************
  *      DEFINES
@@ -996,40 +996,40 @@ void MouthElement::render(MouthType type)
 	switch(type)
 	{
 	case MOUTH_CLOSED:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_closed, 128, 120, WHITE);
 		break;
 	case MOUTH_GRUMPY_ONE:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_grumpy_one, 128, 120, WHITE);
 		break;
 	case MOUTH_GRUMPY_TWO:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_grumpy_two, 128, 120, WHITE);
 		break;
 	case MOUTH_FANGS_ONE:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_fangs_one, 128, 120, WHITE);
 		break;
 	case MOUTH_FANGS_TWO:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_fangs_two, 128, 120, WHITE);
 		break;
 	case MOUTH_SMILE_ONE:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_smile_one, 128, 120, WHITE);
 		break;
 	case MOUTH_SMILE_TWO:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_smile_two, 128, 120, WHITE);
 		break;
 	case MOUTH_SMILE_FILLED:
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_smile_filled, 128, 120, WHITE);
 		break;
 	default:
 		// Default case
-		gfx->fillRect(x, y, 128, 120, BLACK);
+		// gfx->fillRect(x, y, 128, 120, BLACK);
 		gfx->drawBitmap(x, y, mouth_closed, 128, 120, WHITE);
 		break;
 	}

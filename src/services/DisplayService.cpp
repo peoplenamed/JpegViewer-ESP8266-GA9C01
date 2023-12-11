@@ -56,15 +56,15 @@ void Display::setupDisplay()
 	//     bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
 	//     gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
 	// #endif
-	Log.info("Display initializer" CR);
+	Log.info("Display initializer\n");
 	// Init Display
 	if(!gfx->begin())
 	{
-		Log.fatal("gfx->begin() failed!" CR);
+		Log.fatal("gfx->begin() failed!\n");
 	}
 	else
 	{
-		Log.trace("gfx->begin() initialized." CR);
+		Log.trace("gfx->begin() initialized.\n");
 		wipeScreen(true);
 	}
 }
@@ -99,14 +99,14 @@ void Display::drawText(String _text, int _x, int _y, int _size, int _color)
 int Display::jpegDrawCallback(JPEGDRAW* pDraw)
 {
 	Log.trace(
-		"Draw pos = %d,%d. size = %d x %d" CR, pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
+		"Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
 	gfx->draw16bitBeRGBBitmap(pDraw->x, pDraw->y, pDraw->pPixels, pDraw->iWidth, pDraw->iHeight);
 	return 1;
 }
 
 void Display::drawImage(char* fileName)
 {
-	Log.trace("Drawing: %s" CR, fileName);
+	Log.trace("Drawing: %s\n", fileName);
 	int _width = 240;
 	int _height = 240;
 
@@ -121,13 +121,18 @@ void Display::drawImage(char* fileName)
 
 void Display::drawJpgAnimation(String name, String fileType, int frames, int times)
 {
+	Log.info("drawJpgAnimation \n");
 	for(int x = 1; x <= times; x++)
 	{
+		Log.info("drawJpgAnimation x:%d \n", x);
 		for(int i = 0; i <= frames - 1; i++)
 		{
+			Log.info("drawJpgAnimation i:%d \n", i);
 			String filename;
 			filename.concat(name);
+			Log.info("filename i:%s \n", name);
 
+			Log.info("drawImageb");
 			if(i < 10)
 			{
 				filename.concat("00");
@@ -136,6 +141,7 @@ void Display::drawJpgAnimation(String name, String fileType, int frames, int tim
 			{
 				filename.concat("0");
 			}
+			Log.info("drawImagea");
 			filename.concat(i);
 			filename.concat(fileType);
 
@@ -143,7 +149,9 @@ void Display::drawJpgAnimation(String name, String fileType, int frames, int tim
 			char charArray[len];
 			filename.toCharArray(charArray, len);
 
+			Log.info("drawImage");
 			drawImage(charArray);
+			Log.info("drawImage!");
 		}
 	}
 }

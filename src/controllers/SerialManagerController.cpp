@@ -1,4 +1,3 @@
-
 /*********************
  *      INCLUDES
  *********************/
@@ -12,69 +11,57 @@ SerialManager::SerialManager()
 	Log.notice("SerialManager initializer");
 }
 
-void SerialManager::setupDisplay()
-{
-	animations.setupDisplay();
-}
+void SerialManager::init(int *_imageSelect, boolean *_commandReceived) {
+	imageSelect = _imageSelect;
+	commandReceived = _commandReceived;
 
-void SerialManager::processSerialCommands()
-{
-	recvWithStartEndMarkers();
-	showNewData();
+	auto processSerialCommandsTask = [](void* arg) { static_cast<SerialManager*>(arg)->processSerialCommands(); };
+	xTaskCreate(processSerialCommandsTask, "processSerialCommands", 1024, this, 2, NULL);
 }
 
 // Only accept Serial commands wrapped in <>
-void SerialManager::recvWithStartEndMarkers()
+void SerialManager::processSerialCommands()
 {
-	static boolean recvInProgress = false;
-	static byte ndx = 0;
-	char startMarker = '<';
-	char endMarker = '>';
-	char rc;
+	Log.info("We are inside processSerialCommands\n");
+	for (;;) {
+		static boolean recvInProgress = false;
+		static byte ndx = 0;
+		char startMarker = '<';
+		char endMarker = '>';
+		char rc;
 
-	while(Serial.available() > 0 && newData == false)
-	{
-		rc = Serial.read();
-
-		if(recvInProgress == true)
+		while(Serial.available())
 		{
-			if(rc != endMarker)
+			rc = Serial.read();
+
+			if(recvInProgress == true)
 			{
-				receivedChars[ndx] = rc;
-				ndx++;
-				if(ndx >= numChars)
+				if(rc != endMarker)
 				{
-					ndx = numChars - 1;
+					receivedChars[ndx] = rc;
+					ndx++;
+					if(ndx >= numChars)
+					{
+						ndx = numChars - 1;
+					}
+				}
+				else
+				{
+					receivedChars[ndx] = '\0'; // terminate the string
+					recvInProgress = false;
+					ndx = 0;
+					runCommand();
+					// newData = true;
 				}
 			}
-			else
+
+			else if(rc == startMarker)
 			{
-				receivedChars[ndx] = '\0'; // terminate the string
-				recvInProgress = false;
-				ndx = 0;
-				newData = true;
+				recvInProgress = true;
 			}
+
 		}
-
-		else if(rc == startMarker)
-		{
-			recvInProgress = true;
-		}
-	}
-}
-
-void SerialManager::splashScreen()
-{
-	Log.notice("SerialManager::splashScreen()" CR);
-	animations.splashScreen();
-}
-
-void SerialManager::showNewData()
-{
-	if(newData == true)
-	{
-		runCommand();
-		newData = false;
+		vTaskDelay( 250 ); 
 	}
 }
 
@@ -87,7 +74,11 @@ void SerialManager::runCommand()
 	}
 	else
 	{
-		animations.chooseAnimation(atoi(receivedChars));
+		Log.trace("processing: %s\n", receivedChars);
+		*imageSelect = atoi(receivedChars);
+		*commandReceived = (boolean)true;
+		Log.info("Setting command received: TRUE\n");
+		// animations.chooseAnimation(atoi(receivedChars));
 	}
 }
 
@@ -105,7 +96,7 @@ void SerialManager::processCustomMessage()
 	String _color = getValueFromDelimitedString(charsAsString, '|', 4);
 	String _wipe = getValueFromDelimitedString(charsAsString, '|', 5);
 
-	Log.trace("_text: %s, _x: %s, _y: %s, _size: %s, _color: %s, _wipe: %s" CR,
+	Log.trace("THIS IS NOT WORKING ATM\n THIS IS NOT WORKING ATM\n  THIS IS NOT WORKING ATM\n   THIS IS NOT WORKING ATM.... \n Normally it would be processing _text: %s, _x: %s, _y: %s, _size: %s, _color: %s, _wipe: %s" CR,
 			  _text,
 			  _x,
 			  _y,
@@ -115,10 +106,10 @@ void SerialManager::processCustomMessage()
 
 	if(_wipe == "1")
 	{
-		animations.wipeScreen(true);
+		// animations.wipeScreen(true);
 	}
 
-	animations.userDefinedText(_text, _x.toInt(), _y.toInt(), _size.toInt(), _color.toInt());
+	// animations.userDefinedText(_text, _x.toInt(), _y.toInt(), _size.toInt(), _color.toInt());
 }
 
 String SerialManager::getValueFromDelimitedString(String stringData, char separator, int index)

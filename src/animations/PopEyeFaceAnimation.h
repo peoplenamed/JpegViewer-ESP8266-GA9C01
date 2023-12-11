@@ -3,9 +3,9 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h";
-#include "elements/EyeElement.h";
-#include "elements/MouthElement.h";
+#include "../config.h"
+#include "elements/EyeElement.h"
+#include "elements/MouthElement.h"
 
 /*********************
  *      Class
@@ -14,9 +14,8 @@ class PopEyeFaceAnimation
 {
 public:
 	PopEyeFaceAnimation();
-	void renderIn();
-	void renderOut();
-	void renderLoop();
+	int frames = 6;
+	boolean renderFrame(int frame);
 
 private:
 	EyeElement eyeLeftElement;

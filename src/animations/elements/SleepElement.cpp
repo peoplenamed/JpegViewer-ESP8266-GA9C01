@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "SleepElement.h";
+#include "SleepElement.h"
 
 /*********************
  *      DEFINES

@@ -13,56 +13,63 @@ PopEyeFaceAnimation::PopEyeFaceAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void PopEyeFaceAnimation::renderIn()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	delay(300);
-	eyeLeftElement.render(EYE_POP_ONE_LR);
-	delay(300);
-	eyeLeftElement.render(EYE_POP_TWO_LR);
-}
-
-void PopEyeFaceAnimation::renderOut()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	eyeLeftElement.render(EYE_POP_TWO_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_POP_ONE_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-}
-
-void PopEyeFaceAnimation::renderLoop()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	for(int i = 0; i < 3; i++)
+boolean PopEyeFaceAnimation::renderFrame(int frame) {
+	switch(frame)
 	{
-		eyeLeftElement.render(EYE_POP_TWO_LR);
-		delay(300);
-		eyeLeftElement.render(EYE_POP_ONE_LR);
-		delay(300);
-		eyeLeftElement.render(EYE_OPEN_LR);
-		eyeRightElement.render(EYE_OPEN_LR);
-		delay(300);
-		eyeRightElement.render(EYE_POP_ONE_LR);
-		delay(300);
-		eyeRightElement.render(EYE_POP_TWO_LR);
-		delay(300);
-		eyeRightElement.render(EYE_POP_ONE_LR);
-		delay(300);
-		eyeLeftElement.render(EYE_OPEN_LR);
-		eyeRightElement.render(EYE_OPEN_LR);
-		delay(300);
-		eyeLeftElement.render(EYE_POP_ONE_LR);
-		delay(300);
-		eyeLeftElement.render(EYE_POP_TWO_LR);
+		case 1:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+			eyeLeftElement.render(EYE_POP_ONE_LR);
+			break;
+		case 3:
+			eyeLeftElement.render(EYE_POP_TWO_LR);
+			break;
+		case 4:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_POP_TWO_LR);
+			break;
+		case 5:
+			eyeLeftElement.render(EYE_POP_ONE_LR);
+			break;
+		case 6:
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		default:
+			return true;
+			break;
 	}
+	return false;
 }
+
+
+// void PopEyeFaceAnimation::renderLoop()
+// {
+// 	mouthElement.render(MOUTH_CLOSED);
+
+// 	for(int i = 0; i < 3; i++)
+// 	{
+// 		eyeLeftElement.render(EYE_POP_TWO_LR);
+// 		delay(300);
+// 		eyeLeftElement.render(EYE_POP_ONE_LR);
+// 		delay(300);
+// 		eyeLeftElement.render(EYE_OPEN_LR);
+// 		eyeRightElement.render(EYE_OPEN_LR);
+// 		delay(300);
+// 		eyeRightElement.render(EYE_POP_ONE_LR);
+// 		delay(300);
+// 		eyeRightElement.render(EYE_POP_TWO_LR);
+// 		delay(300);
+// 		eyeRightElement.render(EYE_POP_ONE_LR);
+// 		delay(300);
+// 		eyeLeftElement.render(EYE_OPEN_LR);
+// 		eyeRightElement.render(EYE_OPEN_LR);
+// 		delay(300);
+// 		eyeLeftElement.render(EYE_POP_ONE_LR);
+// 		delay(300);
+// 		eyeLeftElement.render(EYE_POP_TWO_LR);
+// 	}
+// }

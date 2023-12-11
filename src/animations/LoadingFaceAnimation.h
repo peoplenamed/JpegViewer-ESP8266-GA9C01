@@ -3,10 +3,10 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h";
-#include "FaceAnimation.h";
-#include "elements/EyeElement.h";
-#include "elements/MouthElement.h";
+#include "../config.h"
+#include "FaceAnimation.h"
+#include "elements/EyeElement.h"
+#include "elements/MouthElement.h"
 
 /*********************
  *      Class
@@ -15,9 +15,8 @@ class LoadingFaceAnimation : public FaceAnimation
 {
 public:
 	LoadingFaceAnimation();
-	void renderIn() override;
-	void renderOut() override;
-	void renderLoop() override;
+	int frames = 45;
+	boolean renderFrame(int frame);
 	EyeType getRandomEyeType();
 
 private:

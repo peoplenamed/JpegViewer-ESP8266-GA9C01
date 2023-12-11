@@ -19,21 +19,30 @@ class SerialManager
 public:
 	SerialManager();
 
-	void setupDisplay();
-	void processSerialCommands();
-	void splashScreen();
-	void recvWithStartEndMarkers();
-	void showNewData();
+	void init(int *_imageSelect, boolean *_commandReceived);
+
+private:
+    // static void process_wrapper(void* arg)
+    // {
+    //     reinterpret_cast<SerialManager*>(arg)->processSerialCommands();
+    // }
+	void processSerialCommands(); // Get commands
+	
+	int *imageSelect;
+	boolean *commandReceived;
+	// void setupDisplay();
+	// void splashScreen();
+	static void recvWithStartEndMarkers();
+	// static void showNewData();
 	void runCommand();
 	void processCustomMessage();
 	String getValueFromDelimitedString(String stringData, char separator, int index);
-
-private:
 	String userInput;
+	// boolean newData;
 	const static byte numChars = 32;
 	char receivedChars[numChars];
-	boolean newData = false;
-	Animations animations;
+	// Animations animations;
+	int vTaskDelayTimeout = 250;
 };
 
 #endif // _SERIAL_MANAGER_CONTROLLER_H_

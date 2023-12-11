@@ -16,16 +16,39 @@
 #include "../services/DisplayService.h"
 #include "../services/HexColorsService.h"
 
-class Animations
+class AnimationsController
 {
 public:
-	Animations();
+	AnimationsController();
 	//  ~();
+	void init(int *_imageSelect, boolean *_commandReceived);
+
+private:
+	// VARIABLES
+	int currentFrame = 0;
+	int totalFrames = 0;
+	boolean drawFrame = false;
+	int *imageSelect;
+	int currentSelection = -1;
+	boolean lastFrameDrawn;
+	boolean commandReceived;
+	int _width = _SCREEN_WIDTH;
+	int _height = _SCREEN_HEIGHT;
+	int vTaskDelayTimeout = 250;
+	Display display;
+	int compassTextColor = 7;
+
+	// Could probably be moved to service layer.
+	void afterFrameEvent();
+	void processCommand();
+	void processAnimationFrame();
+	boolean isAnimationRunning();
+
 
 	// IMAGES
 	void setupDisplay();
-	void chooseAnimation(int imageSelect);
-	void chooseImage(int imageSelect);
+	void chooseAnimation();
+	void chooseImage();
 	void calvinAndHobbes();
 	void octocat();
 	void calvinDuplicator();
@@ -58,12 +81,26 @@ public:
 	void triangleWipe(boolean wipe);
 	void wipeScreen(boolean wipe);
 
-private:
-	Display display;
-	int compassTextColor = 7;
+	// ANIMATION CLASSES
 	HexColorsService hexColors;
-	int _width = _SCREEN_WIDTH;
-	int _height = _SCREEN_HEIGHT;
+	LoadingFaceAnimation loadingFaceAnimation;
+	SleepFaceAnimation sleepFaceAnimation;
+	GrumpyFaceAnimation grumpyFaceAnimation;
+	WinkFaceAnimation winkFaceAnimation;
+	SatisfiedFaceAnimation satisfiedFaceAnimation;
+	PopEyeFaceAnimation popEyeFaceAnimation;
+	PukeRainbowFaceAnimation pukeRainbowFaceAnimation;
+	HappyFaceAnimation happyFaceAnimation;
+	AngryFaceAnimation angryFaceAnimation;
+	NormalAnimation normalAnimation;
+	FangFaceAnimation fangFaceAnimation;
+
+	// T[] animates = {loadingFaceAnimation, sleepFaceAnimation, grumpyFaceAnimation,
+	//  winkFaceAnimation, satisfiedFaceAnimation, popEyeFaceAnimation,
+	//  pukeRainbowFaceAnimation, happyFaceAnimation, angryFaceAnimation,
+	//  normalAnimation, fangFaceAnimation}
+
+
 };
 
-#endif // _ANIMATIONS_H_
+#endif // _ANIMATIONS_CONTROLLER_H_

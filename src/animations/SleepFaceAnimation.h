@@ -3,12 +3,12 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h";
-#include "../services/HexColorsService.h";
-#include "FaceAnimation.h";
-#include "elements/EyeElement.h";
-#include "elements/MouthElement.h";
-#include "elements/SleepElement.h";
+#include "../config.h"
+#include "../services/HexColorsService.h"
+#include "FaceAnimation.h"
+#include "elements/EyeElement.h"
+#include "elements/MouthElement.h"
+#include "elements/SleepElement.h"
 
 /*********************
  *      Class
@@ -17,9 +17,8 @@ class SleepFaceAnimation : public FaceAnimation
 {
 public:
 	SleepFaceAnimation();
-	void renderIn();
-	void renderOut();
-	void renderLoop();
+	int frames = 6;
+	boolean renderFrame(int frame);
 
 private:
 	EyeElement eyeLeftElement;

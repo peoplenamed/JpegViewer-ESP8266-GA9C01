@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "WinkFaceAnimation.h";
+#include "WinkFaceAnimation.h"
 
 /*********************
  *      DEFINES
@@ -13,29 +13,33 @@ WinkFaceAnimation::WinkFaceAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void WinkFaceAnimation::renderIn()
-{
-	mouthElement.render(MOUTH_CLOSED);
 
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_CLOSING_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_CLOSED_LR);
-}
-
-void WinkFaceAnimation::renderOut()
-{
-	mouthElement.render(MOUTH_CLOSED);
-
-	eyeLeftElement.render(EYE_CLOSED_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_CLOSING_LR);
-	delay(300);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
+boolean WinkFaceAnimation::renderFrame(int frame) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			break;
+		case 3:
+			eyeLeftElement.render(EYE_CLOSED_LR);
+			break;
+		case 4:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_CLOSED_LR);
+			break;
+		case 5:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			break;
+		case 6:
+			eyeLeftElement.render(EYE_OPEN_LR);
+			break;
+		default:
+			return false;
+	}
+	return true;
 }

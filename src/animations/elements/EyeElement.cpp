@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "EyeElement.h";
+#include "EyeElement.h"
 
 /*********************
  *      DEFINES

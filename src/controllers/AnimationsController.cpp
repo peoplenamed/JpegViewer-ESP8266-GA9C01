@@ -1,241 +1,216 @@
 #include "AnimationsController.h"
 
-Animations::Animations()
+AnimationsController::AnimationsController()
 {
-	Log.info("Animations initializer" CR);
+	Log.info("Animations initializer\n");
 }
 
-void Animations::setupDisplay()
+void AnimationsController::init(int *_imageSelect, boolean *_commandReceived) {
+	imageSelect = _imageSelect;
+	commandReceived = _commandReceived;
+	setupDisplay();
+
+	auto task = [](void* arg) { static_cast<AnimationsController*>(arg)->processAnimationFrame(); };
+	xTaskCreate(task, "processAnimationFrame", 3092, this, 2, NULL);
+}
+
+void AnimationsController::processAnimationFrame() {
+	for(;;) {
+		if (*imageSelect != currentSelection) {
+			wipeScreen(true);
+			Log.info("commandReceived: %T \n", commandReceived);
+			commandReceived = false;
+			currentFrame = 1;
+			currentSelection = *imageSelect;
+		}
+		chooseAnimation();
+    	vTaskDelay( 250 );
+	}
+}
+
+void AnimationsController::setupDisplay()
 {
 	display.setupDisplay();
+	splashScreen();
 }
 
-void Animations::chooseAnimation(int imageSelect)
+void AnimationsController::chooseAnimation()
 {
-	Log.trace("Switch imageSelect: %d" CR, imageSelect);
-	switch(imageSelect)
+	switch(*imageSelect)
 	{
 	case 0:
-		popEye();
+		lastFrameDrawn = popEyeFaceAnimation.renderFrame(currentFrame);
+		totalFrames = popEyeFaceAnimation.frames;
 		break;
 	case 1:
-		fangs();
+		lastFrameDrawn = fangFaceAnimation.renderFrame(currentFrame);
+		totalFrames = fangFaceAnimation.frames;
 		break;
 	case 2:
-		grumpyFace();
+		// Log.info("AnimationsController::grumpyFace()\n");
+		lastFrameDrawn = grumpyFaceAnimation.renderFrame(currentFrame);
+		totalFrames = grumpyFaceAnimation.frames;
 		break;
 	case 3:
-		winkFace();
+		// Log.info("AnimationsController::winkFaceAnimation()\n");
+		lastFrameDrawn = winkFaceAnimation.renderFrame(currentFrame);
+		totalFrames = winkFaceAnimation.frames;
 		break;
 	case 4:
-		disappointedFace();
+		// Log.info("AnimationsController \n");
+		lastFrameDrawn = angryFaceAnimation.renderFrame(currentFrame);
+		totalFrames = angryFaceAnimation.frames;
 		break;
 	case 5:
-		satisfiedFace();
+		// Log.info("AnimationsController \n");
+		lastFrameDrawn = satisfiedFaceAnimation.renderFrame(currentFrame);
+		totalFrames = satisfiedFaceAnimation.frames;
 		break;
 	case 6:
-		normalFace();
+		// Log.info("AnimationsController \n");
+		lastFrameDrawn = normalAnimation.renderFrame(currentFrame);
+		totalFrames = normalAnimation.frames;
 		break;
 	case 7:
+		// Log.info("AnimationsController \n");
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		diamondEyes();
 		break;
 	case 8:
+		// Log.info("AnimationsController \n");
 		splashScreen();
 		break;
 	case 9:
-		happyFace();
+		Log.trace("happyFaceAnimation \n");
+		lastFrameDrawn = happyFaceAnimation.renderFrame(currentFrame);
+		totalFrames = happyFaceAnimation.frames;
 		break;
 	case 10:
-		pukeRainbowFace();
+		// Log.info("AnimationsController \n");
+		lastFrameDrawn = pukeRainbowFaceAnimation.renderFrame(currentFrame);
+		totalFrames = pukeRainbowFaceAnimation.frames;
 		break;
 	case 11: {
-		Log.trace("AngryFaceAnimation" CR);
-		AngryFaceAnimation angryFaceAnimation;
-		angryFaceAnimation.renderIn();
-		delay(600);
-		angryFaceAnimation.renderOut();
+		Log.trace("AngryFaceAnimation \n");
+		lastFrameDrawn = angryFaceAnimation.renderFrame(currentFrame);
+		totalFrames = angryFaceAnimation.frames;
 		break;
 	}
 	case 12: {
-		Log.trace("SleepFaceAnimation" CR);
-		SleepFaceAnimation sleepFaceAnimation;
-		sleepFaceAnimation.renderIn();
-		delay(2000);
-		sleepFaceAnimation.renderLoop();
+		Log.trace("SleepFaceAnimation \n");
+		lastFrameDrawn = sleepFaceAnimation.renderFrame(currentFrame);
+		totalFrames = sleepFaceAnimation.frames;
 		break;
 	}
 	case 13: {
-		Log.trace("GrumpyFaceAnimation" CR);
-		GrumpyFaceAnimation grumpyFaceAnimation;
-		grumpyFaceAnimation.renderIn();
-		delay(2000);
-		grumpyFaceAnimation.renderLoop();
-		delay(2000);
-		grumpyFaceAnimation.renderOut();
+		Log.trace("GrumpyFaceAnimation \n");
+		lastFrameDrawn = grumpyFaceAnimation.renderFrame(currentFrame);
+		totalFrames = grumpyFaceAnimation.frames;
 		break;
 	}
 	case 14: {
-		Log.trace("WinkFaceAnimation" CR);
-		WinkFaceAnimation winkFaceAnimation;
-		winkFaceAnimation.renderIn();
-		delay(2000);
-		winkFaceAnimation.renderOut();
+		Log.trace("winkFaceAnimation \n");
+		lastFrameDrawn = winkFaceAnimation.renderFrame(currentFrame);
+		totalFrames = winkFaceAnimation.frames;
 		break;
 	}
 	case 15: {
-		Log.trace("SatisfiedFaceAnimation" CR);
-		SatisfiedFaceAnimation satisfiedFaceAnimation;
-		satisfiedFaceAnimation.renderIn();
-		delay(2000);
-		satisfiedFaceAnimation.renderOut();
+		Log.trace("SatisfiedFaceAnimation \n");
+		lastFrameDrawn = satisfiedFaceAnimation.renderFrame(currentFrame);
+		totalFrames = satisfiedFaceAnimation.frames;
 		break;
 	}
 	case 16: {
-		Log.trace("PopEyeFaceAnimation" CR);
-		PopEyeFaceAnimation popEyeFaceAnimation;
-		popEyeFaceAnimation.renderIn();
-		delay(2000);
-		popEyeFaceAnimation.renderLoop();
-		delay(2000);
-		popEyeFaceAnimation.renderOut();
+		Log.trace("PopEyeFaceAnimation \n");
+		lastFrameDrawn = popEyeFaceAnimation.renderFrame(currentFrame);
+		totalFrames = popEyeFaceAnimation.frames;
 		break;
 	}
 	case 17: {
-		Log.trace("FangFaceAnimation" CR);
-		FangFaceAnimation fangFaceAnimation;
-		fangFaceAnimation.renderIn();
-		delay(2000);
-		fangFaceAnimation.renderLoop();
-		delay(2000);
-		fangFaceAnimation.renderOut();
+		Log.trace("FangFaceAnimation \n");
+		lastFrameDrawn = fangFaceAnimation.renderFrame(currentFrame);
+		totalFrames = fangFaceAnimation.frames;
 		break;
 	}
 	case 20:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		circleWipe(10, false);
 		break;
 	case 21:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		circleWipe(10, true);
 		break;
 	case 22:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		triangleWipe(false);
 		break;
 	case 23:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		triangleWipe(true);
 		break;
 	case 30:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		drawRimCircle(120, false, 10);
 		break;
 	case 31:
-		this->northText("North");
-		this->southText("South");
-		this->eastText("East");
-		this->westText("West");
-		this->centerText("100%");
+		// lastFrameDrawn = .renderFrame(currentFrame);
+		northText("North");
+		southText("South");
+		eastText("East");
+		westText("West");
+		centerText("100%");
 		break;
 	case 50:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		octocat();
 		break;
 	case 51:
+		// lastFrameDrawn = .renderFrame(currentFrame);
 		calvinAndHobbes();
 		break;
 	default:
+		// // lastFrameDrawn = .renderFrame(currentFrame);
 		calvinDuplicator();
 		break;
 	}
+
+	afterFrameEvent();
 }
 
 /** STATIC IMAGES **/
-void Animations::calvinAndHobbes()
+void AnimationsController::calvinAndHobbes()
 {
 	display.drawImage("/download.jpeg");
 }
-void Animations::octocat()
+void AnimationsController::octocat()
 {
 	display.drawImage("/octocat.jpg");
 }
 
 /** ANIMATIONS **/
-void Animations::calvinDuplicator()
+void AnimationsController::calvinDuplicator()
 {
+	Log.info(".. calvinDuplicator2");
 	display.drawJpgAnimation("1Ys_", ".jpg", 19, 3);
 }
 
-/** FACES **/
-void Animations::pukeRainbowFace()
-{
-	Log.info("Animations::pukeRainbowFace()" CR);
-	PukeRainbowFaceAnimation pukeRainbowFaceAnimation;
-	pukeRainbowFaceAnimation.renderIn();
-	globalAniumationState.animationState = RENDER_LOOP;
-}
-void Animations::happyFace()
-{
-	Log.info("Animations::happyFace()" CR);
-	HappyFaceAnimation happyFaceAnimation;
-	happyFaceAnimation.renderIn();
-	delay(1000);
-	happyFaceAnimation.renderOut();
-}
-void Animations::grumpyFace()
-{
-	Log.info("Animations::grumpyFace()" CR);
-	GrumpyFaceAnimation grumpyFaceAnimation;
-	grumpyFaceAnimation.renderIn();
-	delay(1000);
-	grumpyFaceAnimation.renderOut();
-}
-void Animations::winkFace()
-{
-	Log.info("Animations::winkFace()" CR);
-	WinkFaceAnimation winkFaceAnimation;
-	winkFaceAnimation.renderIn();
-	delay(1000);
-	winkFaceAnimation.renderOut();
-}
-void Animations::disappointedFace()
-{
-	Log.info("Animations::disappointedFace()" CR);
-	AngryFaceAnimation angryFaceAnimation;
-	angryFaceAnimation.renderIn();
-	delay(1000);
-	angryFaceAnimation.renderOut();
-}
-void Animations::normalFace()
-{
-	Log.info("Animations::normalFace()" CR);
-	NormalAnimation normalAnimation;
-	normalAnimation.renderIn();
-}
-void Animations::satisfiedFace()
-{
-	Log.info("Animations::satisfiedFace()" CR);
-	SatisfiedFaceAnimation satisfiedFaceAnimation;
-	satisfiedFaceAnimation.renderIn();
-	delay(1000);
-	satisfiedFaceAnimation.renderOut();
+
+
+boolean AnimationsController::isAnimationRunning() {
+		// Log.info("isAnimationRunning: %T..\n", (currentFrame < totalFrames));
+	return currentFrame <= totalFrames;
 }
 
-void Animations::popEye()
-{
-	Log.info("Animations::popEye()" CR);
-	PopEyeFaceAnimation popEyeFaceAnimation;
-	popEyeFaceAnimation.renderIn();
-	delay(1000);
-	popEyeFaceAnimation.renderOut();
+void AnimationsController::afterFrameEvent() {
+	if (isAnimationRunning()) {
+		currentFrame++;
+		Log.info("currentFrame++....%d\n", currentFrame);
+	}
 }
 
-void Animations::fangs()
+void AnimationsController::diamondEyes()
 {
-	Log.info("Animations::fangs()" CR);
-	FangFaceAnimation fangFaceAnimation;
-	fangFaceAnimation.renderIn();
-	delay(1000);
-	fangFaceAnimation.renderOut();
-}
-
-void Animations::diamondEyes()
-{
-	normalFace();
+	// normalFace();
 	delay(400);
 	display.drawImage("/diamondEyes_0001.jpg");
 	delay(200);
@@ -255,62 +230,66 @@ void Animations::diamondEyes()
 	delay(200);
 	display.drawImage("/diamondEyes_0001.jpg");
 	delay(200);
-	normalFace();
+	// normalFace();
 }
 
-void Animations::splashScreen()
+void AnimationsController::splashScreen()
 {
-	Log.info("Animations::splashScreen()" CR);
-	LoadingFaceAnimation loadingFaceAnimation;
-	loadingFaceAnimation.renderIn();
+	// Log.info("AnimationsController::splashScreen()\n");
+
+	for (int i = 1; i <= loadingFaceAnimation.frames; i++) {
+		loadingFaceAnimation.renderFrame(i);
+		delay(140);
+	}
+	// Log.info("AnimationsController::splashScreen() DONE \n");
 }
 
-void Animations::northText(String _text)
+void AnimationsController::northText(String _text)
 {
 	display.drawText(_text, 85, 10, 3, compassTextColor);
 }
 
-void Animations::southText(String _text)
+void AnimationsController::southText(String _text)
 {
 	display.drawText(_text, 85, 200, 3, compassTextColor);
 }
 
-void Animations::eastText(String _text)
+void AnimationsController::eastText(String _text)
 {
 	display.drawText(_text, 0, 110, 3, compassTextColor);
 }
 
-void Animations::westText(String _text)
+void AnimationsController::westText(String _text)
 {
 	display.drawText(_text, 185, 110, 3, compassTextColor);
 }
 
-void Animations::centerText(String _text)
+void AnimationsController::centerText(String _text)
 {
 	display.drawText(_text, 85, 110, 3, compassTextColor);
 }
 
-void Animations::errorText(String _text)
+void AnimationsController::errorText(String _text)
 {
 	display.drawText(_text, 0, 105, 4, 3);
 }
 
-void Animations::successText(String _text)
+void AnimationsController::successText(String _text)
 {
 	display.drawText(_text, 0, 105, 5, 4);
 }
 
-void Animations::userDefinedText(String _text, int _x, int _y, int _size, int _color)
+void AnimationsController::userDefinedText(String _text, int _x, int _y, int _size, int _color)
 {
 	display.drawText(_text, _x, _y, _size, _color);
 }
 
-void Animations::wipeScreen(boolean wipe)
+void AnimationsController::wipeScreen(boolean wipe)
 {
 	display.wipeScreen(wipe);
 }
 
-void Animations::drawRimCircle(int32_t radius, boolean wipe, int maxWipe)
+void AnimationsController::drawRimCircle(int32_t radius, boolean wipe, int maxWipe)
 {
 	display.wipeScreen(wipe);
 
@@ -323,7 +302,7 @@ void Animations::drawRimCircle(int32_t radius, boolean wipe, int maxWipe)
 	}
 }
 
-void Animations::circleWipe(int radius, boolean wipe)
+void AnimationsController::circleWipe(int radius, boolean wipe)
 {
 	display.wipeScreen(wipe);
 	int32_t w = _width;
@@ -343,7 +322,7 @@ void Animations::circleWipe(int radius, boolean wipe)
 	}
 }
 
-void Animations::triangleWipe(boolean wipe)
+void AnimationsController::triangleWipe(boolean wipe)
 {
 	display.wipeScreen(wipe);
 	int32_t i;

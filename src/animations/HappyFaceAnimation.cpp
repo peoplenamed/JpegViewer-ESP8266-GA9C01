@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "HappyFaceAnimation.h";
+#include "HappyFaceAnimation.h"
 
 /*********************
  *      DEFINES
@@ -13,33 +13,34 @@ HappyFaceAnimation::HappyFaceAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void HappyFaceAnimation::renderIn()
-{
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	delay(300);
-
-	mouthElement.render(MOUTH_SMILE_ONE);
-	delay(300);
-	mouthElement.render(MOUTH_SMILE_TWO);
-}
-
-void HappyFaceAnimation::renderOut()
-{
-
-	mouthElement.render(MOUTH_SMILE_TWO);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	delay(300);
-	mouthElement.render(MOUTH_SMILE_ONE);
-	delay(300);
-	mouthElement.render(MOUTH_CLOSED);
-}
-
-void HappyFaceAnimation::renderLoop()
-{
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-	mouthElement.render(MOUTH_SMILE_TWO);
+boolean HappyFaceAnimation::renderFrame(int frame) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+			mouthElement.render(MOUTH_SMILE_ONE);
+			break;
+		case 3:
+			mouthElement.render(MOUTH_SMILE_TWO);
+			break;
+		case 4:
+			mouthElement.render(MOUTH_SMILE_TWO);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 5:
+			mouthElement.render(MOUTH_SMILE_ONE);
+			break;
+		case 6:
+			mouthElement.render(MOUTH_CLOSED);
+			break;
+		default:
+			return true;
+			break;
+	}
+	return false;
 }

@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "NormalAnimation.h";
+#include "NormalAnimation.h"
 
 /*********************
  *      DEFINES
@@ -13,26 +13,22 @@ NormalAnimation::NormalAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void NormalAnimation::renderIn()
-{
-	gfx->fillScreen(BLACK);
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-}
-
-void NormalAnimation::renderOut()
-{
-	gfx->fillScreen(BLACK);
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-}
-
-void NormalAnimation::renderLoop()
-{
-	gfx->fillScreen(BLACK);
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
+boolean NormalAnimation::renderFrame(int frame) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		default:
+			return true;
+			break;
+	}
+	return false;
 }

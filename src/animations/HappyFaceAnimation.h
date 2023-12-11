@@ -15,9 +15,8 @@ class HappyFaceAnimation : public FaceAnimation
 {
 public:
 	HappyFaceAnimation();
-	void renderIn() override;
-	void renderOut() override;
-	void renderLoop() override;
+	int frames = 31;
+	boolean renderFrame(int frame);
 
 private:
 	EyeElement eyeLeftElement;

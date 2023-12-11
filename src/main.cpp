@@ -10,16 +10,20 @@
  *********************/
 #include "config.h"
 #include "controllers/SerialManagerController.h"
+#include "controllers/AnimationsController.h"
 
 /*********************
  *  GLOBAL VARIBLES
  *********************/
+int imageSelect = -1;
+boolean commandReceived = false;
 
 /*********************
  *  GLOBAL DEFINE
  *********************/
 
 SerialManager serialManager;
+AnimationsController anitmationsController;
 
 void setup()
 {
@@ -29,21 +33,11 @@ void setup()
 
 	Log.begin(LOG_LEVEL, &Serial);
 
-	//Serial.println("Setup done");
-	serialManager.setupDisplay();
-	serialManager.splashScreen();
+    anitmationsController.init(&imageSelect, &commandReceived);
+    serialManager.init(&imageSelect, &commandReceived);
 }
 
 void loop()
 {
-	serialManager.processSerialCommands();
-	switch(globalAniumationState.animationName)
-	{
-	case ANGRY_FACE_ANIMATION:
-		break;
-	case PUKE_FACE_ANIMATION:
-		PukeRainbowFaceAnimation pukeRainbowFaceAnimation;
-		pukeRainbowFaceAnimation.renderLoop();
-		break;
-	}
+
 }

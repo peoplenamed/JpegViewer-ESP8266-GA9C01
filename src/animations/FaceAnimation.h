@@ -18,9 +18,10 @@ public:
 	FaceAnimation();
 
 	// Pure virtual functions for the animation
-	virtual void renderIn() = 0;
-	virtual void renderOut() = 0;
-	virtual void renderLoop() = 0;
+	// virtual void renderIn() = 0;
+	// virtual void renderOut() = 0;
+	// virtual void renderLoop() = 0;
+	virtual boolean renderFrame(int frame) = 0;
 
 	// Virtual destructor declaration
 	virtual ~FaceAnimation();

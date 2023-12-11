@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "DizzyFaceAnimation.h";
+#include "DizzyFaceAnimation.h"
 
 /*********************
  *      DEFINES
@@ -13,62 +13,80 @@ DizzyFaceAnimation::DizzyFaceAnimation()
 	, mouthElement(_MOUTH_X, _MOUTH_Y)
 { }
 
-void DizzyFaceAnimation::renderIn()
-{
-	gfx->fillScreen(BLACK);
-
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-
-	for(int i = 0; i < 5; i++)
+boolean DizzyFaceAnimation::renderFrame(int frame) {
+	switch(frame)
 	{
-		eyeLeftElement.render(EYE_SPIRAL_ONE_LR);
-		eyeRightElement.render(EYE_SPIRAL_ONE_LR);
-		delay(100);
-		eyeLeftElement.render(EYE_SPIRAL_TWO_LR);
-		eyeRightElement.render(EYE_SPIRAL_TWO_LR);
-		delay(100);
-		eyeLeftElement.render(EYE_SPIRAL_THREE_LR);
-		eyeRightElement.render(EYE_SPIRAL_THREE_LR);
-		delay(100);
-		eyeLeftElement.render(EYE_SPIRAL_FOUR_LR);
-		eyeRightElement.render(EYE_SPIRAL_FOUR_LR);
-		delay(100);
+		case 1:
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 2:
+		case 6:
+		case 10:
+		case 14:
+		case 18:
+			eyeLeftElement.render(EYE_SPIRAL_ONE_LR);
+			eyeRightElement.render(EYE_SPIRAL_ONE_LR);
+			break;
+		case 3:
+		case 7:
+		case 11:
+		case 15:
+		case 19:
+			eyeLeftElement.render(EYE_SPIRAL_TWO_LR);
+			eyeRightElement.render(EYE_SPIRAL_TWO_LR);
+			break;
+		case 4:
+		case 8:
+		case 12:
+		case 16:
+		case 20:
+			eyeLeftElement.render(EYE_SPIRAL_THREE_LR);
+			eyeRightElement.render(EYE_SPIRAL_THREE_LR);
+			break;
+		case 5:
+		case 9:
+		case 13:
+		case 17:
+		case 21:
+			eyeLeftElement.render(EYE_SPIRAL_FOUR_LR);
+			eyeRightElement.render(EYE_SPIRAL_FOUR_LR);
+			break;
+		case 22:
+		case 26:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			eyeRightElement.render(EYE_CLOSING_LR);
+			break;
+		case 23:
+		case 27:
+			eyeLeftElement.render(EYE_CLOSED_LR);
+			eyeRightElement.render(EYE_CLOSED_LR);
+			break;
+		case 24:
+		case 28:
+			eyeLeftElement.render(EYE_CLOSING_LR);
+			eyeRightElement.render(EYE_CLOSING_LR);
+			break;
+		case 25:
+		case 29:
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 30:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		case 31:
+			mouthElement.render(MOUTH_CLOSED);
+			eyeLeftElement.render(EYE_OPEN_LR);
+			eyeRightElement.render(EYE_OPEN_LR);
+			break;
+		default:
+			return true;
+			break;
 	}
-	for(int i = 0; i < 2; i++)
-	{
-		eyeLeftElement.render(EYE_CLOSING_LR);
-		eyeRightElement.render(EYE_CLOSING_LR);
-		delay(200);
-		eyeLeftElement.render(EYE_CLOSED_LR);
-		eyeRightElement.render(EYE_CLOSED_LR);
-		delay(200);
-		eyeLeftElement.render(EYE_CLOSING_LR);
-		eyeRightElement.render(EYE_CLOSING_LR);
-		delay(200);
-		eyeLeftElement.render(EYE_OPEN_LR);
-		eyeRightElement.render(EYE_OPEN_LR);
-		delay(200);
-	}
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-}
-
-void DizzyFaceAnimation::renderOut()
-{
-	gfx->fillScreen(BLACK);
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
-}
-
-void DizzyFaceAnimation::renderLoop()
-{
-	gfx->fillScreen(BLACK);
-	mouthElement.render(MOUTH_CLOSED);
-	eyeLeftElement.render(EYE_OPEN_LR);
-	eyeRightElement.render(EYE_OPEN_LR);
+	return false;
 }
 
 EyeType DizzyFaceAnimation::getRandomEyeType()

@@ -3,9 +3,9 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h";
-#include "elements/EyeElement.h";
-#include "elements/MouthElement.h";
+#include "../config.h"
+#include "elements/EyeElement.h"
+#include "elements/MouthElement.h"
 
 /*********************
  *      Class
@@ -14,9 +14,8 @@ class GrumpyFaceAnimation
 {
 public:
 	GrumpyFaceAnimation();
-	void renderIn();
-	void renderOut();
-	void renderLoop();
+	int frames = 31;
+	boolean renderFrame(int frame);
 
 private:
 	EyeElement eyeLeftElement;

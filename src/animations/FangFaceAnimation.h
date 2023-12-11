@@ -15,9 +15,8 @@ class FangFaceAnimation : public FaceAnimation
 {
 public:
 	FangFaceAnimation();
-	void renderIn() override;
-	void renderOut() override;
-	void renderLoop() override;
+	int frames = 6;
+	boolean renderFrame(int frame);
 
 private:
 	EyeElement eyeLeftElement;

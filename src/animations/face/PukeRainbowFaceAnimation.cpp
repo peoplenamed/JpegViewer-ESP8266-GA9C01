@@ -31,6 +31,8 @@ void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint1
 			break;
 		case 2:
 			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
 			break;
 		case 3:
 		case 4:
@@ -53,6 +55,9 @@ void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint1
 		case 21:
 		case 22:
 		case 23:
+			mouthElement.render(MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
 			this->drawRainbow(frame);
 			break;
 		case 24:
@@ -62,9 +67,13 @@ void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint1
 			break;
 		case 25:
 			mouthElement.render(MOUTH_FANGS_ONE, foreground, background);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
 			break;
 		case 26:
 			mouthElement.render(MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
 			break;
 	}
 }

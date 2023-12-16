@@ -112,7 +112,6 @@ uint16_t ColorsService::getNextRGB(uint16_t startColor)
 	return (startColor += 4680);
 }
 
-
 // the real HSV rainbow
 uint16_t ColorsService::trueHSV(int angle)
 {
@@ -130,13 +129,11 @@ uint16_t ColorsService::trueHSV(int angle)
 // the 'power-conscious' HSV rainbow
 uint16_t ColorsService::powerHSV(int angle)
 {
-  byte red, green, blue;
-  if (angle<120) {red = HSVpower[120-angle]; green = HSVpower[angle]; blue = 0;} else
-  if (angle<240) {red = 0;  green = HSVpower[240-angle]; blue = HSVpower[angle-120];} else
+    byte red, green, blue;
+    if (angle<120) {red = HSVpower[120-angle]; green = HSVpower[angle]; blue = 0;} else
+    if (angle<240) {red = 0;  green = HSVpower[240-angle]; blue = HSVpower[angle-120];} else
                  {red = HSVpower[angle-240]; green = 0; blue = HSVpower[360-angle];}
-				 Log.info("red: %d\n", red);
-				 Log.info("green: %d\n", green);
-				 Log.info("blue: %d\n", blue);
+
     return gfx->color565(red, green, blue);
 }
 

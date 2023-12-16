@@ -75,8 +75,6 @@ void SerialManager::runCommand()
 	{
 		Log.trace("processing: %s\n", receivedChars);
 		*imageSelect = atoi(receivedChars);
-		Log.info("Setting command received: TRUE\n");
-		// animations.chooseAnimation(atoi(receivedChars));
 	}
 }
 

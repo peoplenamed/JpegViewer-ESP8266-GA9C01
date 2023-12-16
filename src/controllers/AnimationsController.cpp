@@ -166,7 +166,7 @@ boolean AnimationsController::serialCommandReceived() {
 
 void AnimationsController::drawAnimation() {
 	if (animation != NULL) {
-		animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+		 animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
 		afterFrameEvents();
 	}
 	if (jpegAnimation != NULL) {
@@ -179,9 +179,7 @@ boolean AnimationsController::isAnimationRunning() {
 }
 
 void AnimationsController::incrementFrame() {
-	if (isAnimationRunning()) {
-		currentFrame++;
-	}
+	currentFrame++;
 }
 
 void AnimationsController::updateFrames() {
@@ -205,8 +203,13 @@ void AnimationsController::updateFrames() {
 }
 
 void AnimationsController::afterFrameEvents() {
-	incrementFrame();
-	setColorShiftingEffect();
+	if (isAnimationRunning()) {
+		incrementFrame();
+		setColorShiftingEffect();
+	} else if (currentSelection == *imageSelect){
+		*imageSelect = NULL;
+		currentSelection = NULL;
+	}
 }
 
 void AnimationsController::setColorShiftingEffect() {

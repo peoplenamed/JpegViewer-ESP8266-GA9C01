@@ -11,7 +11,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h"
+#include "config.h"
 #include <JPEGDEC.h>
 
 /*********************

@@ -5,33 +5,18 @@ AnimationsController::AnimationsController()
 	Log.info("Animations initializer\n");
 }
 
-void AnimationsController::init(int *_imageSelect, boolean *_commandReceived) {
+void AnimationsController::init(int *_imageSelect) {
 	imageSelect = _imageSelect;
-	commandReceived = _commandReceived;
 	setupDisplay();
 
 	auto task = [](void* arg) { static_cast<AnimationsController*>(arg)->processAnimationFrame(); };
 	xTaskCreate(task, "processAnimationFrame", 3092, this, 2, NULL);
 }
 
-void AnimationsController::processAnimationFrame() {
-	for(;;) {
-		if (*imageSelect != currentSelection) {
-			wipeScreen(true);
-			Log.info("commandReceived: %T \n", commandReceived);
-			commandReceived = false;
-			currentFrame = 1;
-			currentSelection = *imageSelect;
-		}
-		chooseAnimation();
-    	vTaskDelay( 250 );
-	}
-}
-
 void AnimationsController::setupDisplay()
 {
-	display.setupDisplay();
-	splashScreen();
+	displayService.setupDisplay();
+	displayService.wipeScreen(true, backgroundColor);
 }
 
 void AnimationsController::chooseAnimation()
@@ -39,308 +24,199 @@ void AnimationsController::chooseAnimation()
 	switch(*imageSelect)
 	{
 	case 0:
-		lastFrameDrawn = popEyeFaceAnimation.renderFrame(currentFrame);
-		totalFrames = popEyeFaceAnimation.frames;
+		animation = new PopEyeFaceAnimation();
 		break;
 	case 1:
-		lastFrameDrawn = fangFaceAnimation.renderFrame(currentFrame);
-		totalFrames = fangFaceAnimation.frames;
+		animation = new FangFaceAnimation();
 		break;
 	case 2:
-		// Log.info("AnimationsController::grumpyFace()\n");
-		lastFrameDrawn = grumpyFaceAnimation.renderFrame(currentFrame);
-		totalFrames = grumpyFaceAnimation.frames;
+		animation = new GrumpyFaceAnimation();
 		break;
 	case 3:
-		// Log.info("AnimationsController::winkFaceAnimation()\n");
-		lastFrameDrawn = winkFaceAnimation.renderFrame(currentFrame);
-		totalFrames = winkFaceAnimation.frames;
+		animation = new WinkFaceAnimation();
 		break;
 	case 4:
-		// Log.info("AnimationsController \n");
-		lastFrameDrawn = angryFaceAnimation.renderFrame(currentFrame);
-		totalFrames = angryFaceAnimation.frames;
+		animation = new AngryFaceAnimation();
 		break;
 	case 5:
-		// Log.info("AnimationsController \n");
-		lastFrameDrawn = satisfiedFaceAnimation.renderFrame(currentFrame);
-		totalFrames = satisfiedFaceAnimation.frames;
+		animation = new SatisfiedFaceAnimation;
 		break;
 	case 6:
-		// Log.info("AnimationsController \n");
-		lastFrameDrawn = normalAnimation.renderFrame(currentFrame);
-		totalFrames = normalAnimation.frames;
-		break;
-	case 7:
-		// Log.info("AnimationsController \n");
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		diamondEyes();
+		animation = new NormalAnimation();
 		break;
 	case 8:
-		// Log.info("AnimationsController \n");
-		splashScreen();
+		animation = new LoadingFaceAnimation();
 		break;
 	case 9:
-		Log.trace("happyFaceAnimation \n");
-		lastFrameDrawn = happyFaceAnimation.renderFrame(currentFrame);
-		totalFrames = happyFaceAnimation.frames;
+		animation = new HappyFaceAnimation();
 		break;
 	case 10:
-		// Log.info("AnimationsController \n");
-		lastFrameDrawn = pukeRainbowFaceAnimation.renderFrame(currentFrame);
-		totalFrames = pukeRainbowFaceAnimation.frames;
+		animation = new PukeRainbowFaceAnimation();
 		break;
-	case 11: {
-		Log.trace("AngryFaceAnimation \n");
-		lastFrameDrawn = angryFaceAnimation.renderFrame(currentFrame);
-		totalFrames = angryFaceAnimation.frames;
+	case 11:
+		animation = new AngryFaceAnimation();
 		break;
-	}
-	case 12: {
-		Log.trace("SleepFaceAnimation \n");
-		lastFrameDrawn = sleepFaceAnimation.renderFrame(currentFrame);
-		totalFrames = sleepFaceAnimation.frames;
+	case 12:
+		animation = new SleepFaceAnimation();
 		break;
-	}
-	case 13: {
-		Log.trace("GrumpyFaceAnimation \n");
-		lastFrameDrawn = grumpyFaceAnimation.renderFrame(currentFrame);
-		totalFrames = grumpyFaceAnimation.frames;
+	case 13:
+		animation = new GrumpyFaceAnimation();
 		break;
-	}
-	case 14: {
-		Log.trace("winkFaceAnimation \n");
-		lastFrameDrawn = winkFaceAnimation.renderFrame(currentFrame);
-		totalFrames = winkFaceAnimation.frames;
+	case 14:
+		animation = new WinkFaceAnimation();
 		break;
-	}
-	case 15: {
-		Log.trace("SatisfiedFaceAnimation \n");
-		lastFrameDrawn = satisfiedFaceAnimation.renderFrame(currentFrame);
-		totalFrames = satisfiedFaceAnimation.frames;
+	case 15:
+		animation = new SatisfiedFaceAnimation();
 		break;
-	}
-	case 16: {
-		Log.trace("PopEyeFaceAnimation \n");
-		lastFrameDrawn = popEyeFaceAnimation.renderFrame(currentFrame);
-		totalFrames = popEyeFaceAnimation.frames;
+	case 16:
+		animation = new PopEyeFaceAnimation();
 		break;
-	}
-	case 17: {
-		Log.trace("FangFaceAnimation \n");
-		lastFrameDrawn = fangFaceAnimation.renderFrame(currentFrame);
-		totalFrames = fangFaceAnimation.frames;
+	case 17:
+		animation = new FangFaceAnimation();
 		break;
-	}
-	case 20:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		circleWipe(10, false);
-		break;
-	case 21:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		circleWipe(10, true);
-		break;
-	case 22:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		triangleWipe(false);
-		break;
-	case 23:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		triangleWipe(true);
-		break;
-	case 30:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		drawRimCircle(120, false, 10);
-		break;
-	case 31:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		northText("North");
-		southText("South");
-		eastText("East");
-		westText("West");
-		centerText("100%");
-		break;
+	// FIX ME!
+	// case 25:
+	// 	CircleWipe circleWipe = new CircleWipe();
+	// 	circleWipe.renderFrame(10, false, foregroundColor, backgroundColor);
+	// 	break;
+	// case 26:
+	// 	CircleWipe circleWipe = new CircleWipe();
+	// 	circleWipe.renderFrame(10, true, foregroundColor, backgroundColor);
+	// 	break;
+	// case 27:
+	// 	TriangleWipe triangleWipe = new TriangleWipe();
+	// 	triangleWipe.renderFrame(false, foregroundColor, backgroundColor);
+	// 	break;
+	// case 28:
+	// 	TriangleWipe triangleWipe = new TriangleWipe();
+	// 	triangleWipe.renderFrame(true, foregroundColor, backgroundColor);
+	// 	break;
+	// case 29:
+	// 	DrawRimCircle drawRimCircle = new DrawRimCircle();
+	// 	drawRimCircle.renderFrame(120, false, foregroundColor, backgroundColor);
+	// 	break;
 	case 50:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		octocat();
+		// northText("North");
+		textDraw = new TextOverLay();
+		textDraw->renderFrame(1, "center", true, foregroundColor, backgroundColor);
 		break;
 	case 51:
-		// lastFrameDrawn = .renderFrame(currentFrame);
-		calvinAndHobbes();
+		textDraw = new TextOverLay();
+		textDraw->renderFrame(2, "center", true, foregroundColor, backgroundColor);
+		// southText("South");
+		break;
+	case 52:
+		textDraw = new TextOverLay();
+		textDraw->renderFrame(3, "center", true, foregroundColor, backgroundColor);
+		// eastText("East");
+		break;
+	case 53:
+		textDraw = new TextOverLay();
+		textDraw->renderFrame(4, "center", true, foregroundColor, backgroundColor);
+		// westText("West");
+		break;
+	case 54:
+		textDraw = new TextOverLay();
+		textDraw->renderFrame(5, "center", true, foregroundColor, backgroundColor);
+		// centerText("100%");
+		break;
+	case 55:
+		textDraw = new TextAlert();
+		textDraw->renderFrame(1, "ERROR!", true, foregroundColor, backgroundColor);
+		break;
+	case 56:
+		textDraw = new TextAlert();
+		textDraw->renderFrame(2, "SUCCESS!", true, foregroundColor, backgroundColor);
+		break;
+	case 57:
+		// FIX ME!
+		// customText("100%");
+	case 75:
+		jpegAnimation = new DimondEyes();
+		break;
+	case 76:
+		jpegAnimation = new OctoCat();
+	case 77:
+		jpegAnimation = new CalvinAndHobbes();
 		break;
 	default:
-		// // lastFrameDrawn = .renderFrame(currentFrame);
-		calvinDuplicator();
+		jpegAnimation = new CalvinDuplicator();
 		break;
 	}
-
-	afterFrameEvent();
+	updateFrames(); 
 }
 
-/** STATIC IMAGES **/
-void AnimationsController::calvinAndHobbes()
-{
-	display.drawImage("/download.jpeg");
-}
-void AnimationsController::octocat()
-{
-	display.drawImage("/octocat.jpg");
-}
+void AnimationsController::processAnimationFrame() {
+	for(;;) {
+		if (serialCommandReceived()) {
+			displayService.wipeScreen(true, backgroundColor);
+			currentFrame = 1;
+			currentSelection = *imageSelect;
+			chooseAnimation();
+		}
 
-/** ANIMATIONS **/
-void AnimationsController::calvinDuplicator()
-{
-	Log.info(".. calvinDuplicator2");
-	display.drawJpgAnimation("1Ys_", ".jpg", 19, 3);
+		drawAnimation();
+    	vTaskDelay( vTaskDelayTimeout );
+	}
 }
 
+boolean AnimationsController::serialCommandReceived() {
+	return *imageSelect != currentSelection;
+}
 
+void AnimationsController::drawAnimation() {
+	if (animation != NULL) {
+		animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+		afterFrameEvents();
+	}
+	if (jpegAnimation != NULL) {
+		jpegAnimation->renderFrame(currentFrame);
+	}
+}
 
 boolean AnimationsController::isAnimationRunning() {
-		// Log.info("isAnimationRunning: %T..\n", (currentFrame < totalFrames));
 	return currentFrame <= totalFrames;
 }
 
-void AnimationsController::afterFrameEvent() {
+void AnimationsController::incrementFrame() {
 	if (isAnimationRunning()) {
 		currentFrame++;
-		Log.info("currentFrame++....%d\n", currentFrame);
 	}
 }
 
-void AnimationsController::diamondEyes()
-{
-	// normalFace();
-	delay(400);
-	display.drawImage("/diamondEyes_0001.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0002.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0003.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0002.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0001.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0003.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0002.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0003.jpg");
-	delay(200);
-	display.drawImage("/diamondEyes_0001.jpg");
-	delay(200);
-	// normalFace();
-}
-
-void AnimationsController::splashScreen()
-{
-	// Log.info("AnimationsController::splashScreen()\n");
-
-	for (int i = 1; i <= loadingFaceAnimation.frames; i++) {
-		loadingFaceAnimation.renderFrame(i);
-		delay(140);
-	}
-	// Log.info("AnimationsController::splashScreen() DONE \n");
-}
-
-void AnimationsController::northText(String _text)
-{
-	display.drawText(_text, 85, 10, 3, compassTextColor);
-}
-
-void AnimationsController::southText(String _text)
-{
-	display.drawText(_text, 85, 200, 3, compassTextColor);
-}
-
-void AnimationsController::eastText(String _text)
-{
-	display.drawText(_text, 0, 110, 3, compassTextColor);
-}
-
-void AnimationsController::westText(String _text)
-{
-	display.drawText(_text, 185, 110, 3, compassTextColor);
-}
-
-void AnimationsController::centerText(String _text)
-{
-	display.drawText(_text, 85, 110, 3, compassTextColor);
-}
-
-void AnimationsController::errorText(String _text)
-{
-	display.drawText(_text, 0, 105, 4, 3);
-}
-
-void AnimationsController::successText(String _text)
-{
-	display.drawText(_text, 0, 105, 5, 4);
-}
-
-void AnimationsController::userDefinedText(String _text, int _x, int _y, int _size, int _color)
-{
-	display.drawText(_text, _x, _y, _size, _color);
-}
-
-void AnimationsController::wipeScreen(boolean wipe)
-{
-	display.wipeScreen(wipe);
-}
-
-void AnimationsController::drawRimCircle(int32_t radius, boolean wipe, int maxWipe)
-{
-	display.wipeScreen(wipe);
-
-	int32_t _x = 120; // radius/2
-	int32_t _y = 120; // radius/2
-
-	for(int y = 0; y < maxWipe; y++)
-	{
-		display.DrawCircle(_x, _y, radius - y, hexColors.getRandomColor());
+void AnimationsController::updateFrames() {
+	if (*imageSelect < 25) {
+		totalFrames = animation->getTotalFrames();
+		jpegAnimation = NULL;
+		textDraw = NULL;
+	} else if (*imageSelect < 50) {
+		animation = NULL;
+		jpegAnimation = NULL;
+		textDraw = NULL;
+	} else if (*imageSelect < 75) {
+		totalFrames = textDraw->frames;
+		animation = NULL;
+		jpegAnimation = NULL;
+	} else {
+		animation = NULL;
+		jpegAnimation = NULL;
+		textDraw = NULL;
 	}
 }
 
-void AnimationsController::circleWipe(int radius, boolean wipe)
-{
-	display.wipeScreen(wipe);
-	int32_t w = _width;
-	int32_t h = _height;
-	// uint32_t start;
-	int32_t x, y;
-	int32_t r2 = radius * 2;
-	int32_t w1 = w + radius;
-	int32_t h1 = h + radius;
-
-	for(x = 0; x < w1; x += r2)
-	{
-		for(y = 0; y < h1; y += r2)
-		{
-			display.DrawCircle(x, y, radius, hexColors.getRandomColor());
-		}
-	}
+void AnimationsController::afterFrameEvents() {
+	incrementFrame();
+	setColorShiftingEffect();
 }
 
-void AnimationsController::triangleWipe(boolean wipe)
-{
-	display.wipeScreen(wipe);
-	int32_t i;
-	int32_t cx = _width / 2;
-	int32_t cy = _height / 2;
-	int32_t cx1 = cx - 1;
-	int32_t cy1 = cy - 1;
-	int32_t cn = min(cx1, cy1);
-	// digit size
-
-	for(i = 0; i < cn; i += 5)
-	{
-		display.DrawTriangle(cx1,
-							 cy1 - i, // peak
-							 cx1 - i,
-							 cy1 + i, // bottom left
-							 cx1 + i,
-							 cy1 + i, // bottom right
-							 hexColors.getRandomColor());
+void AnimationsController::setColorShiftingEffect() {
+	if (randomColors) {
+		foregroundColor = colorsService.getNextRGB(foregroundColor);
+		backgroundColor = colorsService.getNextRGB(backgroundColor);
+	} else if (rainbowColors) {
+		if (currentAngle >= 360){ currentAngle = 0; }
+		foregroundColor = colorsService.powerHSV(currentAngle);
+		// backgroundColor = colorsService.powerHSV(currentAngle + 200);
+		currentAngle += 20;
 	}
 }

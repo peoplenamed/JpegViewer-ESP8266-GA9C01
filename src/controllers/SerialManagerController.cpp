@@ -11,9 +11,8 @@ SerialManager::SerialManager()
 	Log.notice("SerialManager initializer");
 }
 
-void SerialManager::init(int *_imageSelect, boolean *_commandReceived) {
+void SerialManager::init(int *_imageSelect) {
 	imageSelect = _imageSelect;
-	commandReceived = _commandReceived;
 
 	auto processSerialCommandsTask = [](void* arg) { static_cast<SerialManager*>(arg)->processSerialCommands(); };
 	xTaskCreate(processSerialCommandsTask, "processSerialCommands", 1024, this, 2, NULL);
@@ -76,7 +75,6 @@ void SerialManager::runCommand()
 	{
 		Log.trace("processing: %s\n", receivedChars);
 		*imageSelect = atoi(receivedChars);
-		*commandReceived = (boolean)true;
 		Log.info("Setting command received: TRUE\n");
 		// animations.chooseAnimation(atoi(receivedChars));
 	}

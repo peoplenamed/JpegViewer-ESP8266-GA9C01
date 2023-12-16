@@ -15,7 +15,7 @@
  * GLOBAL PROTOTYPES
  **********************/
 
-JpegFunk Display::jpegFunk;
+JpegFunk DisplayService::jpegFunk;
 
 /**********************
  *      MACROS
@@ -25,9 +25,9 @@ JpegFunk Display::jpegFunk;
  *      CLASS
  **********************/
 
-Display::Display() { }
+DisplayService::DisplayService() { }
 
-void Display::setupDisplay()
+void DisplayService::setupDisplay()
 {
 	// #ifdef ESP8826
 	// #include <LittleFS.h>
@@ -69,16 +69,15 @@ void Display::setupDisplay()
 	}
 }
 
-void Display::wipeScreen(boolean wipe)
+void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 {
-	if(wipe)
+	if (wipe)
 	{
-		gfx->fillScreen(0x0000);
-		// gfx->fillScreen(hexColors.black);
+		gfx->fillScreen(backgroundColor);
 	}
 }
 
-void Display::setText(String text)
+void DisplayService::setText(String text)
 {
 	int len = text.length() + 1;
 	char charArray[len];
@@ -87,7 +86,7 @@ void Display::setText(String text)
 	gfx->println(charArray);
 }
 
-void Display::drawText(String _text, int _x, int _y, int _size, int _color)
+void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color)
 {
 	gfx->setCursor(_x, _y);
 	gfx->setTextColor(0x0000);
@@ -96,7 +95,7 @@ void Display::drawText(String _text, int _x, int _y, int _size, int _color)
 	setText(_text);
 }
 
-int Display::jpegDrawCallback(JPEGDRAW* pDraw)
+int DisplayService::jpegDrawCallback(JPEGDRAW* pDraw)
 {
 	Log.trace(
 		"Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
@@ -104,9 +103,8 @@ int Display::jpegDrawCallback(JPEGDRAW* pDraw)
 	return 1;
 }
 
-void Display::drawImage(char* fileName)
+void DisplayService::drawImage(char* fileName)
 {
-	Log.trace("Drawing: %s\n", fileName);
 	int _width = 240;
 	int _height = 240;
 
@@ -119,55 +117,70 @@ void Display::drawImage(char* fileName)
 					  _height /* heightLimit */);
 }
 
-void Display::drawJpgAnimation(String name, String fileType, int frames, int times)
+void DisplayService::drawJpgAnimation(String name, String fileType, int frame)
 {
-	Log.info("drawJpgAnimation \n");
-	for(int x = 1; x <= times; x++)
+	String filename;
+	filename.concat(name);
+
+	if(frame < 10)
 	{
-		Log.info("drawJpgAnimation x:%d \n", x);
-		for(int i = 0; i <= frames - 1; i++)
-		{
-			Log.info("drawJpgAnimation i:%d \n", i);
-			String filename;
-			filename.concat(name);
-			Log.info("filename i:%s \n", name);
-
-			Log.info("drawImageb");
-			if(i < 10)
-			{
-				filename.concat("00");
-			}
-			else
-			{
-				filename.concat("0");
-			}
-			Log.info("drawImagea");
-			filename.concat(i);
-			filename.concat(fileType);
-
-			int len = filename.length() + 1;
-			char charArray[len];
-			filename.toCharArray(charArray, len);
-
-			Log.info("drawImage");
-			drawImage(charArray);
-			Log.info("drawImage!");
-		}
+		filename.concat("00");
 	}
+	else
+	{
+		filename.concat("0");
+	}
+	filename.concat(frame);
+	filename.concat(fileType);
+
+	int len = filename.length() + 1;
+	char charArray[len];
+	filename.toCharArray(charArray, len);
+
+	drawImage(charArray);
 }
 
-void Display::DrawCircle(int32_t x, int32_t y, int32_t radius, int32_t color)
+// void DisplayService::drawJpgAnimations(String name, String fileType, int frames, int times)
+// {
+// 	for(int x = 1; x <= times; x++)
+// 	{
+// 		for(int i = 0; i <= frames - 1; i++)
+// 		{
+// 			String filename;
+// 			filename.concat(name);
+
+// 			if(i < 10)
+// 			{
+// 				filename.concat("00");
+// 			}
+// 			else
+// 			{
+// 				filename.concat("0");
+// 			}
+// 			filename.concat(i);
+// 			filename.concat(fileType);
+
+// 			int len = filename.length() + 1;
+// 			char charArray[len];
+// 			filename.toCharArray(charArray, len);
+
+// 			drawImage(charArray);
+// 		}
+// 	}
+// }
+
+void DisplayService::DrawCircle(int16_t x, int16_t y, int16_t radius, int16_t color)
 {
 	gfx->drawCircle(x, y, radius, color);
 }
 
-void Display::DrawTriangle(int32_t peak,
-						   int32_t bottom_left,
-						   int32_t bottom_right,
-						   int32_t idk1,
-						   int32_t idk2,
-						   int32_t idk3,
-						   int32_t color)
+void DisplayService::DrawTriangle(int16_t peak,
+						   int16_t bottom_left,
+						   int16_t bottom_right,
+						   int16_t idk1,
+						   int16_t idk2,
+						   int16_t idk3,
+						   int16_t color)
 {
 	gfx->drawTriangle(peak, bottom_left, bottom_right, idk1, idk2, idk3, color);
 }

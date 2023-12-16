@@ -4,10 +4,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "../config.h"
-#include "../animations/AngryFaceAnimation.h"
-#include "../animations/GrumpyFaceAnimation.h"
-#include "../animations/SleepFaceAnimation.h"
+#include "config.h"
 #include "AnimationsController.h"
 #include <ArduinoLog.h>
 
@@ -19,7 +16,7 @@ class SerialManager
 public:
 	SerialManager();
 
-	void init(int *_imageSelect, boolean *_commandReceived);
+	void init(int *_imageSelect);
 
 private:
     // static void process_wrapper(void* arg)
@@ -29,7 +26,6 @@ private:
 	void processSerialCommands(); // Get commands
 	
 	int *imageSelect;
-	boolean *commandReceived;
 	// void setupDisplay();
 	// void splashScreen();
 	static void recvWithStartEndMarkers();

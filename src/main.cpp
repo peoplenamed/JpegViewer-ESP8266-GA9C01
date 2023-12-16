@@ -15,8 +15,7 @@
 /*********************
  *  GLOBAL VARIBLES
  *********************/
-int imageSelect = -1;
-boolean commandReceived = false;
+int imageSelect = 8; // Splashscreen
 
 /*********************
  *  GLOBAL DEFINE
@@ -33,8 +32,8 @@ void setup()
 
 	Log.begin(LOG_LEVEL, &Serial);
 
-    anitmationsController.init(&imageSelect, &commandReceived);
-    serialManager.init(&imageSelect, &commandReceived);
+    anitmationsController.init(&imageSelect);
+    serialManager.init(&imageSelect);
 }
 
 void loop()

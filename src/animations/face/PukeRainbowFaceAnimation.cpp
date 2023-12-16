@@ -55,7 +55,7 @@ void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint1
 		case 21:
 		case 22:
 		case 23:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
+			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background);
 			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
 			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
 			this->drawRainbow(frame);

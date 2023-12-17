@@ -11,18 +11,21 @@
 #include "config.h"
 #include "controllers/SerialManagerController.h"
 #include "controllers/AnimationsController.h"
+#include "controllers/TextController.h"
 
 /*********************
  *  GLOBAL VARIBLES
  *********************/
 int imageSelect = 8; // Splashscreen
-
+int textSelect = -1;
+String userDefinedText;
 /*********************
  *  GLOBAL DEFINE
  *********************/
 
 SerialManager serialManager;
 AnimationsController anitmationsController;
+TextController textController;
 
 void setup()
 {
@@ -33,7 +36,8 @@ void setup()
 	Log.begin(LOG_LEVEL, &Serial);
 
     anitmationsController.init(&imageSelect);
-    serialManager.init(&imageSelect);
+    serialManager.init(&imageSelect, &textSelect, &userDefinedText);
+	textController.init(&textSelect, &userDefinedText);
 }
 
 void loop()

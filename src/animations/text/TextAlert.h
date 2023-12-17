@@ -15,10 +15,20 @@ class TextAlert : public TextDraw
         TextAlert();
 
         // Frames can effectively act like a non-blocking timeout for text
-        int frames = 5;
+	    int getTotalFrames();
         void renderFrame(int textType, char* text, boolean _wipe, uint16_t foreground, uint16_t background);
+        void setCustomSettings(int _x, int _y, int _size, uint16_t _color);
 
     private:
-
+        int frames = 5;
+        uint16_t _errorColor = RED;
+        uint16_t _successColor = GREEN;
+        const int _x = 0;
+        const int _y = 105;
+        const int _size = 4;
+        int x;
+        int y;
+        int size;
+        uint16_t color;
 };
 #endif

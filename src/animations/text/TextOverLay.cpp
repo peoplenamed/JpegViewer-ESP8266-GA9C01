@@ -13,7 +13,7 @@ void TextOverLay::renderFrame(int textType,
 							  char* _text,
 							  boolean _wipe,
 							  uint16_t textColor,
-							  uint16_t backgroundColor=NULL) {
+							  uint16_t backgroundColor) {
 
     displayService.wipeScreen(_wipe, backgroundColor);
 
@@ -39,20 +39,22 @@ void TextOverLay::renderFrame(int textType,
             // centerText
             displayService.drawText(_text, 85, 110, 3, textColor);
 			break;
-		case 6:
-            // errorText
-            displayService.drawText(_text, 0, 105, 4, 3);
-			break;
-		case 7:
-            // successText
-            displayService.drawText(_text, 0, 105, 5, 4);
-			break;
 		case 8:
-            // FIX ME!
             // userDefinedText
-            // displayService.drawText(_text, _x, _y, _size, _color);
+            displayService.drawText(_text, x, y, size, color);
 			break;
 		default:
 			break;
 	}
+}
+
+void TextOverLay::setCustomSettings(int _x, int _y, int _size, uint16_t _color) {
+	x = _x;
+	y = _y;
+	size = _size;
+	color = _color;
+}
+
+int TextOverLay::getTotalFrames() {
+	return frames;
 }

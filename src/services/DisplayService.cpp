@@ -89,8 +89,7 @@ void DisplayService::setText(String text)
 void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color)
 {
 	gfx->setCursor(_x, _y);
-	gfx->setTextColor(0x0000);
-	// gfx->setTextColor(hexColors.getHexColor(_color));
+	gfx->setTextColor(_color);
 	gfx->setTextSize(_size);
 	setText(_text);
 }

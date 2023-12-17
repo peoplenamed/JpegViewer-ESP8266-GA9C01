@@ -20,9 +20,9 @@ public:
 	// void renderOut();
 	// void renderLoop();
 	int getTotalFrames();
-	int frames = 6;
 
 private:
+	int frames = 6;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

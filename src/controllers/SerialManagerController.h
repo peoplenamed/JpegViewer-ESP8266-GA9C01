@@ -16,7 +16,7 @@ class SerialManager
 public:
 	SerialManager();
 
-	void init(int *_imageSelect);
+	void init(int *_imageSelect, int *_textSelect, String *_userDefinedText);
 
 private:
     // static void process_wrapper(void* arg)
@@ -26,13 +26,15 @@ private:
 	void processSerialCommands(); // Get commands
 	
 	int *imageSelect;
+	int *textSelect;
+	String *userDefinedText;
+
 	// void setupDisplay();
 	// void splashScreen();
 	static void recvWithStartEndMarkers();
 	// static void showNewData();
 	void runCommand();
 	void processCustomMessage();
-	String getValueFromDelimitedString(String stringData, char separator, int index);
 	String userInput;
 	// boolean newData;
 	const static byte numChars = 32;

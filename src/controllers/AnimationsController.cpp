@@ -95,42 +95,6 @@ void AnimationsController::chooseAnimation()
 	// 	DrawRimCircle drawRimCircle = new DrawRimCircle();
 	// 	drawRimCircle.renderFrame(120, false, foregroundColor, backgroundColor);
 	// 	break;
-	case 50:
-		// northText("North");
-		textDraw = new TextOverLay();
-		textDraw->renderFrame(1, "center", true, foregroundColor, backgroundColor);
-		break;
-	case 51:
-		textDraw = new TextOverLay();
-		textDraw->renderFrame(2, "center", true, foregroundColor, backgroundColor);
-		// southText("South");
-		break;
-	case 52:
-		textDraw = new TextOverLay();
-		textDraw->renderFrame(3, "center", true, foregroundColor, backgroundColor);
-		// eastText("East");
-		break;
-	case 53:
-		textDraw = new TextOverLay();
-		textDraw->renderFrame(4, "center", true, foregroundColor, backgroundColor);
-		// westText("West");
-		break;
-	case 54:
-		textDraw = new TextOverLay();
-		textDraw->renderFrame(5, "center", true, foregroundColor, backgroundColor);
-		// centerText("100%");
-		break;
-	case 55:
-		textDraw = new TextAlert();
-		textDraw->renderFrame(1, "ERROR!", true, foregroundColor, backgroundColor);
-		break;
-	case 56:
-		textDraw = new TextAlert();
-		textDraw->renderFrame(2, "SUCCESS!", true, foregroundColor, backgroundColor);
-		break;
-	case 57:
-		// FIX ME!
-		// customText("100%");
 	case 75:
 		jpegAnimation = new DimondEyes();
 		break;
@@ -165,8 +129,8 @@ boolean AnimationsController::serialCommandReceived() {
 }
 
 void AnimationsController::drawAnimation() {
-	if (animation != NULL) {
-		 animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+	if (animation != NULL && isAnimationRunning()) {
+		animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
 		afterFrameEvents();
 	}
 	if (jpegAnimation != NULL) {
@@ -186,19 +150,12 @@ void AnimationsController::updateFrames() {
 	if (*imageSelect < 25) {
 		totalFrames = animation->getTotalFrames();
 		jpegAnimation = NULL;
-		textDraw = NULL;
 	} else if (*imageSelect < 50) {
-		animation = NULL;
-		jpegAnimation = NULL;
-		textDraw = NULL;
-	} else if (*imageSelect < 75) {
-		totalFrames = textDraw->frames;
 		animation = NULL;
 		jpegAnimation = NULL;
 	} else {
 		animation = NULL;
 		jpegAnimation = NULL;
-		textDraw = NULL;
 	}
 }
 

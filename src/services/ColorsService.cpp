@@ -45,7 +45,7 @@ RgbColorStruct MONO[2];
 
 ColorsService::ColorsService()
 {
-	Log.trace("ColorsService initializer");
+	Log.trace("ColorsService initializer\n");
 }
 
 // unsigned long HexColors::getHexColor(int chosenColor) {

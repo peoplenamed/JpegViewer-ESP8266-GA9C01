@@ -19,7 +19,7 @@ class TextOverLay : public TextDraw
         void setCustomSettings(int _x, int _y, int _size, uint16_t _color);
 
     private:
-        int frames = 6;
+        int frames = 30;
         int x;
         int y;
         int size;

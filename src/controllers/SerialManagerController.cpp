@@ -73,7 +73,7 @@ void SerialManager::runCommand()
 	{
 		// processCustomMessage();
 		String charsAsString = receivedChars;
-		charsAsString.remove(0, 1);
+		// charsAsString.remove(0, 1);
 		*userDefinedText = charsAsString;
 		Log.info("MESSAGE: %s\n", userDefinedText);
 	}

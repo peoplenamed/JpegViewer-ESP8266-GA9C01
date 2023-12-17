@@ -16,8 +16,8 @@ void TextController::init(int *_textSelect, String *_userDefinedText) {
 
 void TextController::setupDisplay()
 {
-	displayService.setupDisplay();
-	displayService.wipeScreen(true, backgroundColor);
+	// displayService.setupDisplay();
+	// displayService.wipeScreen(true, backgroundColor);
 }
 
 void TextController::chooseText()
@@ -71,11 +71,6 @@ void TextController::chooseText()
             _wipe = true;
             _currentColor = foregroundColor;
             break;
-        // case 7:
-            // FIX ME!
-            // customText("100%");
-        // default:
-        // 	break;
 	}
 }
 
@@ -114,7 +109,9 @@ boolean TextController::customSerialCommandReceived() {
 
 void TextController::drawText() {
 	if (textDraw != NULL && isTextRunning()) {
-		textDraw->renderFrame(_textType, _text, _wipe, _currentColor);
+        boolean wipeFrame = _wipe && (currentFrame == 1);
+        Log.info("GONNA WIPE????: %b:\n",wipeFrame);
+		textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor);
 		afterFrameEvents();
 	}
 }

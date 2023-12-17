@@ -38,7 +38,7 @@ private:
     String *userDefinedText;
 	int currentSelection = -1;
 	String currentUserDefinedTextSelection;
-	int vTaskDelayTimeout = 800; // Interval between frames
+	int vTaskDelayTimeout = 190; // Interval between frames
 
 	// FUNCTIONS
     void processSerial();

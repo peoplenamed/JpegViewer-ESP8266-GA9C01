@@ -9,7 +9,11 @@
 // Constructor implementation
 DimondEyes::DimondEyes() { }
 
-void DimondEyes::renderFrame(int frame, int _delay) {
+void DimondEyes::renderFrame(int frame) {
+
+	#ifdef DEBUG
+		Log.trace("DimondEyes::renderFrame  frame: %i\n", frame);
+	#endif
 
 	switch(frame)
 	{
@@ -43,4 +47,8 @@ void DimondEyes::renderFrame(int frame, int _delay) {
 		default:
 			break;
 	}
+}
+
+int DimondEyes::getTotalFrames() {
+	return frames;
 }

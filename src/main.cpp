@@ -16,7 +16,7 @@
 /*********************
  *  GLOBAL VARIBLES
  *********************/
-int imageSelect = 8; // Splashscreen
+int imageSelect = 75; // Splashscreen
 int textSelect = -1;
 String userDefinedText;
 /*********************
@@ -37,7 +37,7 @@ void setup()
 
     anitmationsController.init(&imageSelect);
     serialManager.init(&imageSelect, &textSelect, &userDefinedText);
-	textController.init(&textSelect, &userDefinedText);
+	// textController.init(&textSelect, &userDefinedText);
 }
 
 void loop()

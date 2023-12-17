@@ -9,9 +9,14 @@
 // Constructor implementation
 CalvinAndHobbes::CalvinAndHobbes() { }
 
-void CalvinAndHobbes::renderFrame(int frame, int _delay) {
-	if (_delay > 0) {
-		frames = _delay;
-	}
+void CalvinAndHobbes::renderFrame(int frame) {
+	#ifdef DEBUG
+		Log.trace("CalvinAndHobbes::renderFrame  frame: %i\n", frame);
+	#endif
+
 	displayService.drawJpgAnimation("1Ys_", ".jpg", frame);
+}
+
+int CalvinAndHobbes::getTotalFrames() {
+	return frames;
 }

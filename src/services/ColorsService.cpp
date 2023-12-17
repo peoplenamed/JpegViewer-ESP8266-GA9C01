@@ -1,7 +1,7 @@
 /*********************
  *      INCLUDES
  *********************/
-#include "ColorsService.h";
+#include "ColorsService.h"
 
 /*********************
  *      DEFINES
@@ -45,7 +45,7 @@ RgbColorStruct MONO[2];
 
 ColorsService::ColorsService()
 {
-	Log.trace("ColorsService initializer\n");
+	Log.trace("[ColorsService]<initializer>\n");
 }
 
 // unsigned long HexColors::getHexColor(int chosenColor) {

@@ -15,9 +15,9 @@ class CalvinDuplicator : public JPEGAnimation
     public:
         CalvinDuplicator();
 
-        // Frames can be used like a delay...
         int frames = 14;
-        void renderFrame(int frame, int _delay=0);
+        void renderFrame(int frame);
+	    int getTotalFrames();
 
     private:
         DisplayService displayService;

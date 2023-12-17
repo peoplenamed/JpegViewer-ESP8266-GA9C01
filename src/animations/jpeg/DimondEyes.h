@@ -18,7 +18,8 @@ class DimondEyes : public JPEGAnimation
 
         // Frames can be used like a delay...
         int frames = 10;
-        void renderFrame(int frame, int _delay=0);
+        void renderFrame(int frame);
+	    int getTotalFrames();
 
     private:
         DisplayService displayService;

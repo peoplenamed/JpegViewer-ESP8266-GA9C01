@@ -13,6 +13,7 @@
  *********************/
 #include "config.h"
 #include <JPEGDEC.h>
+#include <LittleFS.h> 
 
 /*********************
  *      DEFINES

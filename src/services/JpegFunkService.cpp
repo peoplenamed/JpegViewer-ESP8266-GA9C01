@@ -25,34 +25,34 @@ JpegFunk::JpegFunk()
 
 void* JpegFunk::jpegOpenFile(const char* szFilename, int32_t* pFileSize)
 {
-#ifdef DEBUG
-	Serial.print("jpegOpenFile: ");
-	Serial.println(szFilename);
-#endif
-	_f = SPIFFS.open(szFilename, "r");
+	#ifdef DEBUG
+		Log.info("jpegOpenFile: %s\n");
+		Log.info(szFilename);
+	#endif
+	LittleFS.begin();
+	_f = LittleFS.open(szFilename, "r");
 	*pFileSize = _f.size();
 
-#ifdef DEBUG
-	Serial.print("JPEG file size: ");
-	Serial.println(_f.size());
-#endif
+	#ifdef DEBUG
+		Log.info("JPEG file size: %i\n"), _f.size();
+	#endif
 	return &_f;
 }
 
 void JpegFunk::jpegCloseFile(void* pHandle)
 {
-#ifdef DEBUG
-	Serial.println("jpegCloseFile");
-#endif
+	#ifdef DEBUG
+		Log.info("jpegCloseFile\n");
+	#endif
 	File* f = static_cast<File*>(pHandle);
 	f->close();
 }
 
 int32_t JpegFunk::jpegReadFile(JPEGFILE* pFile, uint8_t* pBuf, int32_t iLen)
 {
-#ifdef DEBUG
-	Serial.printf("jpegReadFile, iLen: %d\n", iLen);
-#endif
+	#ifdef DEBUG
+		Log.info("jpegReadFile, iLen: %d\n", iLen);
+	#endif
 	File* f = static_cast<File*>(pFile->fHandle);
 	size_t r = f->read(pBuf, iLen);
 	return r;
@@ -61,7 +61,7 @@ int32_t JpegFunk::jpegReadFile(JPEGFILE* pFile, uint8_t* pBuf, int32_t iLen)
 int32_t JpegFunk::jpegSeekFile(JPEGFILE* pFile, int32_t iPosition)
 {
 #ifdef DEBUG
-	Serial.printf("jpegSeekFile, pFile->iPos: %d, iPosition: %d\n", pFile->iPos, iPosition);
+	Log.info("jpegSeekFile, pFile->iPos: %d, iPosition: %d\n", pFile->iPos, iPosition);
 #endif
 
 	File* f = static_cast<File*>(pFile->fHandle);
@@ -109,10 +109,9 @@ void JpegFunk::jpegDraw(const char* filename,
 		_scale = JPEG_SCALE_EIGHTH;
 		iMaxMCUs = widthLimit / 2;
 	}
-#ifdef DEBUG
-	debugJpeg(
-		filename, useBigEndian, x, y, _x, _y, widthLimit, heightLimit, _scale, iMaxMCUs, ratio);
-#endif
+	#ifdef DEBUG
+		debugJpeg(filename, useBigEndian, x, y, _x, _y, widthLimit, heightLimit, _scale, iMaxMCUs, ratio);
+	#endif
 
 	_jpeg.setMaxOutputSize(iMaxMCUs);
 
@@ -137,32 +136,5 @@ void JpegFunk::debugJpeg(const char* filename,
 						 int iMaxMCUs,
 						 float ratio)
 {
-	Serial.print("== filename: ");
-	Serial.println(filename);
-	Serial.print("== *filename: ");
-	Serial.println(*filename);
-	Serial.print("== useBigEndian: ");
-	Serial.println(useBigEndian);
-	Serial.print("== x: ");
-	Serial.println(x);
-	Serial.print("== y: ");
-	Serial.println(y);
-	Serial.print("== _x: ");
-	Serial.println(_x);
-	Serial.print("== _y: ");
-	Serial.println(_y);
-	Serial.print("== _x_bound: ");
-	Serial.println(_x_bound);
-	Serial.print("== _y_bound: ");
-	Serial.println(_y_bound);
-	Serial.print("== widthLimit: ");
-	Serial.println(widthLimit);
-	Serial.print("== heightLimit: ");
-	Serial.println(heightLimit);
-	Serial.print("== _scale: ");
-	Serial.println(_scale);
-	Serial.print("== ratio: ");
-	Serial.println(ratio);
-	Serial.print("== iMaxMCUs: ");
-	Serial.println(iMaxMCUs);
+	Log.info("[JpegFunkService]<debugJpeg> filename: %s, useBigEndian: %b, x: %i, y: %i, _x: %i, _y: %i, _x_bound: %i, _y_bound: %i, widthLimit: %i, heightLimit: %i, _scale: %i, ratio: %f, iMaxMCUs: %i\n", filename, useBigEndian, x, y, _x, _y, _x_bound,_y_bound, widthLimit, heightLimit, _scale, ratio, iMaxMCUs);
 }

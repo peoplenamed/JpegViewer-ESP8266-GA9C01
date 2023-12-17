@@ -49,13 +49,16 @@ private:
 	int currentAngle = 0;
 	int currentFrame = 0;
 	int totalFrames = 0;
-	int *imageSelect;
+	int *imageSelect = 0;
 	int currentSelection = -1;
 	int vTaskDelayTimeout = 200; // Interval between frames
 
 	// FUNCTIONS
 	void chooseAnimation();
 	void afterFrameEvents();
+
+	void afterAnimationFrameEvents();
+	void afterJpegFrameEvents();
 	void updateFrames();
 	void setColorShiftingEffect();
 	void processAnimationFrame();

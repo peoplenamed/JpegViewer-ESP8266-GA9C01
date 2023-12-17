@@ -29,34 +29,6 @@ DisplayService::DisplayService() { }
 
 void DisplayService::setupDisplay()
 {
-	// #ifdef ESP8826
-	// #include <LittleFS.h>
-	// #define TFT_CS D8
-	// #define TFT_DC D2
-	// #define TFT_RST D4
-	// #define TFT_MISO -1 // no data coming back
-	//     Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
-	//     Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
-	// #endif
-
-	// #ifdef ESP32
-	// #include <FS.h>
-	// #ifdef USE_LittleFS
-	// #define SPIFFS LITTLEFS
-	// #include <LITTLEFS.h>
-	// #else
-	// #include <SPIFFS.h>
-	// #endif
-
-	// #define TFT_CS 22
-	// #define TFT_DC 16
-	// #define TFT_RST 4
-	// #define TFT_MISO -1 // no data coming back
-
-	//     bus = new Arduino_ESP32SPI(TFT_DC, TFT_CS);
-	//     gfx = new Arduino_GC9A01(bus, TFT_RST, 0 /* rotation */, true /* IPS */);
-	// #endif
-	Log.info("Display initializer\n");
 	// Init Display
 	if(!gfx->begin())
 	{
@@ -71,6 +43,9 @@ void DisplayService::setupDisplay()
 
 void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 {
+	#ifdef DEBUG
+		Log.trace("<wipeScreen>  wipe: %b, color: %i\n", wipe, backgroundColor);
+	#endif
 	if (wipe)
 	{
 		gfx->fillScreen(backgroundColor);
@@ -79,6 +54,9 @@ void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 
 void DisplayService::setText(String text)
 {
+	#ifdef DEBUG
+		Log.trace("<setText>  text: %s\n", text);
+	#endif
 	int len = text.length() + 1;
 	char charArray[len];
 	text.toCharArray(charArray, len);
@@ -88,6 +66,9 @@ void DisplayService::setText(String text)
 
 void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color)
 {
+	#ifdef DEBUG
+		Log.trace("<drawText>  text: %s, x:%d, y:%d, size:%d, color:%d\n", _text, _x, _y, _size, _color);
+	#endif
 	gfx->setCursor(_x, _y);
 	gfx->setTextColor(_color);
 	gfx->setTextSize(_size);
@@ -96,24 +77,25 @@ void DisplayService::drawText(String _text, int _x, int _y, int _size, int _colo
 
 int DisplayService::jpegDrawCallback(JPEGDRAW* pDraw)
 {
-	Log.trace(
-		"Draw pos = %d,%d. size = %d x %d\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
+	#ifdef DEBUG
+		Log.trace("<jpegDrawCallback>  (x:%d,y:%d), (x1:%d y1:%d)\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
+	#endif
 	gfx->draw16bitBeRGBBitmap(pDraw->x, pDraw->y, pDraw->pPixels, pDraw->iWidth, pDraw->iHeight);
 	return 1;
 }
 
 void DisplayService::drawImage(char* fileName)
 {
-	int _width = 240;
-	int _height = 240;
-
+	#ifdef DEBUG
+		Log.info("<drawImage> fileName: %s\n", fileName);
+	#endif
 	jpegFunk.jpegDraw(fileName,
 					  jpegDrawCallback,
 					  true /* useBigEndian */,
 					  0,
 					  0,
-					  _width /* widthLimit */,
-					  _height /* heightLimit */);
+					  _SCREEN_WIDTH /* widthLimit */,
+					  _SCREEN_HEIGHT /* heightLimit */);
 }
 
 void DisplayService::drawJpgAnimation(String name, String fileType, int frame)
@@ -135,6 +117,10 @@ void DisplayService::drawJpgAnimation(String name, String fileType, int frame)
 	int len = filename.length() + 1;
 	char charArray[len];
 	filename.toCharArray(charArray, len);
+	#ifdef DEBUG
+		Log.info("<drawJpgAnimation> name: %s\n", name);
+		Log.info("<drawJpgAnimation> charArray: %s\n", charArray);
+	#endif
 
 	drawImage(charArray);
 }

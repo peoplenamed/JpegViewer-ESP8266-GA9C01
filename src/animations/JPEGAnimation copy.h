@@ -12,18 +12,15 @@
  *********************/
 class JPEGAnimation
 {
-	public:
-		// Constructor declaration
-		JPEGAnimation();
+public:
+	// Constructor declaration
+	JPEGAnimation();
 
-		virtual void renderFrame(int frame) = 0;
-		virtual int getTotalFrames() = 0;
+	virtual void renderFrame(int frame) = 0;
+	int frames = 0;
 
-		// Virtual destructor declaration
-		virtual ~JPEGAnimation();
-	private:
-		int frames = 0;
-
+	// Virtual destructor declaration
+	virtual ~JPEGAnimation();
 };
 
 #endif // _JPEG_ANIMATION_H_

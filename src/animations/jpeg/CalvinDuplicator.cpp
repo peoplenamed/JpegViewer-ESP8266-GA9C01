@@ -9,9 +9,14 @@
 // Constructor implementation
 CalvinDuplicator::CalvinDuplicator() { }
 
-void CalvinDuplicator::renderFrame(int frame, int _delay) {
-	if (_delay > 0) {
-		frames = _delay;
-	}
+void CalvinDuplicator::renderFrame(int frame) {
+	#ifdef DEBUG
+		Log.trace("CalvinDuplicator::renderFrame  frame: %i\n", frame);
+	#endif
+
 	displayService.drawImage("/download.jpeg");
+}
+
+int CalvinDuplicator::getTotalFrames() {
+	return frames;
 }

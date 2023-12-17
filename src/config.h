@@ -14,6 +14,25 @@
 #include <iostream>
 #include <string>
 
+//  Include little FS or SPIFFS on ESP32
+
+// #define USE_LittleFS
+// #ifdef ESP8266
+// #	include <LittleFS.h>
+// #endif
+
+// #ifdef ESP32
+// #define USE_LittleFS
+
+// #include <FS.h>
+// #ifdef USE_LittleFS
+//   #include <LittleFS.h> 
+// #else
+//   #include <SPIFFS.h>
+// #endif 
+// #endif
+
+
 /*********************
  *      DEFINES
  *********************/
@@ -27,6 +46,8 @@
 #define _MOUTH_X 56
 #define _MOUTH_Y 120
 
+#define DEBUG true
+
 // https://github.com/thijse/Arduino-Log
 //  * 0 - LOG_LEVEL_SILENT     no output
 //  * 1 - LOG_LEVEL_FATAL      fatal errors
@@ -37,25 +58,6 @@
 //  * 6 - LOG_LEVEL_VERBOSE    all
 
 #define LOG_LEVEL LOG_LEVEL_VERBOSE
-
-// #ifdef ESP8266
-// // Include little FS on ESP8266
-// #include <LittleFS.h>
-
-// // Setup Graphics Interace
-// Arduino_DataBus *bus = new Arduino_ESP8266SPI(TFT_DC /* DC */, TFT_CS /* CS */);
-// Arduino_GFX *gfx = new Arduino_GC9A01(bus, TFT_RST /* RST */, 0 /* rotation */, true /* IPS */);
-// #endif
-
-// #ifdef ESP32
-//  Include little FS or SPIFFS on ESP32
-// #include <FS.h>
-// #ifdef USE_LittleFS
-// #	define SPIFFS LITTLEFS
-// #	include <LITTLEFS.h>
-// #else
-// #	include <SPIFFS.h>
-// #endif
 
 /**********************
  *      TYPEDEFS

@@ -10,18 +10,23 @@
 DrawRimCircle::DrawRimCircle() { }
 
 // Setting background color will wipe screen
-void DrawRimCircle::renderFrame(int maxWipe,
+void DrawRimCircle::renderFrame(int frame,
 							boolean _wipe,
 							uint16_t forecolor,
 							uint16_t backgroundColor) {
-	displayService.wipeScreen(_wipe, backgroundColor);
-
+	if (frame == 1) {
+		displayService.wipeScreen(_wipe, backgroundColor);
+	}
 	int32_t _x = 120; // radius/2
 	int32_t _y = 120; // radius/2
 
-	for(int y = 0; y < maxWipe; y++)
-	{
-		displayService.DrawCircle(_x, _y, 240 - y, forecolor);
-		// displayService.DrawCircle(_x, _y, 120 - y, forecolor);
-	}
+	displayService.DrawCircle(_x, _y, 120 - frame, forecolor);
+}
+
+void DrawRimCircle::setTotalFrames(int _frames) {
+	frames = _frames;
+}
+
+int DrawRimCircle::getTotalFrames() {
+	return frames;
 }

@@ -44,7 +44,7 @@ void DisplayService::setupDisplay()
 void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 {
 	#ifdef DEBUG
-		Log.trace("<wipeScreen>  wipe: %b, color: %i\n", wipe, backgroundColor);
+		Log.trace("[DisplayService]<wipeScreen>  wipe: %b, color: %i\n", wipe, backgroundColor);
 	#endif
 	if (wipe)
 	{
@@ -55,7 +55,7 @@ void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 void DisplayService::setText(String text)
 {
 	#ifdef DEBUG
-		Log.trace("<setText>  text: %s\n", text);
+		Log.trace("[DisplayService]<setText>  text: %s\n", text);
 	#endif
 	int len = text.length() + 1;
 	char charArray[len];
@@ -67,7 +67,7 @@ void DisplayService::setText(String text)
 void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color)
 {
 	#ifdef DEBUG
-		Log.trace("<drawText>  text: %s, x:%d, y:%d, size:%d, color:%d\n", _text, _x, _y, _size, _color);
+		Log.trace("[DisplayService]<drawText>  text: %s, x:%d, y:%d, size:%d, color:%d\n", _text, _x, _y, _size, _color);
 	#endif
 	gfx->setCursor(_x, _y);
 	gfx->setTextColor(_color);
@@ -78,7 +78,7 @@ void DisplayService::drawText(String _text, int _x, int _y, int _size, int _colo
 int DisplayService::jpegDrawCallback(JPEGDRAW* pDraw)
 {
 	#ifdef DEBUG
-		Log.trace("<jpegDrawCallback>  (x:%d,y:%d), (x1:%d y1:%d)\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
+		Log.trace("[DisplayService]<jpegDrawCallback>  (x:%d,y:%d), (x1:%d y1:%d)\n", pDraw->x, pDraw->y, pDraw->iWidth, pDraw->iHeight);
 	#endif
 	gfx->draw16bitBeRGBBitmap(pDraw->x, pDraw->y, pDraw->pPixels, pDraw->iWidth, pDraw->iHeight);
 	return 1;

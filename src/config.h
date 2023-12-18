@@ -46,7 +46,7 @@
 #define _MOUTH_X 56
 #define _MOUTH_Y 120
 
-#define DEBUG true
+// #define DEBUG true
 
 // https://github.com/thijse/Arduino-Log
 //  * 0 - LOG_LEVEL_SILENT     no output

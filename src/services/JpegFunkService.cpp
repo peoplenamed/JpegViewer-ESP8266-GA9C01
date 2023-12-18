@@ -26,8 +26,7 @@ JpegFunk::JpegFunk()
 void* JpegFunk::jpegOpenFile(const char* szFilename, int32_t* pFileSize)
 {
 	#ifdef DEBUG
-		Log.info("jpegOpenFile: %s\n");
-		Log.info(szFilename);
+		Log.info("jpegOpenFile: %s\n", szFilename);
 	#endif
 	LittleFS.begin();
 	_f = LittleFS.open(szFilename, "r");

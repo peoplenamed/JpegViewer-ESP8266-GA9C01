@@ -5,11 +5,12 @@
  *********************/
 #include "config.h"
 #include "services/DisplayService.h"
+#include "animations/MathAnimation.h"
 
 /*********************
  *      Class
  *********************/
-class DrawRimCircle
+class DrawRimCircle : public MathAnimation
 {
     public:
         DrawRimCircle();
@@ -17,9 +18,11 @@ class DrawRimCircle
         // Frames can effectively act like a non-blocking timeout for text
         int frames = 5;
         void renderFrame(int radius, boolean _wipe, uint16_t forecolor, uint16_t backgroundColor);
-        DisplayService displayService;
+	    int getTotalFrames();
+        void setTotalFrames(int _frames);
 
     private:
+        DisplayService displayService;
 
 };
 #endif

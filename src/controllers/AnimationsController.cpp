@@ -125,21 +125,45 @@ void AnimationsController::chooseAnimation()
 		#endif
 		animation = new FangFaceAnimation();
 		break;
-	// FIX ME!
 	case 25:
-		circleWipe.renderFrame(10, false, foregroundColor, backgroundColor);
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<chooseAnimation>  Drawing #25 CircleWipe\n");
+		#endif
+		mathAnimation = new CircleWipe();
+		mathAnimation->setTotalFrames(120);
+		mathWipe = false;
 		break;
 	case 26:
-		circleWipe.renderFrame(10, true, foregroundColor, backgroundColor);
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<chooseAnimation>  Drawing #26 CircleWipe\n");
+		#endif
+		mathAnimation = new CircleWipe();
+		mathAnimation->setTotalFrames(120);
+		mathWipe = true;
 		break;
 	case 27:
-		triangleWipe.renderFrame(false, foregroundColor, backgroundColor);
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<chooseAnimation>  Drawing #27 TriangleWipe\n");
+		#endif
+		mathAnimation = new TriangleWipe();
+		mathAnimation->setTotalFrames(120);
+		mathWipe = false;
 		break;
 	case 28:
-		triangleWipe.renderFrame(true, foregroundColor, backgroundColor);
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<chooseAnimation>  Drawing #28 TriangleWipe\n");
+		#endif
+		mathAnimation = new TriangleWipe();
+		mathAnimation->setTotalFrames(50);
+		mathWipe = true;
 		break;
 	case 29:
-		drawRimCircle.renderFrame(120, false, foregroundColor, backgroundColor);
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<chooseAnimation>  Drawing #29 CircleWipe\n");
+		#endif
+		mathAnimation = new CircleWipe();
+		mathAnimation->setTotalFrames(20);
+		mathWipe = false;
 		break;
 	case 75:
 		#ifdef DEBUG
@@ -202,6 +226,14 @@ void AnimationsController::drawAnimation() {
 		jpegAnimation->renderFrame(currentFrame);
 		afterJpegFrameEvents();
 	}
+
+	if (mathAnimation != NULL) {
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<drawAnimation> Drawing mathAnimation\n");
+		#endif
+		mathAnimation->renderFrame(currentFrame, mathWipe, foregroundColor, backgroundColor);
+		afterMathFrameEvents();
+	}
 }
 
 boolean AnimationsController::isAnimationRunning() {
@@ -216,12 +248,15 @@ void AnimationsController::updateFrames() {
 	if (*imageSelect < 25) {
 		totalFrames = animation->getTotalFrames();
 		jpegAnimation = NULL;
+		mathAnimation = NULL;
 	} else if (*imageSelect < 50) {
+		totalFrames = mathAnimation->getTotalFrames();
 		animation = NULL;
 		jpegAnimation = NULL;
 	} else {
 		totalFrames = jpegAnimation->getTotalFrames();
 		animation = NULL;
+		mathAnimation = NULL;
 	}
 }
 
@@ -236,6 +271,16 @@ void AnimationsController::afterAnimationFrameEvents() {
 }
 
 void AnimationsController::afterJpegFrameEvents() {
+	if (isAnimationRunning()) {
+		incrementFrame();
+		setColorShiftingEffect();
+	} else if (currentSelection == *imageSelect){
+		*imageSelect = 0;
+		currentSelection = -1;
+	}
+}
+
+void AnimationsController::afterMathFrameEvents() {
 	if (isAnimationRunning()) {
 		incrementFrame();
 		setColorShiftingEffect();

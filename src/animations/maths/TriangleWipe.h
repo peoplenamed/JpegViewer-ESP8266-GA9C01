@@ -6,21 +6,23 @@
  *********************/
 #include "config.h"
 #include "services/DisplayService.h"
+#include "animations/MathAnimation.h"
 
 /*********************
  *      Class
  *********************/
-class TriangleWipe
+class TriangleWipe : public MathAnimation
 {
     public:
         TriangleWipe();
 
-        // Frames can effectively act like a non-blocking timeout for text
-        int frames = 5;
-        void renderFrame(boolean _wipe, uint16_t forecolor, uint16_t backgroundColor);
+        void renderFrame(int frame, boolean _wipe, uint16_t forecolor, uint16_t backgroundColor);
+	    int getTotalFrames();
+        void setTotalFrames(int _frames);
 
     private:
         DisplayService displayService;
+        int frames = 120;
 
 };
 #endif

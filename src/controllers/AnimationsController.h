@@ -45,6 +45,7 @@ private:
 	uint16_t backgroundColor = colorsService.white;
 	uint16_t foregroundColor = colorsService.indigoViolet;
 	Animation *animation;
+	MathAnimation *mathAnimation;
 	JPEGAnimation *jpegAnimation;
 	CircleWipe circleWipe;
 	TriangleWipe triangleWipe;
@@ -52,6 +53,7 @@ private:
 	TextDraw *textDraw;
 	boolean randomColors = false;
 	boolean rainbowColors = true;
+	boolean mathWipe = false;
 	int currentAngle = 0;
 	int currentFrame = 0;
 	int totalFrames = 0;
@@ -65,6 +67,7 @@ private:
 
 	void afterAnimationFrameEvents();
 	void afterJpegFrameEvents();
+	void afterMathFrameEvents();
 	void updateFrames();
 	void setColorShiftingEffect();
 	void processAnimationFrame();

@@ -1,6 +1,9 @@
 #ifndef _ANIMATIONS_CONTROLLER_H_
 #define _ANIMATIONS_CONTROLLER_H_
 
+#include "animations/maths/DrawRimCircle.h"
+#include "animations/maths/Circlewipe.h"
+#include "animations/maths/TriangleWipe.h"
 #include "animations/face/AngryFaceAnimation.h"
 #include "animations/face/FangFaceAnimation.h"
 #include "animations/face/GrumpyFaceAnimation.h"
@@ -43,6 +46,9 @@ private:
 	uint16_t foregroundColor = colorsService.indigoViolet;
 	Animation *animation;
 	JPEGAnimation *jpegAnimation;
+	CircleWipe circleWipe;
+	TriangleWipe triangleWipe;
+	DrawRimCircle drawRimCircle;
 	TextDraw *textDraw;
 	boolean randomColors = false;
 	boolean rainbowColors = true;

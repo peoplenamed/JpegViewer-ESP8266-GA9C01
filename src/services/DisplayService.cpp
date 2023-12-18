@@ -98,7 +98,7 @@ void DisplayService::drawImage(char* fileName)
 					  _SCREEN_HEIGHT /* heightLimit */);
 }
 
-void DisplayService::drawJpgAnimation(String name, String fileType, int frame)
+void DisplayService::drawJpgAnimationFrame(String name, String fileType, int frame)
 {
 	String filename;
 	filename.concat(name);
@@ -118,8 +118,8 @@ void DisplayService::drawJpgAnimation(String name, String fileType, int frame)
 	char charArray[len];
 	filename.toCharArray(charArray, len);
 	#ifdef DEBUG
-		Log.info("<drawJpgAnimation> name: %s\n", name);
-		Log.info("<drawJpgAnimation> charArray: %s\n", charArray);
+		Log.info("<drawJpgAnimationFrame> name: %s\n", name);
+		Log.info("<drawJpgAnimationFrame> charArray: %s\n", charArray);
 	#endif
 
 	drawImage(charArray);

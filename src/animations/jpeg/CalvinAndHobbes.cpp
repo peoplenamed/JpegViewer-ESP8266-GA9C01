@@ -14,7 +14,7 @@ void CalvinAndHobbes::renderFrame(int frame) {
 		Log.trace("CalvinAndHobbes::renderFrame  frame: %i\n", frame);
 	#endif
 
-	displayService.drawJpgAnimation("1Ys_", ".jpg", frame);
+	displayService.drawImage("/download.jpeg");
 }
 
 int CalvinAndHobbes::getTotalFrames() {

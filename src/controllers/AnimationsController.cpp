@@ -126,26 +126,21 @@ void AnimationsController::chooseAnimation()
 		animation = new FangFaceAnimation();
 		break;
 	// FIX ME!
-	// case 25:
-	// 	CircleWipe circleWipe = new CircleWipe();
-	// 	circleWipe.renderFrame(10, false, foregroundColor, backgroundColor);
-	// 	break;
-	// case 26:
-	// 	CircleWipe circleWipe = new CircleWipe();
-	// 	circleWipe.renderFrame(10, true, foregroundColor, backgroundColor);
-	// 	break;
-	// case 27:
-	// 	TriangleWipe triangleWipe = new TriangleWipe();
-	// 	triangleWipe.renderFrame(false, foregroundColor, backgroundColor);
-	// 	break;
-	// case 28:
-	// 	TriangleWipe triangleWipe = new TriangleWipe();
-	// 	triangleWipe.renderFrame(true, foregroundColor, backgroundColor);
-	// 	break;
-	// case 29:
-	// 	DrawRimCircle drawRimCircle = new DrawRimCircle();
-	// 	drawRimCircle.renderFrame(120, false, foregroundColor, backgroundColor);
-	// 	break;
+	case 25:
+		circleWipe.renderFrame(10, false, foregroundColor, backgroundColor);
+		break;
+	case 26:
+		circleWipe.renderFrame(10, true, foregroundColor, backgroundColor);
+		break;
+	case 27:
+		triangleWipe.renderFrame(false, foregroundColor, backgroundColor);
+		break;
+	case 28:
+		triangleWipe.renderFrame(true, foregroundColor, backgroundColor);
+		break;
+	case 29:
+		drawRimCircle.renderFrame(120, false, foregroundColor, backgroundColor);
+		break;
 	case 75:
 		#ifdef DEBUG
 			Log.info("[AnimationsController]<chooseAnimation>  Drawing #75 DimondEyes\n");
@@ -256,8 +251,9 @@ void AnimationsController::setColorShiftingEffect() {
 		backgroundColor = colorsService.getNextRGB(backgroundColor);
 	} else if (rainbowColors) {
 		if (currentAngle >= 360){ currentAngle = 0; }
-		foregroundColor = colorsService.powerHSV(currentAngle);
-		// backgroundColor = colorsService.powerHSV(currentAngle + 200);
+		// Defining a table is less CPU intensive.
+		foregroundColor = colorsService.getColorWheelByDegrees(currentAngle);
+		// foregroundColor = colorsService.powerHSV(currentAngle);
 		currentAngle += 20;
 	}
 }

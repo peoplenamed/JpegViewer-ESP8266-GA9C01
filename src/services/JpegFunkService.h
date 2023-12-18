@@ -43,7 +43,6 @@ public:
 	static JPEGDEC _jpeg;
 	static File _f;
 	static int _x, _y, _x_bound, _y_bound;
-	//      static File *jpegOpenFile(const char *szFilename, int32_t *pFileSize);
 	static void* jpegOpenFile(const char* szFilename, int32_t* pFileSize);
 	static void jpegCloseFile(void* pHandle);
 	static int32_t jpegReadFile(JPEGFILE* pFile, uint8_t* pBuf, int32_t iLen);

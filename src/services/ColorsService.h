@@ -74,6 +74,7 @@ class ColorsService
 		uint16_t trueHSV(int angle);
 		uint16_t powerHSV(int angle);
 		uint16_t sineLED(int angle);
+		uint16_t getColorWheelByDegrees(int degrees);
 
 		static const uint16_t red = 63488;
 		static const uint16_t redOrange = 64128;
@@ -103,6 +104,8 @@ class ColorsService
 		// indigo = gfx->color565(75, 0, 130);
 		// indigoViolet = gfx->color565(143, 0, 255);
 		// violet = gfx->color565(238, 130, 238);
+
+		static const uint16_t COLOR_WHEEL[361];
 		
 		static const int RGB_COLORS_SIZE = 14;
 		RgbColorStruct RGB_COLORS[RGB_COLORS_SIZE] = {

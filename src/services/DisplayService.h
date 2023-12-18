@@ -47,7 +47,7 @@ public:
 					  int16_t idk3,
 					  int16_t color);
 	void DrawCircle(int16_t x, int16_t y, int16_t radius, int16_t color);
-	void drawJpgAnimation(String name, String fileType, int frame);
+	void drawJpgAnimationFrame(String name, String fileType, int frame);
 	// Deprecated in favor of new frame system.
 	// void drawJpgAnimations(String name, String fileType, int frames, int times);
 

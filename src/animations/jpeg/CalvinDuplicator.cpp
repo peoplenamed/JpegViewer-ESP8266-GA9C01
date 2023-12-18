@@ -14,7 +14,7 @@ void CalvinDuplicator::renderFrame(int frame) {
 		Log.trace("CalvinDuplicator::renderFrame  frame: %i\n", frame);
 	#endif
 
-	displayService.drawImage("/download.jpeg");
+	displayService.drawJpgAnimationFrame("1Ys_", ".jpg", frame);
 }
 
 int CalvinDuplicator::getTotalFrames() {

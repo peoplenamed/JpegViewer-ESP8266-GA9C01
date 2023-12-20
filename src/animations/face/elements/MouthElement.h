@@ -22,21 +22,25 @@ enum MouthType
 
 class MouthElement
 {
-public:
-	int x;
-	int y;
+	public:
+		int x;
+		int y;
 
-	static const unsigned char mouth_closed[] PROGMEM;
-	static const unsigned char mouth_grumpy_one[] PROGMEM;
-	static const unsigned char mouth_grumpy_two[] PROGMEM;
-	static const unsigned char mouth_fangs_one[] PROGMEM;
-	static const unsigned char mouth_fangs_two[] PROGMEM;
-	static const unsigned char mouth_smile_filled[] PROGMEM;
-	static const unsigned char mouth_smile_two[] PROGMEM;
-	static const unsigned char mouth_smile_one[] PROGMEM;
+		static const unsigned char mouth_closed[] PROGMEM;
+		static const unsigned char mouth_grumpy_one[] PROGMEM;
+		static const unsigned char mouth_grumpy_two[] PROGMEM;
+		static const unsigned char mouth_fangs_one[] PROGMEM;
+		static const unsigned char mouth_fangs_two[] PROGMEM;
+		static const unsigned char mouth_smile_filled[] PROGMEM;
+		static const unsigned char mouth_smile_two[] PROGMEM;
+		static const unsigned char mouth_smile_one[] PROGMEM;
 
-	MouthElement(int x, int y);
+		MouthElement(int x, int y);
 
-	void render(MouthType type, uint16_t foreground, uint16_t background);
-};
+		void render(MouthType type, uint16_t foreground, uint16_t background);
+		void getPixels(Pixel*& pixelBuffer, MouthType type, uint16_t foreground, uint16_t background);
+	private:
+		int xMax = 128;
+		int yMax = 120;
+	};
 #endif

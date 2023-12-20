@@ -78,3 +78,65 @@ void GrumpyFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t b
 			break;
 	}
 }
+
+void GrumpyFaceAnimation::getPixels(Pixel *&pixels, int frame, uint16_t foreground, uint16_t background) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+		case 2:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_ONE, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 3:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_TWO, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 4:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_ONE, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 5:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_TWO, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 6:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_ONE, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 7:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_TWO, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 8:
+			mouthElement.render(MOUTH_GRUMPY_ONE, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 9:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_TWO, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		case 10:
+			mouthElement.getPixels(*&pixels, MOUTH_GRUMPY_TWO, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			break;
+		case 11:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_DISAPPOINTED_LR, foreground, background);
+			break;
+		default:
+			break;
+	}
+}

@@ -1024,3 +1024,46 @@ void MouthElement::render(MouthType type, uint16_t foreground, uint16_t backgrou
 		break;
 	}
 }
+
+void MouthElement::getPixels(Pixel*& pixelBuffer, MouthType type, uint16_t foreground, uint16_t background)
+{
+    const unsigned char* bitmapImage;
+
+    switch(type)
+    {
+		case MOUTH_CLOSED:
+			bitmapImage = mouth_closed;
+			break;
+		case MOUTH_GRUMPY_ONE:
+			bitmapImage = mouth_grumpy_one;
+			break;
+		case MOUTH_GRUMPY_TWO:
+			bitmapImage = mouth_grumpy_two;
+			break;
+		case MOUTH_FANGS_ONE:
+			bitmapImage = mouth_fangs_one;
+			break;
+		case MOUTH_FANGS_TWO:
+			bitmapImage = mouth_fangs_two;
+			break;
+		case MOUTH_SMILE_ONE:
+			bitmapImage = mouth_smile_one;
+			break;
+		case MOUTH_SMILE_TWO:
+			bitmapImage = mouth_smile_two;
+			break;
+		case MOUTH_SMILE_FILLED:
+			bitmapImage = mouth_smile_filled;
+			break;
+		default:
+			bitmapImage = mouth_closed;
+			break;
+    }
+
+    for (int i = 0; i < xMax * yMax; i++) {
+		*&pixelBuffer[i].x = x + i % xMax;
+		*&pixelBuffer[i].y = y + i / xMax;
+		*&pixelBuffer[i].color = bitmapImage[i] ? foreground : background;
+	}
+
+}

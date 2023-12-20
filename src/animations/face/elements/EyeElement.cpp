@@ -472,3 +472,63 @@ void EyeElement::render(EyeType type, uint16_t foreground, uint16_t background)
 		break;
 	}
 }
+
+void EyeElement::getPixels(Pixel *&pixelBuffer, EyeType type, uint16_t foreground, uint16_t background)
+{
+	const unsigned char* bitmapImage;
+
+    switch(type)
+    {
+    case EYE_OPEN_LR:
+        bitmapImage = eye_open_lr;
+        break;
+    case EYE_ANGRY_R:
+        bitmapImage = eye_angry_r;
+        break;
+    case EYE_ANGRY_L:
+        bitmapImage = eye_angry_l;
+        break;
+	case EYE_DISAPPOINTED_LR:
+        bitmapImage = eye_disappointed_lr;
+		break;
+	case EYE_SATISFIED_LR:
+        bitmapImage = eye_satisfied_lr;
+		break;
+	case EYE_DIAMOND_LR:
+        bitmapImage = eye_dimond_lr;
+		break;
+	case EYE_CLOSING_LR:
+        bitmapImage = eye_closing_lr;
+		break;
+	case EYE_CLOSED_LR:
+        bitmapImage = eye_closed_lr;
+		break;
+	case EYE_POP_ONE_LR:
+        bitmapImage = eye_pop_one_lr;
+		break;
+	case EYE_POP_TWO_LR:
+        bitmapImage = eye_pop_two_lr;
+		break;
+	case EYE_SPIRAL_ONE_LR:
+        bitmapImage = eye_spiral_one_lr;
+		break;
+	case EYE_SPIRAL_TWO_LR:
+        bitmapImage = eye_spiral_two_lr;
+		break;
+	case EYE_SPIRAL_THREE_LR:
+        bitmapImage = eye_spiral_three_lr;
+		break;
+	case EYE_SPIRAL_FOUR_LR:
+        bitmapImage = eye_spiral_four_lr;
+		break;
+    default:
+        bitmapImage = eye_open_lr;
+        break;
+    }
+
+    for (int i = 0; i < xMax * yMax; i++) {
+        *&pixelBuffer[i].x = x + i % 64;
+        *&pixelBuffer[i].y = y + i / 64;
+        *&pixelBuffer[i].color = bitmapImage[i] ? foreground : background;
+    }
+}

@@ -118,3 +118,86 @@ EyeType DizzyFaceAnimation::getRandomEyeType()
 
 	return lrTypes[randomIndex];
 }
+
+void DizzyFaceAnimation::getPixels(Pixel *&pixels, int frame, uint16_t foreground, uint16_t background) {
+	switch(frame)
+	{
+		case 1:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			break;
+		case 2:
+		case 6:
+		case 10:
+		case 14:
+		case 18:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_SPIRAL_ONE_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_SPIRAL_ONE_LR, foreground, background);
+			break;
+		case 3:
+		case 7:
+		case 11:
+		case 15:
+		case 19:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_SPIRAL_TWO_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_SPIRAL_TWO_LR, foreground, background);
+			break;
+		case 4:
+		case 8:
+		case 12:
+		case 16:
+		case 20:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_SPIRAL_THREE_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_SPIRAL_THREE_LR, foreground, background);
+			break;
+		case 5:
+		case 9:
+		case 13:
+		case 17:
+		case 21:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_SPIRAL_FOUR_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_SPIRAL_FOUR_LR, foreground, background);
+			break;
+		case 22:
+		case 26:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_CLOSING_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_CLOSING_LR, foreground, background);
+			break;
+		case 23:
+		case 27:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_CLOSED_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_CLOSED_LR, foreground, background);
+			break;
+		case 24:
+		case 28:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_CLOSING_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_CLOSING_LR, foreground, background);
+			break;
+		case 25:
+		case 29:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			break;
+		case 30:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			break;
+		case 31:
+			mouthElement.getPixels(*&pixels, MOUTH_CLOSED, foreground, background);
+			eyeLeftElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			eyeRightElement.getPixels(*&pixels, EYE_OPEN_LR, foreground, background);
+			break;
+		default:
+			break;
+	}
+}

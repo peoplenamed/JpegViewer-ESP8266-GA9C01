@@ -200,6 +200,9 @@ void AnimationsController::processAnimationFrame() {
 			currentFrame = 1;
 			currentSelection = *imageSelect;
 			chooseAnimation(); 
+		} else {
+			animation->getPixels(*&pixels, currentFrame, foregroundColor, backgroundColor);
+			drawingService.drawImageFromExternalBuffer(*&pixels);
 		}
 
 		drawAnimation();
@@ -216,7 +219,8 @@ void AnimationsController::drawAnimation() {
 		#ifdef DEBUG
 			Log.info("[AnimationsController]<drawAnimation> Drawing animation\n");
 		#endif
-		animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+		// animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+		drawingService.drawImageFromBuffer();
 		afterAnimationFrameEvents();
 	}
 	if (jpegAnimation != NULL) {

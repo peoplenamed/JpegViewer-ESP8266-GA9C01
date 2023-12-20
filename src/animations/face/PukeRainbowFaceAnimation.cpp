@@ -92,3 +92,23 @@ void PukeRainbowFaceAnimation::drawRainbow(int frame) {
 	}
 	colorIndex = (colorIndex + 1) % colorsService.RGB_COLORS_SIZE;
 }
+
+void PukeRainbowFaceAnimation::getPixels(Pixel *&pixels, int frame, uint16_t foreground, uint16_t background) {
+	const unsigned char* bitmapImage;
+
+	for(int i = 0; i < 60; i += 5)
+	{ // Increment by 5 for 5 pixels wide lines
+		int currentColorIndex =
+			(frame + i / 5) % colorsService.RGB_COLORS_SIZE; // Divide i by 5 to get the correct color index
+
+		// This can't possibly be correct...
+		for (int j=0; j<5; j++) {
+			for (int k=0; k<100; k++) {
+				pixels[i].x = _MOUTH_X + (40) + i + j;
+				pixels[i].y = _MOUTH_Y + 25 + k;
+				pixels[i].color = bitmapImage[i] ? foreground : background;
+			}
+		}
+	}
+	colorIndex = (colorIndex + 1) % colorsService.RGB_COLORS_SIZE;
+}

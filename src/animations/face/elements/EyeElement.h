@@ -31,28 +31,32 @@ enum EyeType
  **********************/
 class EyeElement
 {
-public:
-	int x;
-	int y;
+	public:
+		int x;
+		int y;
 
-	static const unsigned char eye_angry_r[] PROGMEM;
-	static const unsigned char eye_angry_l[] PROGMEM;
-	static const unsigned char eye_disappointed_lr[] PROGMEM;
-	static const unsigned char eye_satisfied_lr[] PROGMEM;
-	static const unsigned char eye_dimond_lr[] PROGMEM;
-	static const unsigned char eye_closing_lr[] PROGMEM;
-	static const unsigned char eye_closed_lr[] PROGMEM;
-	static const unsigned char eye_open_lr[] PROGMEM;
-	static const unsigned char eye_pop_one_lr[] PROGMEM;
-	static const unsigned char eye_pop_two_lr[] PROGMEM;
-	static const unsigned char eye_spiral_one_lr[] PROGMEM;
-	static const unsigned char eye_spiral_two_lr[] PROGMEM;
-	static const unsigned char eye_spiral_three_lr[] PROGMEM;
-	static const unsigned char eye_spiral_four_lr[] PROGMEM;
+		static const unsigned char eye_angry_r[] PROGMEM;
+		static const unsigned char eye_angry_l[] PROGMEM;
+		static const unsigned char eye_disappointed_lr[] PROGMEM;
+		static const unsigned char eye_satisfied_lr[] PROGMEM;
+		static const unsigned char eye_dimond_lr[] PROGMEM;
+		static const unsigned char eye_closing_lr[] PROGMEM;
+		static const unsigned char eye_closed_lr[] PROGMEM;
+		static const unsigned char eye_open_lr[] PROGMEM;
+		static const unsigned char eye_pop_one_lr[] PROGMEM;
+		static const unsigned char eye_pop_two_lr[] PROGMEM;
+		static const unsigned char eye_spiral_one_lr[] PROGMEM;
+		static const unsigned char eye_spiral_two_lr[] PROGMEM;
+		static const unsigned char eye_spiral_three_lr[] PROGMEM;
+		static const unsigned char eye_spiral_four_lr[] PROGMEM;
 
-	EyeElement(int x, int y);
+		EyeElement(int x, int y);
 
-	void render(EyeType type, uint16_t foreground, uint16_t background);
-	void drawRotatingSpiral(int centerX, int centerY, float maxRadius, float rotationStep);
+		void render(EyeType type, uint16_t foreground, uint16_t background);
+		void drawRotatingSpiral(int centerX, int centerY, float maxRadius, float rotationStep);
+		void getPixels(Pixel*& pixelBuffer, EyeType type, uint16_t foreground, uint16_t background);
+	private:
+		int xMax = 64;
+		int yMax = 54;
 };
 #endif

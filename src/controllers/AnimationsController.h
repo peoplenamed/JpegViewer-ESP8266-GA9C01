@@ -27,6 +27,7 @@
 #include "animations/maths/DrawRimCircle.h"
 #include "config.h"
 #include "services/DisplayService.h"
+#include "services/DrawingService.h"
 #include "services/ColorsService.h"
 
 class AnimationsController
@@ -40,8 +41,10 @@ private:
 	// SERVICES
 	ColorsService colorsService;
 	DisplayService displayService;
+	DrawingService drawingService;
 
 	// VARIABLES
+	Pixel *pixels;
 	uint16_t backgroundColor = colorsService.white;
 	uint16_t foregroundColor = colorsService.indigoViolet;
 	Animation *animation;

@@ -16,6 +16,7 @@ class AngryFaceAnimation : public Animation
 public:
 	AngryFaceAnimation();
 	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void getPixels(Pixel *&pixels, int frame, uint16_t foreground, uint16_t background);
 	// void renderIn();
 	// void renderOut();
 	// void renderLoop();

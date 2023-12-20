@@ -19,6 +19,7 @@ public:
 	EyeType getRandomEyeType();
 	int getTotalFrames();
 	int frames = 31;
+	void getPixels(Pixel *&pixels, int frame, uint16_t foreground, uint16_t background);
 
 private:
 	EyeElement eyeLeftElement;

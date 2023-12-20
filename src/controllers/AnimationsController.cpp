@@ -1,11 +1,7 @@
 #include "AnimationsController.h"
 
-AnimationsController::AnimationsController()
-{
-	Log.info("[AnimationsController]<initializer>\n");
-}
-
-void AnimationsController::init(int *_imageSelect) {
+void AnimationsController::init(int *_imageSelect, int *_textSelect, String *_userDefinedText) {
+	textService.init(_textSelect, _userDefinedText);
 	imageSelect = _imageSelect;
 	setupDisplay();
 
@@ -201,8 +197,10 @@ void AnimationsController::processAnimationFrame() {
 			currentSelection = *imageSelect;
 			chooseAnimation(); 
 		}
+		textService.processTextFrame();
 
 		drawAnimation();
+		textService.processTextFrame();
     	vTaskDelay( vTaskDelayTimeout );
 	}
 }

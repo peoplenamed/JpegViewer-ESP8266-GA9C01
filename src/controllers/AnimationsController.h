@@ -28,18 +28,23 @@
 #include "config.h"
 #include "services/DisplayService.h"
 #include "services/ColorsService.h"
+#include "services/TextService.h"
 
 class AnimationsController
 {
 public:
-	AnimationsController();
+	
+	AnimationsController(): textService(colorsService, displayService) {
+		Log.info("[AnimationsController]<initializer>\n");
+	}
 	//  ~();
-	void init(int *_imageSelect);
+	void init(int *_imageSelect, int *_textSelect, String *_userDefinedText);
 
 private:
 	// SERVICES
 	ColorsService colorsService;
 	DisplayService displayService;
+	TextService textService;
 
 	// VARIABLES
 	uint16_t backgroundColor = colorsService.white;

@@ -11,7 +11,6 @@
 #include "config.h"
 #include "controllers/SerialManagerController.h"
 #include "controllers/AnimationsController.h"
-#include "controllers/TextController.h"
 
 /*********************
  *  GLOBAL VARIBLES
@@ -25,7 +24,6 @@ String userDefinedText;
 
 SerialManager serialManager;
 AnimationsController anitmationsController;
-TextController textController;
 
 void setup()
 {
@@ -35,9 +33,8 @@ void setup()
 
 	Log.begin(LOG_LEVEL, &Serial);
 
-    anitmationsController.init(&imageSelect);
+    anitmationsController.init(&imageSelect, &textSelect, &userDefinedText);
     serialManager.init(&imageSelect, &textSelect, &userDefinedText);
-	// textController.init(&textSelect, &userDefinedText);
 }
 
 void loop()

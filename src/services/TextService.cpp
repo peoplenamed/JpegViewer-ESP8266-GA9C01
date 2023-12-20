@@ -1,26 +1,21 @@
-#include "TextController.h"
+#include "TextService.h"
 
-TextController::TextController()
-{
-	Log.info("Text initializer\n");
-}
-
-void TextController::init(int *_textSelect, String *_userDefinedText) {
+void TextService::init(int *_textSelect, String *_userDefinedText) {
 	textSelect = _textSelect;
 	userDefinedText = _userDefinedText;
-	setupDisplay();
+	// setupDisplay();
 
-	auto task = [](void* arg) { static_cast<TextController*>(arg)->processTextFrame(); };
-	xTaskCreate(task, "processTextFrame", 3092, this, 2, NULL);
+	// auto task = [](void* arg) { static_cast<TextService*>(arg)->processTextFrame(); };
+	// xTaskCreate(task, "processTextFrame", 3092, this, 2, NULL);
 }
 
-void TextController::setupDisplay()
-{
-	// displayService.setupDisplay();
-	// displayService.wipeScreen(true, backgroundColor);
-}
+// void TextService::setupDisplay()
+// {
+// 	// displayService.setupDisplay();
+// 	// displayService.wipeScreen(true, backgroundColor);
+// }
 
-void TextController::chooseText()
+void TextService::chooseText()
 {
     if (*textSelect < 20) {
         textDraw = new TextOverLay();
@@ -74,15 +69,15 @@ void TextController::chooseText()
 	}
 }
 
-void TextController::processTextFrame() {
-	for(;;) {
+void TextService::processTextFrame() {
+	// for(;;) {
         processSerial();
 		drawText();
-    	vTaskDelay( vTaskDelayTimeout );
-	}
+    	// vTaskDelay( vTaskDelayTimeout );
+	// }
 }
 
-void TextController::processSerial() {
+void TextService::processSerial() {
     boolean serialReceived = serialCommandReceived();
     boolean customSerialReceived = customSerialCommandReceived();
     if (serialReceived || customSerialReceived) {
@@ -99,15 +94,15 @@ void TextController::processSerial() {
     }
 }
 
-boolean TextController::serialCommandReceived() {
+boolean TextService::serialCommandReceived() {
 	return *textSelect != currentSelection;
 }
 
-boolean TextController::customSerialCommandReceived() {
+boolean TextService::customSerialCommandReceived() {
 	return *userDefinedText != currentUserDefinedTextSelection;
 }
 
-void TextController::drawText() {
+void TextService::drawText() {
 	if (textDraw != NULL && isTextRunning()) {
         boolean wipeFrame = _wipe && (currentFrame == 1);
         Log.info("GONNA WIPE????: %b:\n",wipeFrame);
@@ -116,30 +111,32 @@ void TextController::drawText() {
 	}
 }
 
-boolean TextController::isTextRunning() {
+boolean TextService::isTextRunning() {
 	return currentFrame <= totalFrames;
 }
 
-void TextController::incrementFrame() {
+void TextService::incrementFrame() {
     Log.info("currentFrame: %i\n", currentFrame);
 	currentFrame++;
 }
 
-void TextController::updateFrames() {
+void TextService::updateFrames() {
 	totalFrames = textDraw->getTotalFrames();
 }
 
-void TextController::afterFrameEvents() {
+void TextService::afterFrameEvents() {
 	if (isTextRunning()) {
 		incrementFrame();
 		setColorShiftingEffect();
 	} else if (currentSelection == *textSelect){
 		*textSelect = NULL;
 		currentSelection = NULL;
+        *userDefinedText = "";
+        currentUserDefinedTextSelection = "";
 	}
 }
 
-void TextController::setColorShiftingEffect() {
+void TextService::setColorShiftingEffect() {
 	if (randomColors) {
 		foregroundColor = colorsService.getNextRGB(foregroundColor);
 		backgroundColor = colorsService.getNextRGB(backgroundColor);
@@ -152,7 +149,7 @@ void TextController::setColorShiftingEffect() {
 }
 
 
-void TextController::processCustomMessage()
+void TextService::processCustomMessage()
 {
 	// Example Messages
 	//   <*Howdy friend|0|110|3|65152|0>
@@ -180,7 +177,7 @@ void TextController::processCustomMessage()
     // textDraw->renderFrame(_textType, _text, shouldWipe, __color.toInt());
 }
 
-char* TextController::getCharsFromString(String str) {
+char* TextService::getCharsFromString(String str) {
     const int length = str.length(); 
     // declaring character array (+1 for null terminator) 
     char* customStringAsChars = new char[length + 1]; 
@@ -190,7 +187,7 @@ char* TextController::getCharsFromString(String str) {
     return customStringAsChars;
 }
 
-String TextController::getValueFromDelimitedString(String stringData, char separator, int index)
+String TextService::getValueFromDelimitedString(String stringData, char separator, int index)
 {
 	int found = 0;
 	int strIndex[] = {0, -1};

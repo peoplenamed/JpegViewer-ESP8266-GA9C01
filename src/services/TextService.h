@@ -8,17 +8,22 @@
 #include "animations/text/TextAlert.h"
 #include "animations/text/TextOverLay.h"
 
-class TextController
+class TextService
 {
 public:
-	TextController();
+	TextService(ColorsService& colorsService, DisplayService& displayService)
+        : colorsService(colorsService), displayService(displayService) {
+		Log.info("TextService initializer\n");
+    }
 	//  ~();
 	void init(int *_textSelect, String *_userDefinedText);
+	void processTextFrame();
 
 private:
 	// SERVICES
-	ColorsService colorsService;
-	DisplayService displayService;
+	ColorsService& colorsService;
+    DisplayService& displayService;
+
 
 	// VARIABLES
     int _textType;
@@ -47,7 +52,6 @@ private:
 	void afterFrameEvents();
 	void updateFrames();
 	void setColorShiftingEffect();
-	void processTextFrame();
 	boolean isTextRunning();
 	void processCommand();
 	void incrementFrame();

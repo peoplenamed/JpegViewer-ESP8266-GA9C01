@@ -16,7 +16,9 @@
 #include "animations/face/WinkFaceAnimation.h"
 #include "animations/Animation.h"
 
-class FaceDrawService
+#include "services/DrawFrameService.h"
+
+class FaceDrawService : public DrawFrameService
 {
 public:
 	FaceDrawService(ColorsService& colorsService)
@@ -51,7 +53,6 @@ private:
 	void afterFrameEvents();
 	void updateTotalFrames();
 	boolean isAnimationRunning();
-	void processCommand();
 	void incrementFrame();
 	void drawJpeg();
 	void endAnimation();

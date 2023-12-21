@@ -1,19 +1,20 @@
 #include "TextDrawService.h"
 
-void TextDrawService::init(int *_textSelect, String *_userDefinedText) {
-	textSelect = _textSelect;
-	userDefinedText = _userDefinedText;
+void TextDrawService::init() {
 }
 
-void TextDrawService::chooseText()
+void TextDrawService::chooseAnimation()
 {
-    if (*textSelect < 20) {
+    #ifdef DEBUG
+        Log.info("TextDrawService::chooseAnimation selected: %i\n", currentSelection);
+    #endif
+    if (currentSelection < 20) {
         textDraw = new TextOverLay();
     } else {
         textDraw = new TextAlert();
     }
 
-	switch(*textSelect) {
+	switch(currentSelection) {
         case 0:
             _textType = 1;
             _text = "North";
@@ -60,37 +61,38 @@ void TextDrawService::chooseText()
 }
 
 void TextDrawService::processAnimationFrame() {
-    processSerial();
+    #ifdef DEBUG
+		Log.trace("TextDrawService::processAnimationFrame  currentFrame: %i\n", currentFrame);
+	#endif
     drawText();
 }
 
-void TextDrawService::processSerial() {
-    boolean serialReceived = serialCommandReceived();
-    boolean customSerialReceived = customSerialCommandReceived();
-    if (serialReceived || customSerialReceived) {
-        currentFrame = 1;
-
-        if (serialReceived) {
-            currentSelection = *textSelect;
-            chooseText();
-        } else if (customSerialReceived) {
-            currentUserDefinedTextSelection = *userDefinedText;
-            processCustomMessage();
-        }
-        updateFrames();
-    }
+void TextDrawService::endAnimation() {
+		currentSelection = NULL;
+        currentUserDefinedTextSelection = "";
+		textDraw = NULL;
+		currentFrame = 0;
 }
 
-boolean TextDrawService::serialCommandReceived() {
-	return *textSelect != currentSelection;
+void TextDrawService::processCommand(int selected) {
+    #ifdef DEBUG
+        Log.info("TextDrawService::processCommand selected: %i\n", selected);
+    #endif
+    currentFrame = 1;
+    currentSelection = selected;
+    chooseAnimation();
+    updateTotalFrames();
 }
 
-boolean TextDrawService::customSerialCommandReceived() {
-	return *userDefinedText != currentUserDefinedTextSelection;
+void TextDrawService::processCustomCommand(String customCmd) {
+    currentFrame = 1;
+    currentUserDefinedTextSelection = customCmd;
+    processCustomMessage(customCmd);
+    updateTotalFrames();
 }
 
 void TextDrawService::drawText() {
-	if (textDraw != NULL && isTextRunning()) {
+	if (textDraw != NULL && isAnimationRunning()) {
         boolean wipeFrame = _wipe && (currentFrame == 1);
         Log.info("GONNA WIPE????: %b:\n",wipeFrame);
 		textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor);
@@ -98,7 +100,7 @@ void TextDrawService::drawText() {
 	}
 }
 
-boolean TextDrawService::isTextRunning() {
+boolean TextDrawService::isAnimationRunning() {
 	return currentFrame <= totalFrames;
 }
 
@@ -107,18 +109,18 @@ void TextDrawService::incrementFrame() {
 	currentFrame++;
 }
 
-void TextDrawService::updateFrames() {
+void TextDrawService::updateTotalFrames() {
 	totalFrames = textDraw->getTotalFrames();
 }
 
 void TextDrawService::afterFrameEvents() {
-	if (isTextRunning()) {
+	if (isAnimationRunning()) {
 		incrementFrame();
 		setColorShiftingEffect();
-	} else if (currentSelection == *textSelect){
-		*textSelect = NULL;
+	} else if (currentSelection == currentSelection){
 		currentSelection = NULL;
-        *userDefinedText = "";
+		currentSelection = NULL;
+        // *userDefinedText = "";
         currentUserDefinedTextSelection = "";
 	}
 }
@@ -136,13 +138,12 @@ void TextDrawService::setColorShiftingEffect() {
 }
 
 
-void TextDrawService::processCustomMessage()
+void TextDrawService::processCustomMessage(String charsAsString)
 {
 	// Example Messages
 	//   <*Howdy friend|0|110|3|65152|0>
 	//   <*75%|20|140|3|3|0>
     Log.info("-- processCustomMessage --");
-	String charsAsString = *userDefinedText;
 	charsAsString.remove(0, 1); // remove asterisk
 	String __text = getValueFromDelimitedString(charsAsString, '|', 0);
 	String __x = getValueFromDelimitedString(charsAsString, '|', 1);

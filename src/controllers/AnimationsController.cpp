@@ -1,8 +1,9 @@
 #include "AnimationsController.h"
 
 void AnimationsController::init(int *_imageSelect, int *_textSelect, String *_userDefinedText) {
-	textDrawService.init(_textSelect, _userDefinedText);
 	imageSelect = _imageSelect;
+	textSelect = _textSelect;
+	userDefinedText = _userDefinedText;
 	setupDisplay();
 
 	auto task = [](void* arg) { static_cast<AnimationsController*>(arg)->processAnimationFrame(); };
@@ -20,8 +21,6 @@ void AnimationsController::setupDisplay()
 
 void AnimationsController::processAnimationFrame() {
 	for(;;) {
-		Log.info("LOOP\n");
-		Log.info("currentSelection %i\n", currentSelection);
 		if (serialCommandReceived()) {
 			currentSelection = *imageSelect;
 			currentFrame = 1;
@@ -29,25 +28,34 @@ void AnimationsController::processAnimationFrame() {
 				// This is hacky to get the ball down the road.
 				// Need to make custom commands for everything.
 				int selectedOffset = *imageSelect - 74;
-				Log.info("[AnimationsController]<processAnimationFrame>  serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
+				Log.info("[AnimationsController]<processAnimationFrame>  (jpeg) serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
 				jpegDrawService.processCommand(selectedOffset);
+			} else if (*imageSelect > 49) {
+				// This is hacky to get the ball down the road.
+				// Need to make custom commands for everything.
+				int selectedOffset = *imageSelect - 49;
+				Log.info("[AnimationsController]<processAnimationFrame>  (text) serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
+				textDrawService.processCommand(selectedOffset);
 			} else if (*imageSelect > 24) {
 				// This is hacky to get the ball down the road.
 				// Need to make custom commands for everything.
 				int selectedOffset = *imageSelect - 24;
-				Log.info("[AnimationsController]<processAnimationFrame>  serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
+				Log.info("[AnimationsController]<processAnimationFrame>  (math) serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
 				mathDrawService.processCommand(selectedOffset);
 			} else {
 				// This is hacky to get the ball down the road.
 				// Need to make custom commands for everything.
 				displayService.wipeScreen(true, backgroundColor);
+				Log.info("[AnimationsController]<processAnimationFrame>  (face) serialCommandReceived %i \n", currentSelection);
 				// chooseAnimation(); 
-				faceDrawService.processCommand(*imageSelect);
+				faceDrawService.processCommand(currentSelection);
 			}
-			updateFrames(); 
+		} else if (customSerialCommandReceived()) {
+			currentUserDefinedText = *userDefinedText;
+			textDrawService.processCustomCommand(currentUserDefinedText);
 		}
 
-		drawAnimation();
+		// drawAnimation();
 		textDrawService.processAnimationFrame();
 		jpegDrawService.processAnimationFrame();
 		mathDrawService.processAnimationFrame();
@@ -58,4 +66,8 @@ void AnimationsController::processAnimationFrame() {
 
 boolean AnimationsController::serialCommandReceived() {
 	return *imageSelect != currentSelection;
+}
+
+boolean AnimationsController::customSerialCommandReceived() {
+	return *userDefinedText != currentUserDefinedText;
 }

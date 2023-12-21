@@ -7,8 +7,9 @@
 #include "animations/TextDraw.h"
 #include "animations/text/TextAlert.h"
 #include "animations/text/TextOverLay.h"
+#include "services/DrawFrameService.h"
 
-class TextDrawService
+class TextDrawService : public DrawFrameService
 {
 public:
 	TextDrawService(ColorsService& colorsService, DisplayService& displayService)
@@ -16,8 +17,10 @@ public:
 		Log.info("TextDrawService initializer\n");
     }
 	//  ~();
-	void init(int *_textSelect, String *_userDefinedText);
+	void init();
 	void processAnimationFrame();
+	void processCommand(int selected);
+	void processCustomCommand(String customCmd);
 
 private:
 	// SERVICES
@@ -31,38 +34,37 @@ private:
     boolean _wipe = false;
     uint16_t _currentColor;
 
-	uint16_t backgroundColor = colorsService.white;
-	uint16_t foregroundColor = colorsService.black;
+	uint16_t backgroundColor = colorsService.red;
+	uint16_t foregroundColor = colorsService.white;
 	TextDraw *textDraw;
 	boolean randomColors = false;
 	boolean rainbowColors = true;
-	int currentAngle = 0;
-	int currentFrame = 0;
-	int totalFrames = 0;
+	int currentAngle;
+	int currentFrame;
+	int totalFrames;
 	int *textSelect;
     String *userDefinedText;
 	int currentSelection = -1;
 	String currentUserDefinedTextSelection;
 
 	// FUNCTIONS
-    void processSerial();
-	void chooseText();
-    void chooseCustomText();
 	void afterFrameEvents();
-	void updateFrames();
+	// void updateFrames();
 	void setColorShiftingEffect();
-	boolean isTextRunning();
-	void processCommand();
 	void incrementFrame();
 	void drawText();
-	boolean serialCommandReceived();
-	boolean customSerialCommandReceived();
 	void setupDisplay();
-	void chooseImage();
+	// void chooseImage();
+	boolean isAnimationRunning();
+	void processCustomMessage(String charsAsString);
 
-    void processCustomMessage();
+
+	void chooseAnimation();
+	void updateTotalFrames();
+
 	String getValueFromDelimitedString(String stringData, char separator, int index);
     char* getCharsFromString(String str);
+	void endAnimation();
 };
 
 #endif // _TEXT_CONTROLLER_H_

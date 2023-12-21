@@ -7,8 +7,9 @@
 #include "animations/maths/DrawRimCircle.h"
 #include "animations/maths/Circlewipe.h"
 #include "animations/maths/TriangleWipe.h"
+#include "services/DrawFrameService.h"
 
-class MathDrawService
+class MathDrawService : public DrawFrameService
 {
 public:
 	MathDrawService(ColorsService& colorsService)

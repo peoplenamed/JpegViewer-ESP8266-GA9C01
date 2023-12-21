@@ -9,8 +9,9 @@
 #include "animations/jpeg/CalvinDuplicator.h"
 #include "animations/jpeg/CalvinAndHobbes.h"
 #include "animations/jpeg/OctoCat.h"
+#include "services/DrawFrameService.h"
 
-class JpegDrawService
+class JpegDrawService : public DrawFrameService
 {
 public:
 	JpegDrawService(ColorsService& colorsService)

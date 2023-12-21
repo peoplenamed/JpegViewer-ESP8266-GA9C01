@@ -43,6 +43,9 @@ private:
 	int currentFrame = 0;
 	int totalFrames = 0;
 	int *imageSelect = 0;
+	int *textSelect = 0;
+	String *userDefinedText;
+	String currentUserDefinedText;
 	int currentSelection = -1;
 	int vTaskDelayTimeout = 175; // Interval between frames
 
@@ -61,6 +64,7 @@ private:
 	void incrementFrame();
 	void drawAnimation();
 	boolean serialCommandReceived();
+	boolean customSerialCommandReceived();
 	void setupDisplay();
 	void chooseImage();
 };

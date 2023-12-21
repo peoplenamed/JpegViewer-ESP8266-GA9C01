@@ -8,16 +8,16 @@
 #include "animations/text/TextAlert.h"
 #include "animations/text/TextOverLay.h"
 
-class TextService
+class TextDrawService
 {
 public:
-	TextService(ColorsService& colorsService, DisplayService& displayService)
+	TextDrawService(ColorsService& colorsService, DisplayService& displayService)
         : colorsService(colorsService), displayService(displayService) {
-		Log.info("TextService initializer\n");
+		Log.info("TextDrawService initializer\n");
     }
 	//  ~();
 	void init(int *_textSelect, String *_userDefinedText);
-	void processTextFrame();
+	void processAnimationFrame();
 
 private:
 	// SERVICES
@@ -43,7 +43,6 @@ private:
     String *userDefinedText;
 	int currentSelection = -1;
 	String currentUserDefinedTextSelection;
-	int vTaskDelayTimeout = 190; // Interval between frames
 
 	// FUNCTIONS
     void processSerial();

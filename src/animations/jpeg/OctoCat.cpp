@@ -18,5 +18,8 @@ void OctoCat::renderFrame(int frame) {
 }
 
 int OctoCat::getTotalFrames() {
+	#ifdef DEBUG
+		Log.trace("OctoCat::getTotalFrames  frames: %i\n", frames);
+	#endif
 	return frames;
 }

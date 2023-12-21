@@ -18,5 +18,8 @@ void CalvinDuplicator::renderFrame(int frame) {
 }
 
 int CalvinDuplicator::getTotalFrames() {
+	#ifdef DEBUG
+		Log.trace("CalvinDuplicator::getTotalFrames  frames: %i\n", frames);
+	#endif
 	return frames;
 }

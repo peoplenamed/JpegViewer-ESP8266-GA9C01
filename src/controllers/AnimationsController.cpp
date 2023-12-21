@@ -1,7 +1,7 @@
 #include "AnimationsController.h"
 
 void AnimationsController::init(int *_imageSelect, int *_textSelect, String *_userDefinedText) {
-	textService.init(_textSelect, _userDefinedText);
+	textDrawService.init(_textSelect, _userDefinedText);
 	imageSelect = _imageSelect;
 	setupDisplay();
 
@@ -11,6 +11,9 @@ void AnimationsController::init(int *_imageSelect, int *_textSelect, String *_us
 
 void AnimationsController::setupDisplay()
 {
+	#ifdef DEBUG
+		Log.trace("[AnimationsController]<setupDisplay>  \n");
+	#endif
 	displayService.setupDisplay();
 	displayService.wipeScreen(true, backgroundColor);
 }
@@ -161,46 +164,33 @@ void AnimationsController::chooseAnimation()
 		mathAnimation->setTotalFrames(20);
 		mathWipe = false;
 		break;
-	case 75:
-		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #75 DimondEyes\n");
-		#endif
-		jpegAnimation = new DimondEyes();
-		break;
-	case 76:
-		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #76 OctoCat\n");
-		#endif
-		jpegAnimation = new OctoCat();
-		break;
-	case 77:
-		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #77 CalvinAndHobbes\n");
-		#endif
-		jpegAnimation = new CalvinAndHobbes();
-		break;
-	default:
-		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing default CalvinDuplicator\n");
-		#endif
-		jpegAnimation = new CalvinDuplicator();
-		break;
+
 	}
-	updateFrames(); 
 }
 
 void AnimationsController::processAnimationFrame() {
 	for(;;) {
+		Log.info("LOOP\n");
+		Log.info("currentSelection %i\n", currentSelection);
 		if (serialCommandReceived()) {
-			displayService.wipeScreen(true, backgroundColor);
-			currentFrame = 1;
 			currentSelection = *imageSelect;
-			chooseAnimation(); 
+			currentFrame = 1;
+			if (*imageSelect > 74) {
+				// This is hacky to get the ball down the road.
+				// Need to make custom commands for everything.
+				int selectedOffset = *imageSelect - 74;
+				Log.info("[AnimationsController]<processAnimationFrame>  serialCommandReceived %i, %i \n", selectedOffset, currentSelection);
+				jpegDrawService.processCommand(selectedOffset);
+			} else {
+				displayService.wipeScreen(true, backgroundColor);
+				chooseAnimation(); 
+			}
+			updateFrames(); 
 		}
-		textService.processTextFrame();
 
 		drawAnimation();
-		textService.processTextFrame();
+		textDrawService.processAnimationFrame();
+		jpegDrawService.processAnimationFrame();
     	vTaskDelay( vTaskDelayTimeout );
 	}
 }
@@ -217,13 +207,13 @@ void AnimationsController::drawAnimation() {
 		animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
 		afterAnimationFrameEvents();
 	}
-	if (jpegAnimation != NULL) {
-		#ifdef DEBUG
-			Log.info("[AnimationsController]<drawAnimation> Drawing jpegAnimation\n");
-		#endif
-		jpegAnimation->renderFrame(currentFrame);
-		afterJpegFrameEvents();
-	}
+	// if (jpegAnimation != NULL) {
+	// 	#ifdef DEBUG
+	// 		Log.info("[AnimationsController]<drawAnimation> Drawing jpegAnimation\n");
+	// 	#endif
+	// 	// jpegAnimation->renderFrame(currentFrame);
+	// 	afterJpegFrameEvents();
+	// }
 
 	if (mathAnimation != NULL) {
 		#ifdef DEBUG
@@ -244,18 +234,36 @@ void AnimationsController::incrementFrame() {
 
 void AnimationsController::updateFrames() {
 	if (*imageSelect < 25) {
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<updateFrames> (*imageSelect < 25) \n");
+		#endif
 		totalFrames = animation->getTotalFrames();
-		jpegAnimation = NULL;
+		// jpegAnimation = NULL;
 		mathAnimation = NULL;
 	} else if (*imageSelect < 50) {
+		#ifdef DEBUG
+			Log.info("[AnimationsController]<updateFrames> (*imageSelect < 50) \n");
+		#endif
 		totalFrames = mathAnimation->getTotalFrames();
 		animation = NULL;
-		jpegAnimation = NULL;
+		// jpegAnimation = NULL;
 	} else {
-		totalFrames = jpegAnimation->getTotalFrames();
+		totalFrames = 0;
+		// #ifdef DEBUG
+		// 	Log.info("[AnimationsController]<updateFrames> (else) \n");
+		// #endif
+		// Log.info("---------1---------\n");
+		// totalFrames = jpegAnimation->getTotalFrames();
+		Log.info("---------2---------\n");
 		animation = NULL;
+		Log.info("---------3---------\n");
 		mathAnimation = NULL;
+		Log.info("---------4---------\n");
 	}
+	#ifdef DEBUG
+		Log.info("[AnimationsController]<updateFrames> totalFrames:%i, animation=?, mathAnimation=? \n", totalFrames);
+		Log.info("[AnimationsController]<updateFrames> totalFrames:%i, animation=%b, mathAnimation=%b \n", totalFrames,animation,mathAnimation);
+	#endif
 }
 
 void AnimationsController::afterAnimationFrameEvents() {
@@ -268,15 +276,15 @@ void AnimationsController::afterAnimationFrameEvents() {
 	}
 }
 
-void AnimationsController::afterJpegFrameEvents() {
-	if (isAnimationRunning()) {
-		incrementFrame();
-		setColorShiftingEffect();
-	} else if (currentSelection == *imageSelect){
-		*imageSelect = 0;
-		currentSelection = -1;
-	}
-}
+// void AnimationsController::afterJpegFrameEvents() {
+// 	if (isAnimationRunning()) {
+// 		incrementFrame();
+// 		setColorShiftingEffect();
+// 	} else if (currentSelection == *imageSelect){
+// 		*imageSelect = 0;
+// 		currentSelection = -1;
+// 	}
+// }
 
 void AnimationsController::afterMathFrameEvents() {
 	if (isAnimationRunning()) {

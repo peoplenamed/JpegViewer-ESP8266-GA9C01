@@ -1,21 +1,11 @@
-#include "TextService.h"
+#include "TextDrawService.h"
 
-void TextService::init(int *_textSelect, String *_userDefinedText) {
+void TextDrawService::init(int *_textSelect, String *_userDefinedText) {
 	textSelect = _textSelect;
 	userDefinedText = _userDefinedText;
-	// setupDisplay();
-
-	// auto task = [](void* arg) { static_cast<TextService*>(arg)->processTextFrame(); };
-	// xTaskCreate(task, "processTextFrame", 3092, this, 2, NULL);
 }
 
-// void TextService::setupDisplay()
-// {
-// 	// displayService.setupDisplay();
-// 	// displayService.wipeScreen(true, backgroundColor);
-// }
-
-void TextService::chooseText()
+void TextDrawService::chooseText()
 {
     if (*textSelect < 20) {
         textDraw = new TextOverLay();
@@ -69,15 +59,12 @@ void TextService::chooseText()
 	}
 }
 
-void TextService::processTextFrame() {
-	// for(;;) {
-        processSerial();
-		drawText();
-    	// vTaskDelay( vTaskDelayTimeout );
-	// }
+void TextDrawService::processAnimationFrame() {
+    processSerial();
+    drawText();
 }
 
-void TextService::processSerial() {
+void TextDrawService::processSerial() {
     boolean serialReceived = serialCommandReceived();
     boolean customSerialReceived = customSerialCommandReceived();
     if (serialReceived || customSerialReceived) {
@@ -94,15 +81,15 @@ void TextService::processSerial() {
     }
 }
 
-boolean TextService::serialCommandReceived() {
+boolean TextDrawService::serialCommandReceived() {
 	return *textSelect != currentSelection;
 }
 
-boolean TextService::customSerialCommandReceived() {
+boolean TextDrawService::customSerialCommandReceived() {
 	return *userDefinedText != currentUserDefinedTextSelection;
 }
 
-void TextService::drawText() {
+void TextDrawService::drawText() {
 	if (textDraw != NULL && isTextRunning()) {
         boolean wipeFrame = _wipe && (currentFrame == 1);
         Log.info("GONNA WIPE????: %b:\n",wipeFrame);
@@ -111,20 +98,20 @@ void TextService::drawText() {
 	}
 }
 
-boolean TextService::isTextRunning() {
+boolean TextDrawService::isTextRunning() {
 	return currentFrame <= totalFrames;
 }
 
-void TextService::incrementFrame() {
+void TextDrawService::incrementFrame() {
     Log.info("currentFrame: %i\n", currentFrame);
 	currentFrame++;
 }
 
-void TextService::updateFrames() {
+void TextDrawService::updateFrames() {
 	totalFrames = textDraw->getTotalFrames();
 }
 
-void TextService::afterFrameEvents() {
+void TextDrawService::afterFrameEvents() {
 	if (isTextRunning()) {
 		incrementFrame();
 		setColorShiftingEffect();
@@ -136,7 +123,7 @@ void TextService::afterFrameEvents() {
 	}
 }
 
-void TextService::setColorShiftingEffect() {
+void TextDrawService::setColorShiftingEffect() {
 	if (randomColors) {
 		foregroundColor = colorsService.getNextRGB(foregroundColor);
 		backgroundColor = colorsService.getNextRGB(backgroundColor);
@@ -149,7 +136,7 @@ void TextService::setColorShiftingEffect() {
 }
 
 
-void TextService::processCustomMessage()
+void TextDrawService::processCustomMessage()
 {
 	// Example Messages
 	//   <*Howdy friend|0|110|3|65152|0>
@@ -177,7 +164,7 @@ void TextService::processCustomMessage()
     // textDraw->renderFrame(_textType, _text, shouldWipe, __color.toInt());
 }
 
-char* TextService::getCharsFromString(String str) {
+char* TextDrawService::getCharsFromString(String str) {
     const int length = str.length(); 
     // declaring character array (+1 for null terminator) 
     char* customStringAsChars = new char[length + 1]; 
@@ -187,7 +174,7 @@ char* TextService::getCharsFromString(String str) {
     return customStringAsChars;
 }
 
-String TextService::getValueFromDelimitedString(String stringData, char separator, int index)
+String TextDrawService::getValueFromDelimitedString(String stringData, char separator, int index)
 {
 	int found = 0;
 	int strIndex[] = {0, -1};

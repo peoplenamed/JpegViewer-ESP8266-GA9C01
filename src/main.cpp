@@ -15,7 +15,7 @@
 /*********************
  *  GLOBAL VARIBLES
  *********************/
-int imageSelect = 75; // Splashscreen
+int imageSelect = 10; // Splashscreen
 int textSelect = -1;
 String userDefinedText;
 /*********************

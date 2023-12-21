@@ -46,10 +46,12 @@ void DisplayService::wipeScreen(boolean wipe, uint16_t backgroundColor)
 	#ifdef DEBUG
 		Log.trace("[DisplayService]<wipeScreen>  wipe: %b, color: %i\n", wipe, backgroundColor);
 	#endif
+	Log.trace("[DisplayService]<wipeScreen>  wipe1\n");
 	if (wipe)
 	{
 		gfx->fillScreen(backgroundColor);
 	}
+	Log.trace("[DisplayService]<wipeScreen>  wipe2\n");
 }
 
 void DisplayService::setText(String text)

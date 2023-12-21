@@ -18,5 +18,8 @@ void CalvinAndHobbes::renderFrame(int frame) {
 }
 
 int CalvinAndHobbes::getTotalFrames() {
+	#ifdef DEBUG
+		Log.trace("CalvinAndHobbes::getTotalFrames  frames: %i\n", frames);
+	#endif
 	return frames;
 }

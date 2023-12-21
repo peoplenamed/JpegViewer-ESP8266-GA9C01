@@ -15,10 +15,6 @@
 #include "animations/face/SatisfiedFaceAnimation.h"
 #include "animations/face/SleepFaceAnimation.h"
 #include "animations/face/WinkFaceAnimation.h"
-#include "animations/jpeg/DimondEyes.h"
-#include "animations/jpeg/CalvinDuplicator.h"
-#include "animations/jpeg/CalvinAndHobbes.h"
-#include "animations/jpeg/OctoCat.h"
 #include "animations/text/TextAlert.h"
 #include "animations/text/TextOverLay.h"
 #include "animations/TextDraw.h"
@@ -27,14 +23,15 @@
 #include "animations/maths/DrawRimCircle.h"
 #include "config.h"
 #include "services/DisplayService.h"
+#include "services/JpegDrawService.h"
 #include "services/ColorsService.h"
-#include "services/TextService.h"
+#include "services/TextDrawService.h"
 
 class AnimationsController
 {
 public:
 	
-	AnimationsController(): textService(colorsService, displayService) {
+	AnimationsController(): textDrawService(colorsService, displayService), jpegDrawService(colorsService) {
 		Log.info("[AnimationsController]<initializer>\n");
 	}
 	//  ~();
@@ -44,7 +41,8 @@ private:
 	// SERVICES
 	ColorsService colorsService;
 	DisplayService displayService;
-	TextService textService;
+	TextDrawService textDrawService;
+	JpegDrawService jpegDrawService;
 
 	// VARIABLES
 	uint16_t backgroundColor = colorsService.white;
@@ -64,7 +62,7 @@ private:
 	int totalFrames = 0;
 	int *imageSelect = 0;
 	int currentSelection = -1;
-	int vTaskDelayTimeout = 200; // Interval between frames
+	int vTaskDelayTimeout = 175; // Interval between frames
 
 	// FUNCTIONS
 	void chooseAnimation();

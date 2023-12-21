@@ -50,5 +50,8 @@ void DimondEyes::renderFrame(int frame) {
 }
 
 int DimondEyes::getTotalFrames() {
+	#ifdef DEBUG
+		Log.trace("DimondEyes::getTotalFrames  frames: %i\n", frames);
+	#endif
 	return frames;
 }

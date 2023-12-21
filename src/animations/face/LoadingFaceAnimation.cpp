@@ -7,11 +7,7 @@
  *      DEFINES
  *********************/
 // Constructor implementation
-LoadingFaceAnimation::LoadingFaceAnimation()
-	: eyeLeftElement(_EYE_LEFT_X, _EYE_LEFT_Y)
-	, eyeRightElement(_EYE_RIGHT_X, _EYE_RIGHT_Y)
-	, mouthElement(_MOUTH_X, _MOUTH_Y)
-{ }
+
 
 int LoadingFaceAnimation::getTotalFrames() {
 	return frames;

@@ -15,11 +15,13 @@ class TextOverLay : public TextDraw
         TextOverLay();
 
 	    int getTotalFrames();
-        void renderFrame(int textType, char* text, boolean _wipe, uint16_t foreground, uint16_t background);
+        void renderFrame(int textType, char* text, boolean _wipe, uint16_t foreground, uint16_t background,
+							bool _drawBackgroundColor);
         void setCustomSettings(int _x, int _y, int _size, uint16_t _color);
 
     private:
         int frames = 30;
+        bool drawBackgroundColor = false;
         int x;
         int y;
         int size;

@@ -15,7 +15,7 @@ class AngryFaceAnimation : public Animation
 {
 public:
 	AngryFaceAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	// void renderIn();
 	// void renderOut();
 	// void renderLoop();
@@ -23,6 +23,7 @@ public:
 
 private:
 	int frames = 6;
+	bool drawBackgroundColor = false;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

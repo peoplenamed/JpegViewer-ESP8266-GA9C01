@@ -17,7 +17,8 @@ public:
 	TextDraw();
 
 	// background will wipe frame
-	virtual void renderFrame(int frame, char* _text, boolean _wipe, uint16_t foreground, uint16_t background=NULL) = 0;
+	virtual void renderFrame(int frame, char* _text, boolean _wipe, uint16_t foreground, uint16_t background,
+							bool _drawBackgroundColor) = 0;
 	virtual void setCustomSettings(int _x, int _y, int _size, uint16_t _color) = 0;
 	virtual int getTotalFrames() = 0;
 	int frames;

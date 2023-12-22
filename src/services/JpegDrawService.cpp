@@ -64,7 +64,7 @@ void JpegDrawService::drawJpeg() {
 }
 
 void JpegDrawService::endAnimation() {
-		currentSelection = NULL;
+		currentSelection = 0;
 		jpegAnimation = NULL;
 		currentFrame = 0;
 }
@@ -99,6 +99,6 @@ void JpegDrawService::afterFrameEvents() {
 	if (isAnimationRunning()) {
 		incrementFrame();
 	} else {
-		currentSelection = NULL;
+		currentSelection = 0;
 	}
 }

@@ -89,7 +89,7 @@ void MathDrawService::drawJpeg() {
 }
 
 void MathDrawService::endAnimation() {
-		currentSelection = NULL;
+		currentSelection = 0;
 		mathAnimation = NULL;
 		currentFrame = 0;
 }
@@ -124,6 +124,6 @@ void MathDrawService::afterFrameEvents() {
 	if (isAnimationRunning()) {
 		incrementFrame();
 	} else {
-		currentSelection = NULL;
+		currentSelection = 0;
 	}
 }

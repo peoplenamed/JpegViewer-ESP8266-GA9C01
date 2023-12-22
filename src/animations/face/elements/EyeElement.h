@@ -32,6 +32,13 @@ enum EyeType
 class EyeElement
 {
 public:
+	EyeElement(int x, int y);
+
+	void render(EyeType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
+	
+	void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
+					int16_t w, int16_t h, uint16_t color, uint16_t bg);
+
 	int x;
 	int y;
 
@@ -50,9 +57,9 @@ public:
 	static const unsigned char eye_spiral_three_lr[] PROGMEM;
 	static const unsigned char eye_spiral_four_lr[] PROGMEM;
 
-	EyeElement(int x, int y);
-
-	void render(EyeType type, uint16_t foreground, uint16_t background);
 	void drawRotatingSpiral(int centerX, int centerY, float maxRadius, float rotationStep);
+
+private:
+	bool drawBackgroundColor = false;
 };
 #endif

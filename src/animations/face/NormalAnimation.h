@@ -15,11 +15,12 @@ class NormalAnimation : public Animation
 {
 public:
 	NormalAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	int getTotalFrames();
-	int frames = 2;
 
 private:
+	bool drawBackgroundColor = false;
+	int frames = 2;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

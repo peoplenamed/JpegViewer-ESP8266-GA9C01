@@ -17,11 +17,12 @@ class SleepFaceAnimation : public Animation
 {
 public:
 	SleepFaceAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	int getTotalFrames();
-	int frames = 6;
 
 private:
+	bool drawBackgroundColor = false;
+	int frames = 6;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

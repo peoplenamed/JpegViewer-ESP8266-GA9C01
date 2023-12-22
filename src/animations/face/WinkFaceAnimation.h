@@ -15,11 +15,12 @@ class WinkFaceAnimation : public Animation
 {
 public:
 	WinkFaceAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	int getTotalFrames();
-	int frames = 6;
 
 private:
+	int frames = 6;
+	bool drawBackgroundColor = false;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

@@ -68,7 +68,7 @@ void TextDrawService::processAnimationFrame() {
 }
 
 void TextDrawService::endAnimation() {
-		currentSelection = NULL;
+		currentSelection = 0;
         currentUserDefinedTextSelection = "";
 		textDraw = NULL;
 		currentFrame = 0;
@@ -95,7 +95,7 @@ void TextDrawService::drawText() {
 	if (textDraw != NULL && isAnimationRunning()) {
         boolean wipeFrame = _wipe && (currentFrame == 1);
         Log.info("GONNA WIPE????: %b:\n",wipeFrame);
-		textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor);
+		textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor, backgroundColor, drawBackgroundColor);
 		afterFrameEvents();
 	}
 }
@@ -118,9 +118,7 @@ void TextDrawService::afterFrameEvents() {
 		incrementFrame();
 		setColorShiftingEffect();
 	} else if (currentSelection == currentSelection){
-		currentSelection = NULL;
-		currentSelection = NULL;
-        // *userDefinedText = "";
+		currentSelection = 0;
         currentUserDefinedTextSelection = "";
 	}
 }

@@ -16,7 +16,7 @@ class Animation
 		// Constructor declaration
 		Animation();
 
-		virtual void renderFrame(int frame, uint16_t foreground, uint16_t background) = 0;
+		virtual void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor) = 0;
 		virtual int getTotalFrames() = 0;
 		int frames;
 

@@ -21,18 +21,20 @@ int PukeRainbowFaceAnimation::getTotalFrames() {
 	return frames;
 }
 
-void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t background) {
+void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+	drawBackgroundColor = _drawBackgroundColor;
+	
 	switch(frame)
 	{
 		case 1:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 2:
-			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 3:
 		case 4:
@@ -55,25 +57,25 @@ void PukeRainbowFaceAnimation::renderFrame(int frame, uint16_t foreground, uint1
 		case 21:
 		case 22:
 		case 23:
-			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_SMILE_FILLED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			this->drawRainbow(frame);
 			break;
 		case 24:
-			mouthElement.render(MOUTH_FANGS_TWO, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_FANGS_TWO, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 25:
-			mouthElement.render(MOUTH_FANGS_ONE, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_FANGS_ONE, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 26:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 	}
 }

@@ -35,6 +35,7 @@ private:
 
 	// VARIABLES
 	boolean screenWipe;
+	boolean drawBackgroundColor = false;
     uint16_t _currentColor;
 	uint16_t backgroundColor = colorsService.white;
 	uint16_t foregroundColor = colorsService.black;

@@ -989,38 +989,50 @@ const unsigned char MouthElement::mouth_smile_one[] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-void MouthElement::render(MouthType type, uint16_t foreground, uint16_t background)
+void MouthElement::render(MouthType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor)
 {
+	drawBackgroundColor = _drawBackgroundColor;
 	const unsigned char* bitmapImage;
 
 	switch(type)
 	{
 	case MOUTH_CLOSED:
-		gfx->drawBitmap(x, y, mouth_closed, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_closed, 128, 120, foreground, background);
 		break;
 	case MOUTH_GRUMPY_ONE:
-		gfx->drawBitmap(x, y, mouth_grumpy_one, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_grumpy_one, 128, 120, foreground, background);
 		break;
 	case MOUTH_GRUMPY_TWO:
-		gfx->drawBitmap(x, y, mouth_grumpy_two, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_grumpy_two, 128, 120, foreground, background);
 		break;
 	case MOUTH_FANGS_ONE:
-		gfx->drawBitmap(x, y, mouth_fangs_one, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_fangs_one, 128, 120, foreground, background);
 		break;
 	case MOUTH_FANGS_TWO:
-		gfx->drawBitmap(x, y, mouth_fangs_two, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_fangs_two, 128, 120, foreground, background);
 		break;
 	case MOUTH_SMILE_ONE:
-		gfx->drawBitmap(x, y, mouth_smile_one, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_smile_one, 128, 120, foreground, background);
 		break;
 	case MOUTH_SMILE_TWO:
-		gfx->drawBitmap(x, y, mouth_smile_two, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_smile_two, 128, 120, foreground, background);
 		break;
 	case MOUTH_SMILE_FILLED:
-		gfx->drawBitmap(x, y, mouth_smile_filled, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_smile_filled, 128, 120, foreground, background);
 		break;
 	default:
-		gfx->drawBitmap(x, y, mouth_closed, 128, 120, foreground, background);
+		drawBitmap(x, y, mouth_closed, 128, 120, foreground, background);
 		break;
 	}
+}
+
+void MouthElement::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
+							int16_t w, int16_t h, uint16_t color, uint16_t bg) {
+    if (drawBackgroundColor) {
+        // Call the 3-parameter version of drawBitmap
+        gfx->drawBitmap(x, y, bitmap, w, h, color, bg);
+    } else {
+        // Call the 7-parameter version of drawBitmap
+        gfx->drawBitmap(x, y, bitmap, w, h, color);
+    }
 }

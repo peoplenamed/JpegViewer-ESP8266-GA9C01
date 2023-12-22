@@ -15,12 +15,13 @@ class DizzyFaceAnimation : public Animation
 {
 public:
 	DizzyFaceAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	EyeType getRandomEyeType();
 	int getTotalFrames();
-	int frames = 31;
 
 private:
+	bool drawBackgroundColor = false;
+	int frames = 31;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

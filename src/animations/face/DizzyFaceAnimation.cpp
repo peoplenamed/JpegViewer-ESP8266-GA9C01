@@ -17,83 +17,85 @@ int DizzyFaceAnimation::getTotalFrames() {
 	return frames;
 }
 
-void DizzyFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t background) {
+void DizzyFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+	drawBackgroundColor = _drawBackgroundColor;
+	
 	switch(frame)
 	{
 		case 1:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 2:
 		case 6:
 		case 10:
 		case 14:
 		case 18:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_SPIRAL_ONE_LR, foreground, background);
-			eyeRightElement.render(EYE_SPIRAL_ONE_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_SPIRAL_ONE_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_SPIRAL_ONE_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 3:
 		case 7:
 		case 11:
 		case 15:
 		case 19:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_SPIRAL_TWO_LR, foreground, background);
-			eyeRightElement.render(EYE_SPIRAL_TWO_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_SPIRAL_TWO_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_SPIRAL_TWO_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 4:
 		case 8:
 		case 12:
 		case 16:
 		case 20:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_SPIRAL_THREE_LR, foreground, background);
-			eyeRightElement.render(EYE_SPIRAL_THREE_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_SPIRAL_THREE_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_SPIRAL_THREE_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 5:
 		case 9:
 		case 13:
 		case 17:
 		case 21:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_SPIRAL_FOUR_LR, foreground, background);
-			eyeRightElement.render(EYE_SPIRAL_FOUR_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_SPIRAL_FOUR_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_SPIRAL_FOUR_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 22:
 		case 26:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_CLOSING_LR, foreground, background);
-			eyeRightElement.render(EYE_CLOSING_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_CLOSING_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_CLOSING_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 23:
 		case 27:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_CLOSED_LR, foreground, background);
-			eyeRightElement.render(EYE_CLOSED_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_CLOSED_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_CLOSED_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 24:
 		case 28:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_CLOSING_LR, foreground, background);
-			eyeRightElement.render(EYE_CLOSING_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_CLOSING_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_CLOSING_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 25:
 		case 29:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 30:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		case 31:
-			mouthElement.render(MOUTH_CLOSED, foreground, background);
-			eyeLeftElement.render(EYE_OPEN_LR, foreground, background);
-			eyeRightElement.render(EYE_OPEN_LR, foreground, background);
+			mouthElement.render(MOUTH_CLOSED, foreground, background, drawBackgroundColor);
+			eyeLeftElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
+			eyeRightElement.render(EYE_OPEN_LR, foreground, background, drawBackgroundColor);
 			break;
 		default:
 			break;

@@ -16,11 +16,12 @@ class PukeRainbowFaceAnimation : public Animation
 {
 public:
 	PukeRainbowFaceAnimation();
-	void renderFrame(int frame, uint16_t foreground, uint16_t background);
+	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
 	int getTotalFrames();
-	int frames = 26;
 
 private:
+	bool drawBackgroundColor = false;
+	int frames = 26;
 	EyeElement eyeLeftElement;
 	EyeElement eyeRightElement;
 	MouthElement mouthElement;

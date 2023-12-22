@@ -66,7 +66,7 @@ void DisplayService::setText(String text)
 	gfx->println(charArray);
 }
 
-void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color)
+void DisplayService::drawText(String _text, int _x, int _y, int _size, int _color, int _bgcolor, bool drawBackgroundColor)
 {
 	#ifdef DEBUG
 		Log.trace("[DisplayService]<drawText>  text: %s, x:%d, y:%d, size:%d, color:%d\n", _text, _x, _y, _size, _color);
@@ -126,35 +126,6 @@ void DisplayService::drawJpgAnimationFrame(String name, String fileType, int fra
 
 	drawImage(charArray);
 }
-
-// void DisplayService::drawJpgAnimations(String name, String fileType, int frames, int times)
-// {
-// 	for(int x = 1; x <= times; x++)
-// 	{
-// 		for(int i = 0; i <= frames - 1; i++)
-// 		{
-// 			String filename;
-// 			filename.concat(name);
-
-// 			if(i < 10)
-// 			{
-// 				filename.concat("00");
-// 			}
-// 			else
-// 			{
-// 				filename.concat("0");
-// 			}
-// 			filename.concat(i);
-// 			filename.concat(fileType);
-
-// 			int len = filename.length() + 1;
-// 			char charArray[len];
-// 			filename.toCharArray(charArray, len);
-
-// 			drawImage(charArray);
-// 		}
-// 	}
-// }
 
 void DisplayService::DrawCircle(int16_t x, int16_t y, int16_t radius, int16_t color)
 {

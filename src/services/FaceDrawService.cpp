@@ -135,7 +135,7 @@ void FaceDrawService::drawJpeg() {
 			#ifdef DEBUG
 				Log.trace("FaceDrawService::drawJpeg  currentFrame: %i\n", currentFrame);
 			#endif
-			animation->renderFrame(currentFrame, foregroundColor, backgroundColor);
+			animation->renderFrame(currentFrame, foregroundColor, backgroundColor, drawBackgroundColor);
 			afterFrameEvents();
 		} else {
 			endAnimation();
@@ -144,7 +144,7 @@ void FaceDrawService::drawJpeg() {
 }
 
 void FaceDrawService::endAnimation() {
-		currentSelection = NULL;
+		currentSelection = 0;
 		animation = NULL;
 		currentFrame = 0;
 }
@@ -180,7 +180,7 @@ void FaceDrawService::afterFrameEvents() {
 		incrementFrame();
 		setColorShiftingEffect();
 	} else {
-		currentSelection = NULL;
+		currentSelection = 0;
 	}
 }
 

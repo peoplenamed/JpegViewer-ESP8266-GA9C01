@@ -14,8 +14,10 @@ void TextAlert::renderFrame(int textType,
 						    char* _text,
 							boolean _wipe,
 							uint16_t textColor,
-							uint16_t backgroundColor)
+							uint16_t backgroundColor,
+							bool _drawBackgroundColor)
 {
+	drawBackgroundColor = _drawBackgroundColor;
 	displayService.wipeScreen(_wipe, backgroundColor);
 
 	switch(textType)
@@ -23,11 +25,11 @@ void TextAlert::renderFrame(int textType,
 		case 1:
             // errorText
 			// String _text, int _x, int _y, int _size, int _color
-            displayService.drawText(_text, _x, _y, _size, _errorColor);
+            displayService.drawText(_text, _x, _y, _size, _errorColor, backgroundColor, drawBackgroundColor);
 			break;
 		case 2:
             // successText
-            displayService.drawText(_text, _x, _y, _size, _successColor);
+            displayService.drawText(_text, _x, _y, _size, _successColor, backgroundColor, drawBackgroundColor);
 			break;
 		default:
 			break;

@@ -36,7 +36,7 @@ public:
 	void setupDisplay();
 	void wipeScreen(boolean wipe, uint16_t backgroundColor=0);
 	void setText(String text);
-	void drawText(String _text, int _x, int _y, int _size, int _color);
+	void drawText(String _text, int _x, int _y, int _size, int _color, int _bgcolor, bool drawBackgroundColor);
 	static int jpegDrawCallback(JPEGDRAW* pDraw);
 	void drawImage(char* fileName);
 	void DrawTriangle(int16_t peak,

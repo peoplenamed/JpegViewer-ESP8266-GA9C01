@@ -32,6 +32,7 @@ private:
     int _textType;
     char* _text;
     boolean _wipe = false;
+	bool drawBackgroundColor = false;
     uint16_t _currentColor;
 
 	uint16_t backgroundColor = colorsService.red;

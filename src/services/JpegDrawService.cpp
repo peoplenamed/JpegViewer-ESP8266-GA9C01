@@ -98,7 +98,7 @@ void JpegDrawService::afterFrameEvents() {
 	#endif
 	if (isAnimationRunning()) {
 		incrementFrame();
-	} else {
+	} else if (currentSelection != 0){
 		currentSelection = 0;
 	}
 }

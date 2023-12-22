@@ -92,12 +92,16 @@ void TextDrawService::processCustomCommand(String customCmd) {
 }
 
 void TextDrawService::drawText() {
-	if (textDraw != NULL && isAnimationRunning()) {
-        boolean wipeFrame = _wipe && (currentFrame == 1);
-        Log.info("GONNA WIPE????: %b:\n",wipeFrame);
-		textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor, backgroundColor, drawBackgroundColor);
-		afterFrameEvents();
-	}
+	if (textDraw != NULL) {
+        if (isAnimationRunning()) {
+            boolean wipeFrame = _wipe && (currentFrame == 1);
+            Log.info("GONNA WIPE????: %b:\n",wipeFrame);
+            textDraw->renderFrame(_textType, _text, wipeFrame, _currentColor, backgroundColor, drawBackgroundColor);
+            afterFrameEvents();
+        } else {
+            endAnimation();
+        }
+    }
 }
 
 boolean TextDrawService::isAnimationRunning() {
@@ -117,7 +121,7 @@ void TextDrawService::afterFrameEvents() {
 	if (isAnimationRunning()) {
 		incrementFrame();
 		setColorShiftingEffect();
-	} else if (currentSelection == currentSelection){
+	} else if (currentSelection != 0){
 		currentSelection = 0;
         currentUserDefinedTextSelection = "";
 	}

@@ -6,7 +6,7 @@ void MathDrawService::chooseAnimation()
 	switch(currentSelection) {
 	case 1:
 		#ifdef DEBUG
-			Log.info("[MathDrawService]<chooseAnimation>  Drawing #25 CircleWipe\n");
+			Log.info("[]<chooseAnimation>  Drawing #25 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -14,7 +14,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 2:
 		#ifdef DEBUG
-			Log.info("[MathDrawService]<chooseAnimation>  Drawing #26 CircleWipe\n");
+			Log.info("[]<chooseAnimation>  Drawing #26 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -22,7 +22,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 3:
 		#ifdef DEBUG
-			Log.info("[MathDrawService]<chooseAnimation>  Drawing #27 TriangleWipe\n");
+			Log.info("[]<chooseAnimation>  Drawing #27 TriangleWipe\n");
 		#endif
 		mathAnimation = new TriangleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -30,7 +30,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 4:
 		#ifdef DEBUG
-			Log.info("[MathDrawService]<chooseAnimation>  Drawing #28 TriangleWipe\n");
+			Log.info("[]<chooseAnimation>  Drawing #28 TriangleWipe\n");
 		#endif
 		mathAnimation = new TriangleWipe();
 		mathAnimation->setTotalFrames(50);
@@ -38,7 +38,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 5:
 		#ifdef DEBUG
-			Log.info("[MathDrawService]<chooseAnimation>  Drawing #29 CircleWipe\n");
+			Log.info("[]<chooseAnimation>  Drawing #29 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(20);
@@ -124,7 +124,7 @@ void MathDrawService::afterFrameEvents() {
 	#endif
 	if (isAnimationRunning()) {
 		incrementFrame();
-	} else {
+	} else if (currentSelection != 0) {
 		currentSelection = 0;
 	}
 }

@@ -6,7 +6,7 @@ void MathDrawService::chooseAnimation()
 	switch(currentSelection) {
 	case 1:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #25 CircleWipe\n");
+			Log.info("[MathDrawService]<chooseAnimation>  Drawing #25 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -14,7 +14,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 2:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #26 CircleWipe\n");
+			Log.info("[MathDrawService]<chooseAnimation>  Drawing #26 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -22,7 +22,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 3:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #27 TriangleWipe\n");
+			Log.info("[MathDrawService]<chooseAnimation>  Drawing #27 TriangleWipe\n");
 		#endif
 		mathAnimation = new TriangleWipe();
 		mathAnimation->setTotalFrames(120);
@@ -30,7 +30,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 4:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #28 TriangleWipe\n");
+			Log.info("[MathDrawService]<chooseAnimation>  Drawing #28 TriangleWipe\n");
 		#endif
 		mathAnimation = new TriangleWipe();
 		mathAnimation->setTotalFrames(50);
@@ -38,7 +38,7 @@ void MathDrawService::chooseAnimation()
 		break;
 	case 5:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #29 CircleWipe\n");
+			Log.info("[MathDrawService]<chooseAnimation>  Drawing #29 CircleWipe\n");
 		#endif
 		mathAnimation = new CircleWipe();
 		mathAnimation->setTotalFrames(20);
@@ -89,9 +89,10 @@ void MathDrawService::drawJpeg() {
 }
 
 void MathDrawService::endAnimation() {
-		currentSelection = 0;
-		mathAnimation = NULL;
-		currentFrame = 0;
+	Log.trace("MathDrawService::endAnimation  \n");
+	currentSelection = 0;
+	mathAnimation = NULL;
+	currentFrame = 0;
 }
 
 boolean MathDrawService::isAnimationRunning() {

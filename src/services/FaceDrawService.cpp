@@ -7,103 +7,103 @@ void FaceDrawService::chooseAnimation()
 {
 	case 1:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #1 FangFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #1 FangFaceAnimation\n");
 		#endif
 		animation = new FangFaceAnimation();
 		break;
 	case 2:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #2 GrumpyFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #2 GrumpyFaceAnimation\n");
 		#endif
 		animation = new GrumpyFaceAnimation();
 		break;
 	case 3:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #3 WinkFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #3 WinkFaceAnimation\n");
 		#endif
 		animation = new WinkFaceAnimation();
 		break;
 	case 4:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #4 AngryFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #4 AngryFaceAnimation\n");
 		#endif
 		animation = new AngryFaceAnimation();
 		break;
 	case 5:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #5 new \n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #5 new \n");
 		#endif
 		animation = new SatisfiedFaceAnimation;
 		break;
 	case 6:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #6 NormalAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #6 NormalAnimation\n");
 		#endif
 		animation = new NormalAnimation();
 		break;
 	case 8:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #8 LoadingFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #8 LoadingFaceAnimation\n");
 		#endif
 		animation = new LoadingFaceAnimation();
 		break;
 	case 9:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #9 HappyFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #9 HappyFaceAnimation\n");
 		#endif
 		animation = new HappyFaceAnimation();
 		break;
 	case 10:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #10 PukeRainbowFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #10 PukeRainbowFaceAnimation\n");
 		#endif
 		animation = new PukeRainbowFaceAnimation();
 		break;
 	case 11:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #11 AngryFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #11 AngryFaceAnimation\n");
 		#endif
 		animation = new AngryFaceAnimation();
 		break;
 	case 12:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #12 SleepFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #12 SleepFaceAnimation\n");
 		#endif
 		animation = new SleepFaceAnimation();
 		break;
 	case 13:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #13 GrumpyFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #13 GrumpyFaceAnimation\n");
 		#endif
 		animation = new GrumpyFaceAnimation();
 		break;
 	case 14:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #14 WinkFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #14 WinkFaceAnimation\n");
 		#endif
 		animation = new WinkFaceAnimation();
 		break;
 	case 15:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #15 SatisfiedFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #15 SatisfiedFaceAnimation\n");
 		#endif
 		animation = new SatisfiedFaceAnimation();
 		break;
 	case 16:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #16 PopEyeFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #16 PopEyeFaceAnimation\n");
 		#endif
 		animation = new PopEyeFaceAnimation();
 		break;
 	case 17:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing #17 FangFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing #17 FangFaceAnimation\n");
 		#endif
 		animation = new FangFaceAnimation();
 		break;
 	default:
 		#ifdef DEBUG
-			Log.info("[AnimationsController]<chooseAnimation>  Drawing default PopEyeFaceAnimation\n");
+			Log.info("[FaceDrawService]<chooseAnimation>  Drawing default PopEyeFaceAnimation\n");
 		#endif
 		animation = new PopEyeFaceAnimation();
 		break;

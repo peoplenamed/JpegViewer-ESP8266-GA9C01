@@ -1026,6 +1026,41 @@ void MouthElement::render(MouthType type, uint16_t foreground, uint16_t backgrou
 	}
 }
 
+FrameInfo MouthElement::getFrameInfo(MouthType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor)
+{
+	drawBackgroundColor = _drawBackgroundColor;
+	switch(type)
+	{
+	case MOUTH_CLOSED:
+		return {x, y, mouth_closed, 128, 120, foreground, background};
+		break;
+	case MOUTH_GRUMPY_ONE:
+		return {x, y, mouth_grumpy_one, 128, 120, foreground, background};
+		break;
+	case MOUTH_GRUMPY_TWO:
+		return {x, y, mouth_grumpy_two, 128, 120, foreground, background};
+		break;
+	case MOUTH_FANGS_ONE:
+		return {x, y, mouth_fangs_one, 128, 120, foreground, background};
+		break;
+	case MOUTH_FANGS_TWO:
+		return {x, y, mouth_fangs_two, 128, 120, foreground, background};
+		break;
+	case MOUTH_SMILE_ONE:
+		return {x, y, mouth_smile_one, 128, 120, foreground, background};
+		break;
+	case MOUTH_SMILE_TWO:
+		return {x, y, mouth_smile_two, 128, 120, foreground, background};
+		break;
+	case MOUTH_SMILE_FILLED:
+		return {x, y, mouth_smile_filled, 128, 120, foreground, background};
+		break;
+	default:
+		return {x, y, mouth_closed, 128, 120, foreground, background};
+		break;
+	}
+}
+
 void MouthElement::drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
 							int16_t w, int16_t h, uint16_t color, uint16_t bg) {
     if (drawBackgroundColor) {

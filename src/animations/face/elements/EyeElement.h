@@ -35,12 +35,15 @@ public:
 	EyeElement(int x, int y);
 
 	void render(EyeType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
+	FrameInfo getFrameInfo(EyeType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
 	
 	void drawBitmap(int16_t x, int16_t y, const uint8_t *bitmap,
 					int16_t w, int16_t h, uint16_t color, uint16_t bg);
 
 	int x;
 	int y;
+	int xMax = 64;
+	int yMax = 54;
 
 	static const unsigned char eye_angry_r[] PROGMEM;
 	static const unsigned char eye_angry_l[] PROGMEM;

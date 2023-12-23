@@ -17,6 +17,9 @@ class Animation
 		Animation();
 
 		virtual void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor) = 0;
+		virtual FrameObject getFrameObject(int frame, uint16_t foreground,
+			uint16_t background, bool _drawBackgroundColor) = 0;
+		virtual std::vector<FrameInfo> getFrameInfos(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) = 0;
 		virtual int getTotalFrames() = 0;
 		int frames;
 

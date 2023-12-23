@@ -13,6 +13,8 @@
 #include <functional>
 #include <iostream>
 #include <string>
+#include <vector>
+#include <iostream>
 
 //  Include little FS or SPIFFS on ESP32
 
@@ -81,6 +83,32 @@ typedef struct
 	AnimationState animationState;
 	String animationMarkers;
 } GlobalAniumationState;
+
+struct Pixel {
+  int x;
+  int y;
+  uint16_t color;
+};
+
+struct Pyxel {
+  uint16_t color;
+};
+
+struct FrameInfo {
+    int x;
+    int y;
+    const uint8_t* bitmap;
+    int w;
+    int h;
+    uint16_t color;
+    uint16_t backgroundColor;
+    bool drawBackgroundColor;
+};
+
+struct FrameObject {
+    std::vector<FrameInfo> currentFrames;
+    std::vector<FrameInfo> previousFrames;
+};
 
 /**********************
  * GLOBAL PROTOTYPES

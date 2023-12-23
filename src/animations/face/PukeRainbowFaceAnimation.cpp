@@ -94,3 +94,78 @@ void PukeRainbowFaceAnimation::drawRainbow(int frame) {
 	}
 	colorIndex = (colorIndex + 1) % colorsService.RGB_COLORS_SIZE;
 }
+
+FrameObject PukeRainbowFaceAnimation::getFrameObject(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+	FrameObject frameObject;
+
+	if (frame > 1) {
+		frameObject.previousFrames = getFrameInfos(frame - 1, foreground, background, _drawBackgroundColor);
+	}
+
+	frameObject.currentFrames = getFrameInfos(frame, foreground, background, _drawBackgroundColor);
+
+    return frameObject;
+}
+
+std::vector<FrameInfo> PukeRainbowFaceAnimation::getFrameInfos(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+	std::vector<FrameInfo> frameInfos;
+   
+		switch(frame)
+	{
+		case 1:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 2:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_SMILE_FILLED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+		case 12:
+		case 13:
+		case 14:
+		case 15:
+		case 16:
+		case 17:
+		case 18:
+		case 19:
+		case 20:
+		case 21:
+		case 22:
+		case 23:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_SMILE_FILLED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			// FIXME: Need to return FrameObjects for the rainbow
+			this->drawRainbow(frame);
+			break;
+		case 24:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_FANGS_TWO, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 25:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_FANGS_ONE, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 26:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+	}
+
+    return frameInfos;
+}

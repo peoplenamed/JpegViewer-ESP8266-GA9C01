@@ -28,6 +28,7 @@ public:
 	//  ~();
 	void processAnimationFrame();
     void processCommand(int selected);
+	void setDrawBackgroundColor(bool _drawBackgroundColor);
 
 private:
 	// SERVICES

@@ -128,3 +128,8 @@ void MathDrawService::afterFrameEvents() {
 		currentSelection = 0;
 	}
 }
+
+void MathDrawService::setDrawBackgroundColor(bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+}
+

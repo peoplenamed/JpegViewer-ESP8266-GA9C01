@@ -6,6 +6,11 @@ void AnimationsController::init(int *_imageSelect, int *_textSelect, String *_us
 	userDefinedText = _userDefinedText;
 	setupDisplay();
 
+	textDrawService.setDrawBackgroundColor(true);
+	jpegDrawService.setDrawBackgroundColor(true);
+	mathDrawService.setDrawBackgroundColor(true);
+	faceDrawService.setDrawBackgroundColor(true);
+
 	auto task = [](void* arg) { static_cast<AnimationsController*>(arg)->processAnimationFrame(); };
 	xTaskCreate(task, "processAnimationFrame", 3092, this, 2, NULL);
 }

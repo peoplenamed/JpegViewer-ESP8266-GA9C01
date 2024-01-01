@@ -195,3 +195,7 @@ String TextDrawService::getValueFromDelimitedString(String stringData, char sepa
 
 	return found > index ? stringData.substring(strIndex[0], strIndex[1]) : "";
 }
+
+void TextDrawService::setDrawBackgroundColor(bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+}

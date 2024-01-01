@@ -21,6 +21,7 @@ public:
 	//  ~();
 	void processAnimationFrame();
     void processCommand(int selected);
+	void setDrawBackgroundColor(bool _drawBackgroundColor);
 
 private:
 	// SERVICES
@@ -28,6 +29,7 @@ private:
 
 	// VARIABLES
     uint16_t _currentColor;
+	bool drawBackgroundColor = false;
 
 	uint16_t backgroundColor = colorsService.white;
 	uint16_t foregroundColor = colorsService.black;

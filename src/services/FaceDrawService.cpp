@@ -196,3 +196,7 @@ void FaceDrawService::setColorShiftingEffect() {
 		currentAngle += 20;
 	}
 }
+
+void FaceDrawService::setDrawBackgroundColor(bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+}

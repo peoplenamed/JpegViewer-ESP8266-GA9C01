@@ -19,6 +19,7 @@ public:
 	//  ~();
 	void processAnimationFrame();
     void processCommand(int selected);
+	void setDrawBackgroundColor(bool _drawBackgroundColor);
 
 private:
 	// SERVICES
@@ -34,6 +35,7 @@ private:
 	int totalFrames = 0;
 	int currentFrame = 0;
 	int currentSelection = -1;
+	bool drawBackgroundColor = false;
 
 	// FUNCTIONS
 	void processCustomCommand(String customJpeg);

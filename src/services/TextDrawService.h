@@ -22,11 +22,13 @@ public:
 	void processCommand(int selected);
 	void processCustomCommand(String customCmd);
 
+	void setDrawBackgroundColor(bool _drawBackgroundColor);
+
+
 private:
 	// SERVICES
 	ColorsService& colorsService;
     DisplayService& displayService;
-
 
 	// VARIABLES
     int _textType;

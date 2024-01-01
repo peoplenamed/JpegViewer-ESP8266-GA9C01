@@ -102,3 +102,7 @@ void JpegDrawService::afterFrameEvents() {
 		currentSelection = 0;
 	}
 }
+
+void JpegDrawService::setDrawBackgroundColor(bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+}

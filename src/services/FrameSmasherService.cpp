@@ -25,10 +25,11 @@ void FrameSmasherService::smashFrames(std::vector<FrameObject> frameObjects) {
     int currentY = findLowestYValue(frameObjects);
     
     while (currentY <= _SCREEN_HEIGHT) {
+        Log.info("[FrameSmasherService]<smashFrames>  currentY: %i \n", currentY);
         smashY(currentY, frameObjects);
         currentY++;
     }
-    
+
 
 
     // for (int i=0; i < frameObjects.size(); i++) {
@@ -58,15 +59,15 @@ void FrameSmasherService::smashY(int currentY, std::vector<FrameObject> frameObj
             setFramePyxels(currentY, frameObjects[frameObjectsIterator].previousFrames[previousFramesIterator], true);
         }
     }
-    Log.info("[FrameSmasherService]<smashY>  pyxels[]: %d \n", pyxels);
+    // Log.info("[FrameSmasherService]<smashY>  pyxels[]: %d \n", pyxels);
 
-    for (int i=0; i < _SCREEN_WIDTH; i++) {
+    // for (int i=0; i < _SCREEN_WIDTH; i++) {
 
-        if (pyxels[i] != 0) {
-            Log.info("[FrameSmasherService]<smashY>  pyxels[%i]: %i \n", i, pyxels[i]);
-            gfx->drawPixel(i, currentY, pyxels[i]);
-        }
-    }
+    //     if (pyxels[i] != 0) {
+    //         Log.info("[FrameSmasherService]<smashY>  pyxels[%i]: %i \n", i, pyxels[i]);
+    //         gfx->drawPixel(i, currentY, pyxels[i]);
+    //     }
+    // }
 }
 
 void FrameSmasherService::setFramePyxels(int currentY, FrameInfo frameInfo, bool useBackgroundColor) {
@@ -96,30 +97,14 @@ void FrameSmasherService::setFramePyxels(int currentY, FrameInfo frameInfo, bool
                 byte = pgm_read_byte(&frameInfo.bitmap[currentIndex * byteWidth + i / 8]);
             }
             if (byte & 0x80) {
-                pyxels[currentIndex + i] = useBackgroundColor ? frameInfo.backgroundColor : frameInfo.color;
+                // if (!pyxels[currentIndex + i]) {
+                    // pyxels[currentIndex + i] = useBackgroundColor ? frameInfo.backgroundColor : frameInfo.color;
+                    gfx->drawPixel(frameInfo.x + i, currentY, useBackgroundColor ? frameInfo.backgroundColor : frameInfo.color);
+                // }
             }
-            //  writePixel(x + i, y, (byte & 0x80) ? color : 0);
         }
 
 
-
-
-
-        // for (int bitMapPyxel = currentIndex; bitMapPyxel < maxX; bitMapPyxel++) {
-        //     Log.info(" [FrameSmasherService]<setFramePyxels>  frameInfo.bitmap[%i]: %i \n", bitMapPyxel, frameInfo.bitmap[bitMapPyxel]);
-        //     if (frameInfo.bitmap[bitMapPyxel] != 0) {
-        //         Log.info("  [FrameSmasherService]<setFramePyxels>  pyxels[%i]: %i \n", currentIndex, pyxels[currentIndex]);
-        //         if (!pyxels[currentIndex]) {
-        //             uint16_t color = frameInfo.color;
-        //             if (useBackgroundColor) {
-        //                 color = frameInfo.backgroundColor;
-        //             }
-        //             Log.info("    [FrameSmasherService]<setFramePyxels>  pyxels[%i].color: %i \n", currentIndex, color);
-        //             pyxels[currentIndex].color = color;
-        //         }
-        //     }
-        // }
-    // }
 }
 
 

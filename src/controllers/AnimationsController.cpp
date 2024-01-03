@@ -53,7 +53,8 @@ void AnimationsController::processAnimationFrame() {
 				displayService.wipeScreen(true, backgroundColor);
 				Log.info("[AnimationsController]<processAnimationFrame>  (face) serialCommandReceived %i \n", currentSelection);
 				// chooseAnimation(); 
-				faceDrawService.processCommand(currentSelection);
+				// faceDrawService.processCommand(currentSelection);
+				faceDrawServiceExperimental.processCommand(currentSelection);
 			}
 		} else if (customSerialCommandReceived()) {
 			currentUserDefinedText = *userDefinedText;
@@ -61,12 +62,21 @@ void AnimationsController::processAnimationFrame() {
 		}
 
 		// drawAnimation();
-		textDrawService.processAnimationFrame();
-		jpegDrawService.processAnimationFrame();
-		mathDrawService.processAnimationFrame();
-		faceDrawService.processAnimationFrame();
+		// textDrawService.processAnimationFrame();
+		// jpegDrawService.processAnimationFrame();
+		// mathDrawService.processAnimationFrame();
+		// faceDrawService.processAnimationFrame();
+		smashFrames();
     	vTaskDelay( vTaskDelayTimeout );
 	}
+}
+
+void AnimationsController::smashFrames() {
+	FrameObject frameObject = faceDrawServiceExperimental.getFrameObject();
+	std::vector<FrameObject> frameObjects;
+	frameObjects.push_back(frameObject);
+	Log.info("[AnimationsController]<smashFrames>  frameObjects.size(): %i \n", frameObjects.size());
+	frameSmasherService.smashFrames(frameObjects);
 }
 
 boolean AnimationsController::serialCommandReceived() {

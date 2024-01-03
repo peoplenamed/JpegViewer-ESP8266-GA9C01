@@ -9,6 +9,8 @@
 #include "services/TextDrawService.h"
 #include "services/MathDrawService.h"
 #include "services/FaceDrawService.h"
+#include "services/FrameSmasherService.h"
+#include "services/FaceDrawServiceExperimental.h"
 
 class AnimationsController
 {
@@ -18,7 +20,8 @@ public:
 		textDrawService(colorsService, displayService),
 		jpegDrawService(colorsService),
 		mathDrawService(colorsService),
-		faceDrawService(colorsService) {
+		faceDrawService(colorsService),
+		faceDrawServiceExperimental(colorsService) {
 		Log.info("[AnimationsController]<initializer>\n");
 	}
 	//  ~();
@@ -32,6 +35,9 @@ private:
 	JpegDrawService jpegDrawService;
 	MathDrawService mathDrawService;
 	FaceDrawService faceDrawService;
+	FaceDrawServiceExperimental faceDrawServiceExperimental;
+	FrameSmasherService frameSmasherService;
+
 
 	// VARIABLES
 	uint16_t backgroundColor = colorsService.white;
@@ -67,6 +73,7 @@ private:
 	boolean customSerialCommandReceived();
 	void setupDisplay();
 	void chooseImage();
+	void smashFrames();
 };
 
 #endif // _ANIMATIONS_CONTROLLER_H_

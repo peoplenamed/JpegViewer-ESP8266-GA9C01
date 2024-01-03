@@ -1,8 +1,8 @@
-#include "FaceDrawService.h"
+#include "FaceDrawServiceExperimental.h"
 
-void FaceDrawService::chooseAnimation()
+void FaceDrawServiceExperimental::chooseAnimation()
 {
-    Log.info("FaceDrawService::chooseAnimation currentSelection: %i\n", currentSelection);
+    Log.info("FaceDrawServiceExperimental::chooseAnimation currentSelection: %i\n", currentSelection);
 	switch(currentSelection) {
 {
 	case 1:
@@ -112,30 +112,31 @@ void FaceDrawService::chooseAnimation()
 	totalFrames = animation->getTotalFrames();
 }
 
-void FaceDrawService::processAnimationFrame() {
+void FaceDrawServiceExperimental::processAnimationFrame() {
 	#ifdef DEBUG
-		Log.trace("FaceDrawService::processAnimationFrame  currentFrame: %i\n", currentFrame);
+		Log.trace("FaceDrawServiceExperimental::processAnimationFrame  currentFrame: %i\n", currentFrame);
 	#endif
     drawJpeg();
 }
 
-void FaceDrawService::processCustomCommand(String customJpeg) {
+void FaceDrawServiceExperimental::processCustomCommand(String customJpeg) {
 }
 
-void FaceDrawService::processCommand(int selected) {
-    Log.info("FaceDrawService::processCommand selected: %i\n", selected);
+void FaceDrawServiceExperimental::processCommand(int selected) {
+    Log.info("FaceDrawServiceExperimental::processCommand selected: %i\n", selected);
     currentFrame = 1;
     currentSelection = selected;
     chooseAnimation();
 }
 
-void FaceDrawService::drawJpeg() {
+void FaceDrawServiceExperimental::drawJpeg() {
 	if (animation != NULL){
 		if(isAnimationRunning()) {
 			#ifdef DEBUG
-				Log.trace("FaceDrawService::drawJpeg  currentFrame: %i\n", currentFrame);
+				Log.trace("FaceDrawServiceExperimental::drawJpeg  currentFrame: %i\n", currentFrame);
 			#endif
 			animation->renderFrame(currentFrame, foregroundColor, backgroundColor, drawBackgroundColor);
+
 			afterFrameEvents();
 		} else {
 			endAnimation();
@@ -143,38 +144,42 @@ void FaceDrawService::drawJpeg() {
 	}
 }
 
-void FaceDrawService::endAnimation() {
+FrameObject FaceDrawServiceExperimental::getFrameObject() {
+	return animation->getFrameObject(currentFrame, foregroundColor, backgroundColor, drawBackgroundColor);
+}
+
+void FaceDrawServiceExperimental::endAnimation() {
 		currentSelection = 0;
 		animation = NULL;
 		currentFrame = 0;
 }
 
-boolean FaceDrawService::isAnimationRunning() {
+boolean FaceDrawServiceExperimental::isAnimationRunning() {
 	boolean result = currentFrame <= totalFrames;
 	#ifdef DEBUG
-		Log.trace("FaceDrawService::isAnimationRunning  currentFrame(%i) <= totalFrames(%i): %T\n",
+		Log.trace("FaceDrawServiceExperimental::isAnimationRunning  currentFrame(%i) <= totalFrames(%i): %T\n",
 		currentFrame, totalFrames, result);
 	#endif
 	return result;
 }
 
-void FaceDrawService::incrementFrame() {
+void FaceDrawServiceExperimental::incrementFrame() {
 	#ifdef DEBUG
-		Log.trace("FaceDrawService::incrementFrame  currentFrame++: %i\n", currentFrame + 1);
+		Log.trace("FaceDrawServiceExperimental::incrementFrame  currentFrame++: %i\n", currentFrame + 1);
 	#endif
 	currentFrame++;
 }
 
-void FaceDrawService::updateTotalFrames() {
+void FaceDrawServiceExperimental::updateTotalFrames() {
 	totalFrames = animation->getTotalFrames();
 	#ifdef DEBUG
-		Log.trace("FaceDrawService::updateTotalFrames  totalFrames: %i\n", totalFrames);
+		Log.trace("FaceDrawServiceExperimental::updateTotalFrames  totalFrames: %i\n", totalFrames);
 	#endif
 }
 
-void FaceDrawService::afterFrameEvents() {
+void FaceDrawServiceExperimental::afterFrameEvents() {
 	#ifdef DEBUG
-		Log.trace("FaceDrawService::afterFrameEvents  currentFrame: %i\n", currentFrame);
+		Log.trace("FaceDrawServiceExperimental::afterFrameEvents  currentFrame: %i\n", currentFrame);
 	#endif
 	if (isAnimationRunning()) {
 		incrementFrame();
@@ -184,7 +189,7 @@ void FaceDrawService::afterFrameEvents() {
 	}
 }
 
-void FaceDrawService::setColorShiftingEffect() {
+void FaceDrawServiceExperimental::setColorShiftingEffect() {
 	if (randomColors) {
 		foregroundColor = colorsService.getNextRGB(foregroundColor);
 		backgroundColor = colorsService.getNextRGB(backgroundColor);
@@ -195,8 +200,4 @@ void FaceDrawService::setColorShiftingEffect() {
 		// foregroundColor = colorsService.powerHSV(currentAngle);
 		currentAngle += 20;
 	}
-}
-
-void FaceDrawService::setDrawBackgroundColor(bool _drawBackgroundColor) {
-    drawBackgroundColor = _drawBackgroundColor;
 }

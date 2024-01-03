@@ -422,54 +422,106 @@ const unsigned char EyeElement::eye_spiral_four_lr[] PROGMEM = {
 void EyeElement::render(EyeType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor)
 {
 	drawBackgroundColor = _drawBackgroundColor;
-	const unsigned char* bitmapImage;
 
 	switch(type)
 	{
 	case EYE_OPEN_LR:
-		drawBitmap(x, y, eye_open_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_open_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_ANGRY_R:
-		drawBitmap(x, y, eye_angry_r, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_angry_r, xMax, yMax, foreground, background);
 		break;
 	case EYE_ANGRY_L:
-		drawBitmap(x, y, eye_angry_l, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_angry_l, xMax, yMax, foreground, background);
 		break;
 	case EYE_DISAPPOINTED_LR:
-		drawBitmap(x, y, eye_disappointed_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_disappointed_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_SATISFIED_LR:
-		drawBitmap(x, y, eye_satisfied_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_satisfied_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_DIAMOND_LR:
-		drawBitmap(x, y, eye_dimond_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_dimond_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_CLOSING_LR:
-		drawBitmap(x, y, eye_closing_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_closing_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_CLOSED_LR:
-		drawBitmap(x, y, eye_closed_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_closed_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_POP_ONE_LR:
-		drawBitmap(x, y, eye_pop_one_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_pop_one_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_POP_TWO_LR:
-		drawBitmap(x, y, eye_pop_two_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_pop_two_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_SPIRAL_ONE_LR:
-		drawBitmap(x, y, eye_spiral_one_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_spiral_one_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_SPIRAL_TWO_LR:
-		drawBitmap(x, y, eye_spiral_two_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_spiral_two_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_SPIRAL_THREE_LR:
-		drawBitmap(x, y, eye_spiral_three_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_spiral_three_lr, xMax, yMax, foreground, background);
 		break;
 	case EYE_SPIRAL_FOUR_LR:
-		drawBitmap(x, y, eye_spiral_four_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_spiral_four_lr, xMax, yMax, foreground, background);
 		break;
 	default:
-		drawBitmap(x, y, eye_open_lr, 64, 54, foreground, background);
+		drawBitmap(x, y, eye_open_lr, xMax, yMax, foreground, background);
+		break;
+	}
+}
+
+FrameInfo EyeElement::getFrameInfo(EyeType type, uint16_t foreground, uint16_t background, bool _drawBackgroundColor)
+{
+	drawBackgroundColor = _drawBackgroundColor;
+	switch(type)
+	{
+	case EYE_OPEN_LR:
+		return {x, y, eye_open_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_ANGRY_R:
+		return {x, y, eye_angry_r, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_ANGRY_L:
+		return {x, y, eye_angry_l, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_DISAPPOINTED_LR:
+		return {x, y, eye_disappointed_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_SATISFIED_LR:
+		return {x, y, eye_satisfied_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_DIAMOND_LR:
+		return {x, y, eye_dimond_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_CLOSING_LR:
+		return {x, y, eye_closing_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_CLOSED_LR:
+		return {x, y, eye_closed_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_POP_ONE_LR:
+		return {x, y, eye_pop_one_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_POP_TWO_LR:
+		return {x, y, eye_pop_two_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_SPIRAL_ONE_LR:
+		return {x, y, eye_spiral_one_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_SPIRAL_TWO_LR:
+		return {x, y, eye_spiral_two_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_SPIRAL_THREE_LR:
+		return {x, y, eye_spiral_three_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	case EYE_SPIRAL_FOUR_LR:
+		return {x, y, eye_spiral_four_lr, xMax, yMax, foreground, background, drawBackgroundColor};
+		break;
+	default:
+		return {x, y, eye_open_lr, xMax, yMax, foreground, background, drawBackgroundColor};
 		break;
 	}
 }

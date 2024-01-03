@@ -19,6 +19,8 @@ public:
 	SleepFaceAnimation();
 	void renderFrame(int frame, uint16_t foreground, uint16_t background, bool drawBackgroundColor);
 	int getTotalFrames();
+	FrameObject getFrameObject(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
+	std::vector<FrameInfo> getFrameInfos(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor);
 
 private:
 	bool drawBackgroundColor = false;

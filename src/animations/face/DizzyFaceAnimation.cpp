@@ -102,6 +102,106 @@ void DizzyFaceAnimation::renderFrame(int frame, uint16_t foreground, uint16_t ba
 	}
 }
 
+FrameObject DizzyFaceAnimation::getFrameObject(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+    drawBackgroundColor = _drawBackgroundColor;
+	FrameObject frameObject;
+
+	if (frame > 1) {
+		frameObject.previousFrames = getFrameInfos(frame - 1, foreground, background, _drawBackgroundColor);
+	}
+
+	frameObject.currentFrames = getFrameInfos(frame, foreground, background, _drawBackgroundColor);
+
+    return frameObject;
+}
+
+std::vector<FrameInfo> DizzyFaceAnimation::getFrameInfos(int frame, uint16_t foreground, uint16_t background, bool _drawBackgroundColor) {
+	std::vector<FrameInfo> frameInfos;
+
+    switch(frame)
+	{
+		case 1:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 2:
+		case 6:
+		case 10:
+		case 14:
+		case 18:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_SPIRAL_ONE_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_SPIRAL_ONE_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 3:
+		case 7:
+		case 11:
+		case 15:
+		case 19:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_SPIRAL_TWO_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_SPIRAL_TWO_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 4:
+		case 8:
+		case 12:
+		case 16:
+		case 20:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_SPIRAL_THREE_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_SPIRAL_THREE_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 5:
+		case 9:
+		case 13:
+		case 17:
+		case 21:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_SPIRAL_FOUR_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_SPIRAL_FOUR_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 22:
+		case 26:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_CLOSING_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_CLOSING_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 23:
+		case 27:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_CLOSED_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_CLOSED_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 24:
+		case 28:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_CLOSING_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_CLOSING_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 25:
+		case 29:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 30:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		case 31:
+			frameInfos.push_back(mouthElement.getFrameInfo(MOUTH_CLOSED, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeLeftElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			frameInfos.push_back(eyeRightElement.getFrameInfo(EYE_OPEN_LR, foreground, background, drawBackgroundColor));
+			break;
+		default:
+			break;
+	}
+
+    return frameInfos;
+}
+
 EyeType DizzyFaceAnimation::getRandomEyeType()
 {
 	// Array of EyeType values ending with '_LR'
